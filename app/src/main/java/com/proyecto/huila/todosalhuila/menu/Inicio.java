@@ -6,30 +6,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.proyecto.huila.indicador.AutoPlayManager;
+import com.proyecto.huila.indicador.ImageIndicatorView;
 import com.proyecto.huila.todosalhuila.R;
-import com.proyecto.huila.todosalhuila.galeria.FragmentosImagenes;
-import com.proyecto.huila.todosalhuila.galeria.ManejadoraGaleria;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geocalizacion;
+
 
 public class Inicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    int[] imagenes = {
-            R.drawable.image2,
-            R.drawable.image1,
-            R.drawable.image3,
-            R.drawable.image4
-    };
-
-    ManejadoraGaleria manejadorGaleria;
-    ViewPager mViewPager;
+    private ImageIndicatorView autoImageIndicatorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +43,34 @@ public class Inicio extends AppCompatActivity
 
         //galeria de imagenes
 
-        manejadorGaleria = new ManejadoraGaleria(getSupportFragmentManager());
+        this.autoImageIndicatorView = (ImageIndicatorView) findViewById(R.id.indicate_view);
+        autoImageIndicatorView.setOnItemChangeListener(new ImageIndicatorView.OnItemChangeListener() {
+            @Override
+            public void onPosition(int position, int totalCount) {
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        manejadorGaleria.agregarFragmentos(FragmentosImagenes.newInstance(imagenes[0]));
-        manejadorGaleria.agregarFragmentos(FragmentosImagenes.newInstance(imagenes[1]));
-        manejadorGaleria.agregarFragmentos(FragmentosImagenes.newInstance(imagenes[2]));
-        manejadorGaleria.agregarFragmentos(FragmentosImagenes.newInstance(imagenes[3]));
+            }
+        });
+        this.autoImageIndicatorView.setOnItemChangeListener(new ImageIndicatorView.OnItemChangeListener() {
+            @Override
+            public void onPosition(int position, int totalCount) {
 
-        mViewPager.setAdapter(manejadorGaleria);
+            }
+        });
+
+        initView();
+    }
+
+    private void initView() {
+        final Integer[] resArray = new Integer[] { R.drawable.image2, R.drawable.image1, R.drawable.image3, R.drawable.image4 };
+
+        this.autoImageIndicatorView.setupLayoutByDrawable(resArray);
+        this.autoImageIndicatorView.show();
+
+        AutoPlayManager autoBrocastManager =  new AutoPlayManager(this.autoImageIndicatorView);
+        autoBrocastManager.setBroadcastEnable(true);
+        autoBrocastManager.setBroadCastTimes(5);//循环次数
+        autoBrocastManager.setBroadcastTimeIntevel(3 * 1000, 3 * 1000);//首次启动时间及间隔
+        autoBrocastManager.loop();
     }
 
     @Override

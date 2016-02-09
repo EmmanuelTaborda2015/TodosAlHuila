@@ -60,14 +60,12 @@
             android:name=".lista.Lugares"
             android:label="@string/title_activity_lugares"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".galeria.Visor"
-            android:label="@string/title_activity_lugares"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".geolocalizacion.Informacion"
             android:label="@string/title_activity_informacion"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

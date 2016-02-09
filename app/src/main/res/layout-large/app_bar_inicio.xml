@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/azul1"
     android:fitsSystemWindows="true"
     tools:context=".menu.Inicio">
 
@@ -23,20 +22,28 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <com.proyecto.huila.indicador.ImageIndicatorView
+        android:id="@+id/indicate_view"
         android:layout_width="match_parent"
-        android:layout_height="350dp"/>
+        android:layout_height="350dp"
+        android:background="@color/azul1"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/text_inicio"
-        android:id="@+id/textInicio"
-        android:gravity="center|"/>
+        android:layout_height="match_parent"
+        android:background="@color/azul1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/text_inicio"
+            android:id="@+id/textInicio"
+            android:gravity="center|"/>
+
+    </LinearLayout>
 
 </LinearLayout>

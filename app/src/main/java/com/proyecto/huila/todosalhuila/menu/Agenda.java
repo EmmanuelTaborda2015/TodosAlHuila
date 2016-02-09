@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.geolocalizacion.Geocalizacion;
 
 public class Agenda extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -87,7 +88,7 @@ public class Agenda extends AppCompatActivity
             overridePendingTransition(0, 0);
             finish();
         } else if (id == R.id.menu3) {
-            Intent i = new Intent(Agenda.this, Localizacion.class );
+            Intent i = new Intent(Agenda.this, Geocalizacion.class );
             startActivity(i);
             overridePendingTransition(0, 0);
             finish();

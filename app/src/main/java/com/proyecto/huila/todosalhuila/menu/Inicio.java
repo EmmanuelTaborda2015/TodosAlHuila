@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.galeria.FragmentosImagenes;
 import com.proyecto.huila.todosalhuila.galeria.ManejadoraGaleria;
+import com.proyecto.huila.todosalhuila.geolocalizacion.Geocalizacion;
 
 public class Inicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -114,7 +115,7 @@ public class Inicio extends AppCompatActivity
             overridePendingTransition(0, 0);
             finish();
         } else if (id == R.id.menu3) {
-            Intent i = new Intent(Inicio.this, Localizacion.class );
+            Intent i = new Intent(Inicio.this, Geocalizacion.class );
             startActivity(i);
             overridePendingTransition(0, 0);
             finish();

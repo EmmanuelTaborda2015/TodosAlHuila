@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
+import com.proyecto.huila.todosalhuila.geolocalizacion.Geocalizacion;
 import com.proyecto.huila.todosalhuila.lista.Lugares;
 import com.proyecto.huila.todosalhuila.R;
 
@@ -107,7 +108,7 @@ public class Categorias extends AppCompatActivity
             overridePendingTransition(0, 0);
             finish();
         } else if (id == R.id.menu3) {
-            Intent i = new Intent(Categorias.this, Localizacion.class );
+            Intent i = new Intent(Categorias.this, Geocalizacion.class );
             startActivity(i);
             overridePendingTransition(0, 0);
             finish();

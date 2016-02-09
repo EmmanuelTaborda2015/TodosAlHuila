@@ -31,4 +31,5 @@
     <string name="title_activity_mapa">Map</string>
     <string name="title_activity_agenda">Agenda</string>
     <string name="title_activity_lugares">Lugares</string>
+    <string name="title_activity_informacion">Informacion</string>
 </resources>

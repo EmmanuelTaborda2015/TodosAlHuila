@@ -19,10 +19,19 @@
     <string name="categoria6">Iglesias</string>
 
     <string name="text_inicio">Descubre todas las maravillas que te puede ofrecer el paraíso huilense. Desde altas montañas, nevados y ríos hasta parques nacionales y exhuberantes comidas.</string>
+
     <string name="salir_aplicacion">¿Desea salir de la aplicación?</string>
+
     <string name="opcionSi">Si</string>
     <string name="opcionNo">No</string>
+
     <string name="cerrar_aplicacion">Salir de la Aplicación</string>
+
+    <string name="text_tab1">Descripción</string>
+    <string name="text_tab2">Contacto</string>
+    <string name="text_tab3">Compartir</string>
+
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

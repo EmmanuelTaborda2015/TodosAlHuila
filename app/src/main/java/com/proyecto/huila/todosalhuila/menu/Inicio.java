@@ -44,18 +44,7 @@ public class Inicio extends AppCompatActivity
         //galeria de imagenes
 
         this.autoImageIndicatorView = (ImageIndicatorView) findViewById(R.id.indicate_view);
-        autoImageIndicatorView.setOnItemChangeListener(new ImageIndicatorView.OnItemChangeListener() {
-            @Override
-            public void onPosition(int position, int totalCount) {
 
-            }
-        });
-        this.autoImageIndicatorView.setOnItemChangeListener(new ImageIndicatorView.OnItemChangeListener() {
-            @Override
-            public void onPosition(int position, int totalCount) {
-
-            }
-        });
 
         initView();
     }

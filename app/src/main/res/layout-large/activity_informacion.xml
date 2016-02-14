@@ -25,13 +25,13 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <LinearLayout android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="fill_parent">
-        <LinearLayout android:background="@color/azul1"  android:layout_height="150dp" android:layout_width="fill_parent">
+    <LinearLayout android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="match_parent">
+        <LinearLayout android:background="@color/azul1"  android:layout_height="350dp" android:layout_width="match_parent">
 
-            <com.proyecto.huila.indicador.ImageIndicatorView
+            <com.proyecto.huila.indicador.ImageIndicatorViewUrl
                 android:id="@+id/indicate_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
@@ -57,35 +57,43 @@
 
                         <LinearLayout android:id="@+id/tab1"
                             android:orientation="vertical"
+                            android:padding="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
 
-                            <TextView android:id="@+id/textView1"
-                                android:text="Contenido Tab 1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/scrollView" >
+
+                                <TextView android:id="@+id/textViewtab1"
+                                    android:text="Contenido Tab 1"
+                                    android:textColor="@color/black"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </ScrollView>
+
                         </LinearLayout>
 
                         <LinearLayout android:id="@+id/tab2"
                             android:orientation="vertical"
+                            android:padding="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
 
-                            <TextView android:id="@+id/textView2"
-                                android:text="Contenido Tab 2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/scrollView2" >
 
-                        <LinearLayout android:id="@+id/tab3"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                                <TextView android:id="@+id/textViewtab2"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
 
-                            <TextView android:id="@+id/textView3"
-                                android:text="Contenido Tab 3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                            </ScrollView>
+
                         </LinearLayout>
 
                     </FrameLayout>

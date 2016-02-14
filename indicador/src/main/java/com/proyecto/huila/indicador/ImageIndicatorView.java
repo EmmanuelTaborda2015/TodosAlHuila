@@ -196,7 +196,7 @@ public class ImageIndicatorView extends RelativeLayout {
 
 	/**
 	 * set Drawable array
-	 * 
+	 *
 	 * @param resArray
 	 *            Drawable array
 	 */

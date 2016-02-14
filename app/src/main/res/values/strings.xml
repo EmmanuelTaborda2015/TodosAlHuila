@@ -31,6 +31,12 @@
     <string name="text_tab2">Contacto</string>
     <string name="text_tab3">Compartir</string>
 
+    <string name="tipodato1">Dirección:</string>
+    <string name="tipodato2">Teléfono:</string>
+    <string name="tipodato3">Celular:</string>
+    <string name="tipodato4">E-mail:</string>
+    <string name="tipodato5">Página Web:</string>
+
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

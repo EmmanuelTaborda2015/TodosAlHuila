@@ -1,9 +1,13 @@
 package com.proyecto.huila.todosalhuila.geolocalizacion;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,11 +29,34 @@ import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.menu.Agenda;
 import com.proyecto.huila.todosalhuila.menu.Categorias;
 import com.proyecto.huila.todosalhuila.menu.Inicio;
+import com.proyecto.huila.todosalhuila.webservice.WS_Marcador;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexion;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Geocalizacion extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private List<String> marker = new ArrayList<String>();
+    private HashMap<Marker, Integer> mHashMap = new HashMap<Marker, Integer>();
+
+    private Marker previoMarker;
+    private int showMarker = 0;
+
+    private Handler handler_marcador = new Handler();
+    private Thread thread_marcador;
+    private WS_Marcador webResponseMarcador;
+
+    private ProgressDialog circuloProgreso;
+
+    private List<String> sitio_turistico = new ArrayList<String>();
+    private List<String> nombre_sitio_turistico = new ArrayList<String>();
+    private List<String> tipo_sitio_turistico = new ArrayList<String>();
+    private List<String> coord_x = new ArrayList<String>();
+    private List<String> coord_y = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +77,22 @@ public class Geocalizacion extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Se genera el llamado al web service que enviara los marcadores presentes en la base de datos.
+        circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
+
+        thread_marcador = new Thread() {
+            public void run() {
+                Looper.prepare();
+                String id_dispositivo = Settings.Secure.getString(getApplication().getContentResolver(), Settings.Secure.ANDROID_ID);
+                webResponseMarcador = new WS_Marcador();
+                webResponseMarcador.startWebAccess("usuario", id_dispositivo);
+                handler_marcador.post(marcador);
+            }
+        };
+
+        thread_marcador.start();
+        ////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     @Override
@@ -134,58 +177,80 @@ public class Geocalizacion extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         LatLng huila = new LatLng(2.92504, -75.2897);
-        mMap.addMarker(new MarkerOptions().position(huila).title("Huila"));//.icon(BitmapDescriptorFactory.fromResource(R.drawable.logohuila3)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(huila));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(huila, 13));
         mMap.isTrafficEnabled();
-
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(2.9370613, -75.2952122))
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ubica_museo))
-                .title("Museo de Arte Contemporneo Del Huila"));
-
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(2.921914, -75.293802))
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ubica_museo))
-                .title("Museo Prehistórico"));
-
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(2.9522992,-75.2875389))
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ubica_hotel))
-                .title("Hotel GHL"));
-
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-
-            @Override
-            public boolean onMarkerClick(Marker arg0) {
-                Toast.makeText(Geocalizacion.this, arg0.getTitle(), Toast.LENGTH_SHORT).show();// display toast
-                if (arg0.getTitle().equals("Museo Prehistórico")) {
-                    Intent i = new Intent(Geocalizacion.this, Informacion.class);
-                    startActivity(i);
-                }
-                return true;
-            }
-
-        });
-
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
-        {
-
-            @Override
-            public boolean onMarkerClick(Marker arg0) {
-                Toast.makeText(Geocalizacion.this, arg0.getTitle(), Toast.LENGTH_SHORT).show();// display toast
-                if(arg0.getTitle().equals("Hotel GHL")) {
-                    Intent i = new Intent(Geocalizacion.this, Informacion.class);
-                    startActivity(i);
-                }
-                return true;
-            }
-
-        });
-
-
     }
+
+
+
+    //Se establece las acciones a tomar en el instante que llegue la respuesta del web service.
+    final Runnable marcador = new Runnable() {
+        public void run() {
+            circuloProgreso.dismiss();
+            
+            sitio_turistico = webResponseMarcador.getSitioTuristico();
+            tipo_sitio_turistico = webResponseMarcador.getTipoSitioTuristico();
+            nombre_sitio_turistico = webResponseMarcador.getNombreSitioTuristico();
+            coord_x = webResponseMarcador.getCoordX();
+            coord_y = webResponseMarcador.getCoordY();
+
+            int imagen = 0;
+
+            for(int i=0; i < sitio_turistico.size(); i++){
+                if("1".equals(tipo_sitio_turistico.get(i))){
+                    imagen = R.drawable.ubica_hotel;
+                }else if ("2".equals(tipo_sitio_turistico.get(i))){
+                    imagen = R.drawable.ubica_restaurante;
+                }else if ("3".equals(tipo_sitio_turistico.get(i))){
+                    imagen = R.drawable.ubica_museo;
+                }else if ("4".equals(tipo_sitio_turistico.get(i))){
+                    imagen = R.drawable.ubica_cencom;
+                }else if ("5".equals(tipo_sitio_turistico.get(i))){
+                    imagen = R.drawable.ubica_disco;
+                }else if ("6".equals(tipo_sitio_turistico.get(i))){
+                    imagen = R.drawable.ubica_iglesia;
+                }
+
+                Marker marker =mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(Double.parseDouble(coord_x.get(i)), Double.parseDouble(coord_y.get(i))))
+                        .icon(BitmapDescriptorFactory.fromResource(imagen))
+                        .title(nombre_sitio_turistico.get(i)));
+
+                mHashMap.put(marker, Integer.parseInt(sitio_turistico.get(i)));
+            }
+
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker arg0) {
+
+                    if (arg0.equals(previoMarker) && showMarker > 0) {
+                        arg0.hideInfoWindow();
+                        showMarker = 0;
+                    } else {
+                        arg0.showInfoWindow();
+                        showMarker++;
+                    }
+
+                    previoMarker = arg0;
+
+                    return true;
+                }
+
+            });
+
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    Intent i = new Intent(Geocalizacion.this, Informacion.class);
+                    i.putExtra("sitio_turistico", mHashMap.get(marker).toString());
+                    i.putExtra("nombre_sitio_turistico", marker.getTitle());
+                    startActivity(i);
+                }
+            });
+        }
+    };
+    ////////////////////////////////////////////////////////////////////////////////////////////
 
 }

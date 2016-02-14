@@ -26,4 +26,6 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile project(':indicador')
+    compile files('/home/etaborda/AndroidStudioProjects/TodosAlHuila/ksoap2.jar')
+    compile files('/home/etaborda/AndroidStudioProjects/TodosAlHuila/ksoap2-android-assembly-3.0.0-jar-with-dependencies/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar')
 }

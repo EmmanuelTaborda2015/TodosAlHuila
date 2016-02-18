@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
@@ -21,8 +23,10 @@ import com.proyecto.huila.indicador.ImageIndicatorView;
 import com.proyecto.huila.indicador.ImageIndicatorViewUrl;
 import com.proyecto.huila.indicador.LoadImageFromURL;
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.menu.Inicio;
 import com.proyecto.huila.todosalhuila.webservice.WS_SitioTuristico;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -36,7 +40,8 @@ public class Informacion extends AppCompatActivity {
 
     private ProgressDialog circuloProgreso;
 
-    private int sitio_turistico;
+    private String sitio_turistico;
+    private String nombre_sitio_turistico;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +52,10 @@ public class Informacion extends AppCompatActivity {
             setSupportActionBar(toolbar);
 
             final Intent intent = getIntent();
-            String title = intent.getStringExtra("nombre_sitio_turistico");
+            this.nombre_sitio_turistico = intent.getStringExtra("nombre_sitio_turistico");
+            this.sitio_turistico = intent.getStringExtra("sitio_turistico");
 
-            this.sitio_turistico = Integer.parseInt(intent.getStringExtra("sitio_turistico"));
-
-            this.setTitle(title);
+            this.setTitle(this.nombre_sitio_turistico);
 
             //Se genera el llamado al web service que enviara los marcadores presentes en la base de datos.
             circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
@@ -120,7 +124,7 @@ public class Informacion extends AppCompatActivity {
                 private ImageIndicatorViewUrl imageIndicatorView;
 
                 @Override
-                public void processFinish(Bitmap[] output) {
+                public void processFinish(final Bitmap[] output) {
 
                     circuloProgreso.dismiss();
 
@@ -153,6 +157,42 @@ public class Informacion extends AppCompatActivity {
                         }
                         j++;
                     }
+
+                    ImageView comentar = (ImageView) findViewById(R.id.botonComentar);
+                    comentar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Informacion.this, Inicio.class);
+                            i.putExtra("sitio_turistico", sitio_turistico);
+                            i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
+                            startActivity(i);
+                        }
+                    });
+
+                    ImageView calificar = (ImageView) findViewById(R.id.botonCalificar);
+                    calificar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Informacion.this, Calificar.class);
+                            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                            output[0].compress(Bitmap.CompressFormat.PNG, 50, bs);
+                            i.putExtra("byteArray", bs.toByteArray());
+                            i.putExtra("sitio_turistico", sitio_turistico);
+                            i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
+                            startActivity(i);
+                        }
+                    });
+
+                    ImageView compartir = (ImageView) findViewById(R.id.botonCompartir);
+                    compartir.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Informacion.this, Inicio.class);
+                            i.putExtra("sitio_turistico", sitio_turistico);
+                            i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
+                            startActivity(i);
+                        }
+                    });
                 }
             });
 

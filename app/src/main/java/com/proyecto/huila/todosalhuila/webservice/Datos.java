@@ -12,7 +12,7 @@ public class Datos {
         return SERVICE;
     }
 
-    private String HOST = "http://192.168.0.6/";
+    private String HOST = "http://192.168.0.5/";
     private String SERVICE = HOST + "ws_todosalhuila/turista/servicio/servicio.php";
 
 }

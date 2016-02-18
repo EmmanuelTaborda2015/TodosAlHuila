@@ -174,9 +174,11 @@ public class Informacion extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Informacion.this, Calificar.class);
-                            ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                            output[0].compress(Bitmap.CompressFormat.PNG, 50, bs);
-                            i.putExtra("byteArray", bs.toByteArray());
+                            if(output.length>0){
+                                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                output[0].compress(Bitmap.CompressFormat.PNG, 50, bs);
+                                i.putExtra("byteArray", bs.toByteArray());
+                            }
                             i.putExtra("sitio_turistico", sitio_turistico);
                             i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
                             startActivity(i);

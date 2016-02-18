@@ -18,6 +18,9 @@
     <string name="categoria5">Discotecas</string>
     <string name="categoria6">Iglesias</string>
 
+    <string name="registroCalificacionTrue">Gracias por su calificación!!! </string>
+    <string name="registroCalificacionFalse">No se ha podido enviar su calificación</string>
+
     <string name="text_inicio">Descubre todas las maravillas que te puede ofrecer el paraíso huilense. Desde altas montañas, nevados y ríos hasta parques nacionales y exhuberantes comidas.</string>
 
     <string name="salir_aplicacion">¿Desea salir de la aplicación?</string>

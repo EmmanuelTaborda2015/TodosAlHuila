@@ -29,11 +29,6 @@ import java.util.List;
  */
 public class ImageIndicatorViewUrl extends RelativeLayout {
 
-	private ImageView imagen;
-
-	/**
-	 * ViewPager
-	 */
 	private ViewPager viewPager;
 	/**
 	 * anchor container
@@ -123,9 +118,8 @@ public class ImageIndicatorViewUrl extends RelativeLayout {
 	 * @param context
 	 */
 	private void init(Context context) {
-		LayoutInflater.from(context).inflate(R.layout.bitmap_indicator_layout, this);
+		LayoutInflater.from(context).inflate(R.layout.image_indicator_layout, this);
 		this.viewPager = (ViewPager) findViewById(R.id.view_pager);
-		this.imagen = (ImageView) findViewById(R.id.imagen);
 		this.indicateLayout = (LinearLayout) findViewById(R.id.image_indicater_layout);
 		this.leftButton = (Button) findViewById(R.id.left_button);
 		this.rightButton = (Button) findViewById(R.id.right_button);

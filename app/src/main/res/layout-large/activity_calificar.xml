@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/button"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/azul1">
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/ratingBarStyle"
+        android:id="@+id/ratingBar"
+        android:numStars="5"
+        android:rating="0"
+        android:paddingTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:progressTint="#f9f907"
+        android:progressBackgroundTint="#ffffff"
+        android:backgroundTintMode="src_atop"
+        android:backgroundTint="#ffffff"
+        android:foregroundTintMode="src_atop"
+        android:progressBackgroundTintMode="src_atop"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/calificar_boton1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Lugar a Calificar"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:id="@+id/label_lugar_calificar"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp" />
+
+    <ImageView
+        android:layout_height="350dp"
+        android:layout_width="fill_parent"
+        android:scaleType="fitXY"
+        android:id="@+id/calificar_imagen1"
+        android:background="@drawable/imageview"
+        android:layout_gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/calificar_boton1"
+        android:text="Calificar"
+        android:textColor="#FFFFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:layout_margin="5dp"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <RatingBar
+        style="?android:attr/ratingBarStyleIndicator"
+        android:isIndicator="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar2"
+        android:numStars="5"
+        android:rating="3.3"
+        android:progressTint="#f9f907"
+        android:progressBackgroundTint="#ffffff"
+        android:secondaryProgressTint="#f9f907"
+        android:layout_below="@+id/label_lugar_calificar"
+        android:layout_centerHorizontal="true"
+        android:clickable="false"
+        android:backgroundTintMode="src_atop"
+        android:progressBackgroundTintMode="src_atop"
+        android:secondaryProgressTintMode="src_atop"
+        android:foregroundTintMode="src_atop"
+        android:foregroundTint="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Medium Text"
+        android:textAlignment="center"
+        android:id="@+id/calificar_label2"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/ratingBar2"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

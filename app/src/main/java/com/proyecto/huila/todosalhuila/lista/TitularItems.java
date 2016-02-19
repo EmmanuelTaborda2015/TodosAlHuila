@@ -6,7 +6,7 @@ public class TitularItems {
 
     String description; // Descripción del item
 
-    int img; // Imagen del ítem
+    String img; // Imagen del ítem
 
     // Constructor por defecto de la clase
 
@@ -14,7 +14,7 @@ public class TitularItems {
 
     // Constructor con parámetros para inicializar el item
 
-    public TitularItems(String _title, String _description, int _img){
+    public TitularItems(String _title, String _description, String _img){
 
         this.title = _title;
 
@@ -34,8 +34,8 @@ public class TitularItems {
 
     public void setDescription(String description) { this.description = description; }
 
-    public int getImg() { return img; }
+    public String getImg() { return img; }
 
-    public void setImg(int img) { this.img = img; }
+    public void setImg(String img) { this.img = img; }
 
 }

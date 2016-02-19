@@ -41,7 +41,7 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/calificar"
+                android:src="@drawable/startshape"
                 android:id="@+id/botonCalificar"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />

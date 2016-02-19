@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Lugar a Calificar"
+        android:text=""
         android:textStyle="bold"
         android:textSize="30dp"
         android:textColor="@color/white"
@@ -59,7 +59,7 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttonshape"
+        android:background="@drawable/buttonselect"
         android:shadowColor="#A8A8A8"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"
@@ -78,7 +78,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/ratingBar2"
         android:numStars="5"
-        android:rating="3.3"
         android:progressTint="#f9f907"
         android:progressBackgroundTint="#ffffff"
         android:secondaryProgressTint="#f9f907"
@@ -94,14 +93,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
         android:textAlignment="center"
         android:id="@+id/calificar_label2"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"
         android:layout_below="@+id/ratingBar2"
         android:layout_centerHorizontal="true" />
-
 
 </RelativeLayout>

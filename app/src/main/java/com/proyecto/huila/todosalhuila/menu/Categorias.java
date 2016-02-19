@@ -44,6 +44,8 @@ public class Categorias extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Categorias.this, Lugares.class);
+                i.putExtra("nombre_categoria", getResources().getString(R.string.categoria1));
+                i.putExtra("categoria", "1");
                 startActivity(i);
                 overridePendingTransition(0, 0);
             }

@@ -60,23 +60,22 @@
             android:name=".lista.Lugares"
             android:label="@string/title_activity_lugares"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".geolocalizacion.Informacion"
             android:label="@string/title_activity_informacion"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".geolocalizacion.Calificar"
             android:label="@string/title_activity_calificar"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".galeria.MainActivity"
             android:label="@string/title_activity_informacion"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".geolocalizacion.Comentar"
+            android:label="@string/title_activity_comentar"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -126,8 +126,6 @@ public class Informacion extends AppCompatActivity {
                 @Override
                 public void processFinish(final Bitmap[] output) {
 
-                    circuloProgreso.dismiss();
-
                     this.imageIndicatorView = (ImageIndicatorViewUrl) findViewById(R.id.indicate_view);
                     final Bitmap[] resArray = output;
                     this.imageIndicatorView.setupLayoutByDrawable(resArray);
@@ -195,6 +193,8 @@ public class Informacion extends AppCompatActivity {
                             startActivity(i);
                         }
                     });
+
+                    circuloProgreso.dismiss();
                 }
             });
 
@@ -214,10 +214,6 @@ public class Informacion extends AppCompatActivity {
                 String[] myTaskParams ={};
                 asyncTask.execute(myTaskParams);
             }
-
-
-
-
         }
     };
     ////////////////////////////////////////////////////////////////////////////////////////////

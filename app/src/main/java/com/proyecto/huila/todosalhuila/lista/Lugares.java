@@ -1,6 +1,11 @@
 package com.proyecto.huila.todosalhuila.lista;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
@@ -8,6 +13,8 @@ import android.widget.ListView;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.lista.Adaptador;
 import com.proyecto.huila.todosalhuila.lista.TitularItems;
+import com.proyecto.huila.todosalhuila.webservice.WS_ListaCategoria;
+import com.proyecto.huila.todosalhuila.webservice.WS_SitioTuristico;
 
 import java.util.ArrayList;
 
@@ -17,6 +24,14 @@ public class Lugares extends AppCompatActivity {
     private com.proyecto.huila.todosalhuila.lista.Adaptador Adaptador;
     private ListView listaItems;
 
+    private Handler handler_listaCategoria = new Handler();
+    private Thread thread_listaCategoria;
+    private WS_ListaCategoria webResponseListaCategoria;
+
+    private ProgressDialog circuloProgreso;
+
+    private String nombre_categoria;
+    private String categoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,20 +40,47 @@ public class Lugares extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        this.setTitle("Atractivos Turísticos");
+        final Intent intent = getIntent();
+        this.nombre_categoria = intent.getStringExtra("nombre_categoria");
+        this.categoria = intent.getStringExtra("categoria");
+
+        this.setTitle(nombre_categoria);
 
         listaItems = (ListView)findViewById(R.id.listItems);
-        loadItems();
+
+        //Se genera el llamado al web service que enviara los marcadores presentes en la base de datos.
+        circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
+
+        thread_listaCategoria = new Thread() {
+            public void run() {
+                Looper.prepare();
+                String id_dispositivo = Settings.Secure.getString(getApplication().getContentResolver(), Settings.Secure.ANDROID_ID);
+                webResponseListaCategoria = new WS_ListaCategoria();
+                webResponseListaCategoria.startWebAccess("usuario", id_dispositivo, categoria);
+                handler_listaCategoria.post(listaCategoria);
+            }
+        };
+
+        thread_listaCategoria.start();
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+
     }
 
-    private void loadItems(){
+    //Se establece las acciones a tomar en el instante que llegue la respuesta del web service.
+    final Runnable listaCategoria = new Runnable() {
+        public void run() {
 
-        Items = new ArrayList<TitularItems>();
-        Items.add(new TitularItems("Museo Prehistórico", "Museo", this.getResources().getIdentifier("museoprehistorico", "drawable", this.getPackageName())));
-        Items.add(new TitularItems("Museo de Arte Contemporneo Del Huila", "Museo", this.getResources().getIdentifier("museoartehuila", "drawable", this.getPackageName())));
+            Items = new ArrayList<TitularItems>();
 
-        Adaptador = new Adaptador(this, Items);
-        listaItems.setAdapter(Adaptador);
-    }
+            for(int i=0; i<webResponseListaCategoria.getSitioTuristico().size(); i++){
+                Items.add(new TitularItems(webResponseListaCategoria.getNombreSitioTuristico().get(i), "Pendiente", webResponseListaCategoria.getImagenSitioTuristico().get(i)));
+            }
+
+            Adaptador = new Adaptador(Lugares.this, Items);
+            listaItems.setAdapter(Adaptador);
+
+            circuloProgreso.dismiss();
+        }
+    };
 
 }

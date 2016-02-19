@@ -1,12 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
-
-    <item
-        jar="/home/etaborda/AndroidStudioProjects/TodosAlHuila/app/build/intermediates/exploded-aar/TodosAlHuila/indicador/unspecified/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="04c91bd8ce0208248c97a383d07fdd5fe181593e">
-        <dex dex="/home/etaborda/AndroidStudioProjects/TodosAlHuila/app/build/intermediates/pre-dexed/debug/TodosAlHuila-indicador-unspecified_7c63e6d4882fcab8b0f77d4a0ee9921d6e9697cd.jar" />
-    </item>
-
-</items>
+<items version="2" />

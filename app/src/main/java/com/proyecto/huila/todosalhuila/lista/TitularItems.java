@@ -2,6 +2,8 @@ package com.proyecto.huila.todosalhuila.lista;
 
 public class TitularItems {
 
+    String sitio; // Título del item
+
     String title; // Título del item
 
     String description; // Descripción del item
@@ -14,7 +16,9 @@ public class TitularItems {
 
     // Constructor con parámetros para inicializar el item
 
-    public TitularItems(String _title, String _description, String _img){
+    public TitularItems(String _sitio, String _title, String _description, String _img){
+
+        this.sitio = _sitio;
 
         this.title = _title;
 
@@ -25,6 +29,10 @@ public class TitularItems {
     }
 
     // Aqui inicia el GET y el SET para cada propiedad de la clase
+
+    public String getSitio() { return sitio; }
+
+    public void setSitioString (String sitio) { this.sitio = sitio; }
 
     public String getTitle() { return title; }
 

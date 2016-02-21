@@ -11,7 +11,8 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttonselect"
+        android:background="@drawable/layoutselect"
+        android:alpha="0.8"
         android:orientation="horizontal">
 
         <LinearLayout android:id="@+id/thumbnail"

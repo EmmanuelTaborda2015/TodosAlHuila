@@ -39,7 +39,7 @@ public class Categorias extends AppCompatActivity
 
         //Aquí se generan los eventos de los botones correspondeintes a cada categoría.
 
-        LinearLayout categoria1 = (LinearLayout) findViewById(R.id.atractivos_turisticos);
+        LinearLayout categoria1 = (LinearLayout) findViewById(R.id.hoteles);
         categoria1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,10 +51,65 @@ public class Categorias extends AppCompatActivity
             }
         });
 
+        LinearLayout categoria2 = (LinearLayout) findViewById(R.id.restaurantes);
+        categoria2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Categorias.this, Lugares.class);
+                i.putExtra("nombre_categoria", getResources().getString(R.string.categoria2));
+                i.putExtra("categoria", "2");
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
+        });
 
+        LinearLayout categoria3 = (LinearLayout) findViewById(R.id.atractivos_turisticos);
+        categoria3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Categorias.this, Lugares.class);
+                i.putExtra("nombre_categoria", getResources().getString(R.string.categoria3));
+                i.putExtra("categoria", "3");
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
+        });
 
+        LinearLayout categoria4 = (LinearLayout) findViewById(R.id.centros_comerciales);
+        categoria4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Categorias.this, Lugares.class);
+                i.putExtra("nombre_categoria", getResources().getString(R.string.categoria4));
+                i.putExtra("categoria", "4");
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
+        });
 
+        LinearLayout categoria5 = (LinearLayout) findViewById(R.id.discotecas);
+        categoria5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Categorias.this, Lugares.class);
+                i.putExtra("nombre_categoria", getResources().getString(R.string.categoria5));
+                i.putExtra("categoria", "5");
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
+        });
 
+        LinearLayout categoria6 = (LinearLayout) findViewById(R.id.iglesias);
+        categoria6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Categorias.this, Lugares.class);
+                i.putExtra("nombre_categoria", getResources().getString(R.string.categoria6));
+                i.putExtra("categoria", "6");
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
+        });
     }
 
     @Override

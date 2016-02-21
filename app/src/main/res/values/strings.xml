@@ -11,10 +11,10 @@
     <string name="menu4">Agenda</string>
     <string name="menu5">Salir</string>
 
-    <string name="categoria1">Atractivos Turísticos</string>
-    <string name="categoria2">Centros Comerciales</string>
-    <string name="categoria3">Hoteles</string>
-    <string name="categoria4">Restaurantes</string>
+    <string name="categoria1">Hoteles</string>
+    <string name="categoria2">Restaurantes</string>
+    <string name="categoria3">Atractivos Turísticos</string>
+    <string name="categoria4">Centros Comerciales</string>
     <string name="categoria5">Discotecas</string>
     <string name="categoria6">Iglesias</string>
 
@@ -43,12 +43,12 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_categorias">Categorias</string>
-    <string name="title_activity_localizacion">Localizacion</string>
+    <string name="title_activity_categorias">Categorías</string>
+    <string name="title_activity_localizacion">Localización</string>
     <string name="title_activity_mapa">Map</string>
     <string name="title_activity_agenda">Agenda</string>
     <string name="title_activity_lugares">Lugares</string>
-    <string name="title_activity_informacion">Informacion</string>
+    <string name="title_activity_informacion">Información</string>
     <string name="title_activity_calificar">Calificar</string>
     <string name="title_activity_comentar">Comentar</string>
 </resources>

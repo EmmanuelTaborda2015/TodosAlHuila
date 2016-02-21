@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -189,7 +190,7 @@ public class Geocalizacion extends AppCompatActivity
     final Runnable marcador = new Runnable() {
         public void run() {
             circuloProgreso.dismiss();
-            
+
             sitio_turistico = webResponseMarcador.getSitioTuristico();
             tipo_sitio_turistico = webResponseMarcador.getTipoSitioTuristico();
             nombre_sitio_turistico = webResponseMarcador.getNombreSitioTuristico();
@@ -229,6 +230,10 @@ public class Geocalizacion extends AppCompatActivity
                         arg0.hideInfoWindow();
                         showMarker = 0;
                     } else {
+
+                        int zoom = (int)mMap.getCameraPosition().zoom;
+                        CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(arg0.getPosition().latitude + (double)90/Math.pow(2, zoom), arg0.getPosition().longitude), zoom);
+                        mMap.moveCamera(cu);
                         arg0.showInfoWindow();
                         showMarker++;
                     }

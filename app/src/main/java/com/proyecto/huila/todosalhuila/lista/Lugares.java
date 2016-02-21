@@ -8,9 +8,15 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Marker;
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.geolocalizacion.Informacion;
 import com.proyecto.huila.todosalhuila.lista.Adaptador;
 import com.proyecto.huila.todosalhuila.lista.TitularItems;
 import com.proyecto.huila.todosalhuila.webservice.WS_ListaCategoria;
@@ -73,10 +79,24 @@ public class Lugares extends AppCompatActivity {
             Items = new ArrayList<TitularItems>();
 
             for(int i=0; i<webResponseListaCategoria.getSitioTuristico().size(); i++){
-                Items.add(new TitularItems(webResponseListaCategoria.getNombreSitioTuristico().get(i), "Pendiente", webResponseListaCategoria.getImagenSitioTuristico().get(i)));
+                Items.add(new TitularItems(webResponseListaCategoria.getSitioTuristico().get(i), webResponseListaCategoria.getNombreSitioTuristico().get(i), "Pendiente", webResponseListaCategoria.getImagenSitioTuristico().get(i)));
             }
 
             Adaptador = new Adaptador(Lugares.this, Items);
+
+
+            listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+
+                    Intent i = new Intent(Lugares.this, Informacion.class);
+                    i.putExtra("sitio_turistico", Items.get(position).getSitio());
+                    i.putExtra("nombre_sitio_turistico", Items.get(position).getTitle());
+                    startActivity(i);
+                }
+            });
+
             listaItems.setAdapter(Adaptador);
 
             circuloProgreso.dismiss();

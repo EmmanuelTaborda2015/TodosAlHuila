@@ -42,10 +42,13 @@
             <ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
-                android:src="@drawable/calificar"
+                android:src="@drawable/startshape"
                 android:id="@+id/botonCalificar"
+                android:layout_marginLeft="141dp"
+                android:layout_marginStart="141dp"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_toRightOf="@+id/botonComentar"
+                android:layout_toEndOf="@+id/botonComentar" />
 
             <ImageView
                 android:layout_width="38dp"
@@ -56,6 +59,17 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:src="@drawable/ubicar"
+                android:id="@+id/botonUbicar"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/botonCompartir"
+                android:layout_toStartOf="@+id/botonCompartir"
+                android:layout_marginRight="129dp"
+                android:layout_marginEnd="129dp" />
         </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>

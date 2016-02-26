@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import com.proyecto.huila.indicador.AutoPlayManager;
 import com.proyecto.huila.indicador.ImageIndicatorView;
 import com.proyecto.huila.todosalhuila.R;
-import com.proyecto.huila.todosalhuila.geolocalizacion.Geocalizacion;
+import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 
 
 public class Inicio extends AppCompatActivity
@@ -115,7 +115,7 @@ public class Inicio extends AppCompatActivity
             overridePendingTransition(0, 0);
             finish();
         } else if (id == R.id.menu3) {
-            Intent i = new Intent(Inicio.this, Geocalizacion.class );
+            Intent i = new Intent(Inicio.this, Geolocalizacion.class );
             startActivity(i);
             overridePendingTransition(0, 0);
             finish();

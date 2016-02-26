@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.webkit.GeolocationPermissions;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -127,7 +128,12 @@ public class Informacion extends AppCompatActivity {
                 public void processFinish(final Bitmap[] output) {
 
                     this.imageIndicatorView = (ImageIndicatorViewUrl) findViewById(R.id.indicate_view);
-                    final Bitmap[] resArray = output;
+                    Bitmap[] resArray = output;
+                    if(resArray.length==0){
+                        Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
+                        resArray = new Bitmap[1];
+                        resArray[0] =icon;
+                    }
                     this.imageIndicatorView.setupLayoutByDrawable(resArray);
                     this.imageIndicatorView.show();
 
@@ -176,6 +182,11 @@ public class Informacion extends AppCompatActivity {
                                 ByteArrayOutputStream bs = new ByteArrayOutputStream();
                                 output[0].compress(Bitmap.CompressFormat.PNG, 50, bs);
                                 i.putExtra("byteArray", bs.toByteArray());
+                            }else{
+                                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
+                                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                                i.putExtra("byteArray", bs.toByteArray());
                             }
                             i.putExtra("sitio_turistico", sitio_turistico);
                             i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
@@ -188,6 +199,17 @@ public class Informacion extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Informacion.this, Inicio.class);
+                            i.putExtra("sitio_turistico", sitio_turistico);
+                            i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
+                            startActivity(i);
+                        }
+                    });
+
+                    ImageView ubicar = (ImageView) findViewById(R.id.botonUbicar);
+                    ubicar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Informacion.this, GeolocalizacionPunto.class);
                             i.putExtra("sitio_turistico", sitio_turistico);
                             i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
                             startActivity(i);

@@ -1,6 +1,9 @@
 package com.proyecto.huila.todosalhuila.webservice;
 
+import android.content.Context;
 import android.util.Log;
+
+import com.proyecto.huila.todosalhuila.herramientas.ServicioWeb;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -11,11 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-public class WS_Marcador {
+public class WS_Marcador extends ServicioWeb {
 
     private final String NAMESPACE = "urn:app";
 
     private String URL;
+
+    private String usuario;
+    private String dispositivo;
+    private String marcador;
 
     private final String SOAP_ACTION = "urn:app/marcador";
     private final String METHOD_NAME = "marcador";
@@ -25,6 +32,14 @@ public class WS_Marcador {
     private List<String> tipo_sitio_turistico = new ArrayList<String>();
     private List<String> coord_x = new ArrayList<String>();
     private List<String> coord_y = new ArrayList<String>();
+
+    public WS_Marcador(Context context, String usuario, String dispositivo, String marcador) {
+        super(context);
+
+        this.usuario=usuario;
+        this.dispositivo=dispositivo;
+        this.marcador=marcador;
+    }
 
     public List<String> getSitioTuristico() {
         return sitio_turistico;
@@ -46,7 +61,7 @@ public class WS_Marcador {
         return coord_y;
     }
 
-    public void startWebAccess(String usuario, String dispositivo) {
+    public void startWebAccess() {
 
         Datos url = new Datos();
         URL = url.getSERVICE();
@@ -55,6 +70,7 @@ public class WS_Marcador {
 
         request.addProperty("usuario", usuario);
         request.addProperty("dispositivo", dispositivo);
+        request.addProperty("marcador", marcador);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.setOutputSoapObject(request);

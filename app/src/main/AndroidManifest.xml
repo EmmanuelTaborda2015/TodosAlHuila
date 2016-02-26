@@ -7,6 +7,15 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <receiver android:name="com.AEDesign.communication.WifiReceiver">
+        <intent-filter android:priority="100">
+            <action android:name="android.net.wifi.STATE_CHANGE" />
+        </intent-filter>
+    </receiver>
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -49,7 +58,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".geolocalizacion.Geocalizacion"
+            android:name=".geolocalizacion.Geolocalizacion"
             android:label="@string/title_activity_localizacion"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -71,10 +80,18 @@
         <activity
             android:name=".galeria.MainActivity"
             android:label="@string/title_activity_informacion"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".geolocalizacion.Comentar"
             android:label="@string/title_activity_comentar"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".geolocalizacion.GeolocalizacionPunto"
+            android:label="@string/title_activity_geolocalizacion_punto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".geolocalizacion.Comentarios"
+            android:label="@string/title_activity_comentarios"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

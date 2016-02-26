@@ -1,9 +1,13 @@
 package com.proyecto.huila.todosalhuila.menu;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,12 +18,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
-import com.proyecto.huila.todosalhuila.geolocalizacion.Geocalizacion;
+import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
+import com.proyecto.huila.todosalhuila.herramientas.AppStatus;
 import com.proyecto.huila.todosalhuila.lista.Lugares;
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexion;
 
 public class Categorias extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ProgressDialog circuloProgreso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +35,17 @@ public class Categorias extends AppCompatActivity
         setContentView(R.layout.activity_categorias);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        AppStatus app = new AppStatus(Categorias.this);
+        Thread conexion = app.isOnline();
+
+        circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
+
+        while(conexion.isAlive()){
+            Log.v("Corriendo", "si");
+        }
+
+        circuloProgreso.dismiss();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -36,6 +55,7 @@ public class Categorias extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         //Aquí se generan los eventos de los botones correspondeintes a cada categoría.
 
@@ -165,7 +185,7 @@ public class Categorias extends AppCompatActivity
             overridePendingTransition(0, 0);
             finish();
         } else if (id == R.id.menu3) {
-            Intent i = new Intent(Categorias.this, Geocalizacion.class );
+            Intent i = new Intent(Categorias.this, Geolocalizacion.class );
             startActivity(i);
             overridePendingTransition(0, 0);
             finish();
@@ -187,4 +207,6 @@ public class Categorias extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

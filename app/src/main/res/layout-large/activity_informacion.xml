@@ -107,7 +107,7 @@
 
                         <LinearLayout android:id="@+id/tab1"
                             android:orientation="vertical"
-                            android:padding="8dp"
+                            android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
 
@@ -117,7 +117,10 @@
                                 android:id="@+id/scrollView" >
 
                                 <TextView android:id="@+id/textViewtab1"
-                                    android:text="Contenido Tab 1"
+                                    android:text=""
+                                    android:paddingLeft="15dp"
+                                    android:paddingRight="15dp"
+                                    android:paddingBottom="15dp"
                                     android:textColor="@color/black"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
@@ -127,7 +130,7 @@
 
                         <LinearLayout android:id="@+id/tab2"
                             android:orientation="vertical"
-                            android:padding="8dp"
+                            android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
 
@@ -138,6 +141,9 @@
 
                                 <TextView android:id="@+id/textViewtab2"
                                     android:text=""
+                                    android:paddingLeft="15dp"
+                                    android:paddingRight="15dp"
+                                    android:paddingBottom="15dp"
                                     android:textColor="@color/black"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />

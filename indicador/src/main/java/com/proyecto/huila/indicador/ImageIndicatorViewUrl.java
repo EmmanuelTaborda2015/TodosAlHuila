@@ -353,6 +353,7 @@ public class ImageIndicatorViewUrl extends RelativeLayout {
 			if (totelCount <= 1) {
 				leftButton.setVisibility(View.GONE);
 				rightButton.setVisibility(View.GONE);
+				indicateLayout.setVisibility(View.GONE);
 			} else if (totelCount == 2) {
 				if (currentIndex == 0) {
 					leftButton.setVisibility(View.VISIBLE);

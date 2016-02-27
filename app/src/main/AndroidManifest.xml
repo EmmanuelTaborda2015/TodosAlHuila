@@ -93,6 +93,11 @@
             android:name=".geolocalizacion.Comentarios"
             android:label="@string/title_activity_comentarios"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".lista.Comentario"
+            android:label="@string/title_activity_comentarios"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

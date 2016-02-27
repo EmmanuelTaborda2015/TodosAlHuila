@@ -11,23 +11,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.Marker;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Informacion;
-import com.proyecto.huila.todosalhuila.lista.Adaptador;
-import com.proyecto.huila.todosalhuila.lista.TitularItems;
 import com.proyecto.huila.todosalhuila.webservice.WS_ListaCategoria;
-import com.proyecto.huila.todosalhuila.webservice.WS_SitioTuristico;
 
 import java.util.ArrayList;
 
 public class Lugares extends AppCompatActivity {
 
-    private ArrayList<TitularItems> Items;
-    private com.proyecto.huila.todosalhuila.lista.Adaptador Adaptador;
+    private ArrayList<TitularItemsLugares> Items;
+    private AdaptadorLugares Adaptador;
     private ListView listaItems;
 
     private Handler handler_listaCategoria = new Handler();
@@ -76,13 +70,13 @@ public class Lugares extends AppCompatActivity {
     final Runnable listaCategoria = new Runnable() {
         public void run() {
 
-            Items = new ArrayList<TitularItems>();
+            Items = new ArrayList<TitularItemsLugares>();
 
             for(int i=0; i<webResponseListaCategoria.getSitioTuristico().size(); i++){
-                Items.add(new TitularItems(webResponseListaCategoria.getSitioTuristico().get(i), webResponseListaCategoria.getNombreSitioTuristico().get(i), "Pendiente", webResponseListaCategoria.getImagenSitioTuristico().get(i)));
+                Items.add(new TitularItemsLugares(webResponseListaCategoria.getSitioTuristico().get(i), webResponseListaCategoria.getNombreSitioTuristico().get(i), "Pendiente", webResponseListaCategoria.getImagenSitioTuristico().get(i)));
             }
 
-            Adaptador = new Adaptador(Lugares.this, Items);
+            Adaptador = new AdaptadorLugares(Lugares.this, Items);
 
 
             listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {

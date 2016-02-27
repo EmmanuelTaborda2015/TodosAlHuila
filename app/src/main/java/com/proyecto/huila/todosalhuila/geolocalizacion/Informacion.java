@@ -24,6 +24,7 @@ import com.proyecto.huila.indicador.ImageIndicatorView;
 import com.proyecto.huila.indicador.ImageIndicatorViewUrl;
 import com.proyecto.huila.indicador.LoadImageFromURL;
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.lista.Comentario;
 import com.proyecto.huila.todosalhuila.menu.Inicio;
 import com.proyecto.huila.todosalhuila.webservice.WS_SitioTuristico;
 
@@ -166,7 +167,7 @@ public class Informacion extends AppCompatActivity {
                     comentar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Informacion.this, Inicio.class);
+                            Intent i = new Intent(Informacion.this, Comentario.class);
                             i.putExtra("sitio_turistico", sitio_turistico);
                             i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
                             startActivity(i);

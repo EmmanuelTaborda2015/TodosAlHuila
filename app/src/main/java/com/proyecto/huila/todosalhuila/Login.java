@@ -22,11 +22,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Bitmap icon = BitmapFactory.decodeResource(this.getResources(), R.drawable.imagen_no_disponible);
-        CircleImageView image = (CircleImageView) findViewById(R.id.profile_image);
-        image.setImageResource(R.drawable.imagen_no_disponible);
-
-
         Button boton = (Button) findViewById(R.id.botonBienvenida);
         boton.setOnClickListener(new View.OnClickListener() {
             @Override

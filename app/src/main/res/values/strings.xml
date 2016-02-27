@@ -50,7 +50,7 @@
     <string name="title_activity_lugares">Lugares</string>
     <string name="title_activity_informacion">Información</string>
     <string name="title_activity_calificar">Calificar</string>
-    <string name="title_activity_comentar">Comentar</string>
+    <string name="title_activity_comentar">Comentarios</string>
     <string name="title_activity_geolocalizacion_punto">GeolocalizacionPunto</string>
     <string name="title_activity_verificacion_internet">VerificacionInternet</string>
     <string name="title_activity_comentarios">Comentarios</string>

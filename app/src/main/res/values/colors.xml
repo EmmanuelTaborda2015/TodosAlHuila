@@ -46,5 +46,8 @@
         <item>@color/azul3</item>
     </integer-array>
 
+    <color name ="background">#000000</color>
+    <color name="list_qualities_bg">#88FFFFFF</color>
+
 </resources>
 

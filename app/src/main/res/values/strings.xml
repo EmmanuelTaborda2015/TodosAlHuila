@@ -9,7 +9,8 @@
     <string name="menu2">Categorías</string>
     <string name="menu3">Localización</string>
     <string name="menu4">Agenda</string>
-    <string name="menu5">Salir</string>
+    <string name="menu5">Multimedia</string>
+    <string name="menu6">Salir</string>
 
     <string name="categoria1">Hoteles</string>
     <string name="categoria2">Restaurantes</string>
@@ -54,4 +55,12 @@
     <string name="title_activity_geolocalizacion_punto">GeolocalizacionPunto</string>
     <string name="title_activity_verificacion_internet">VerificacionInternet</string>
     <string name="title_activity_comentarios">Comentarios</string>
+    <string name="title_activity_multimedia">Multimedia</string>
+
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="done">Done</string>
+    <string name="video_path">Video path:</string>
+    <string name="video_too_short">Video is too short.</string>
+    <string name="processing">Processing...</string>
 </resources>

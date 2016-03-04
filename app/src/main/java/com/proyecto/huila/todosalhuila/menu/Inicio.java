@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.proyecto.huila.indicador.AutoPlayManager;
 import com.proyecto.huila.indicador.ImageIndicatorView;
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.activities.CameraActivity;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 
 
@@ -125,6 +126,11 @@ public class Inicio extends AppCompatActivity
             overridePendingTransition(0, 0);
             finish();
         } else if (id == R.id.menu5) {
+            Intent i = new Intent(Inicio.this, CameraActivity.class );
+            startActivity(i);
+            overridePendingTransition(0, 0);
+            finish();
+        } else if (id == R.id.menu6) {
             finish();
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);

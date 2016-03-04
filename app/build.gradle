@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.proyecto.huila.todosalhuila"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -16,6 +16,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    defaultConfig {
+        multiDexEnabled true
     }
 }
 
@@ -28,4 +32,6 @@ dependencies {
     compile project(':indicador')
     compile files('/home/etaborda/AndroidStudioProjects/TodosAlHuila/ksoap2.jar')
     compile files('/home/etaborda/AndroidStudioProjects/TodosAlHuila/ksoap2-android-assembly-3.0.0-jar-with-dependencies/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar')
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile files('build/libs/commons-io-2.4.jar')
 }

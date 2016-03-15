@@ -10,7 +10,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.proyecto.huila.todosalhuila.menu.Categorias;
+import com.proyecto.huila.todosalhuila.categorias.Categorias;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexion;
 
 

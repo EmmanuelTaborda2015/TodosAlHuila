@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.categorias.Categorias;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 
 public class Agenda extends AppCompatActivity

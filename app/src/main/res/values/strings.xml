@@ -37,8 +37,8 @@
 
     <string name="tipodato1">Dirección:</string>
     <string name="tipodato2">Teléfono:</string>
-    <string name="tipodato3">Celular:</string>
-    <string name="tipodato4">E-mail:</string>
+    <string name="tipodato3">E-mail:</string>
+    <string name="tipodato4">Página Web:</string>
     <string name="tipodato5">Página Web:</string>
 
 
@@ -63,4 +63,8 @@
     <string name="video_path">Video path:</string>
     <string name="video_too_short">Video is too short.</string>
     <string name="processing">Processing...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_subir">Subir</string>
 </resources>

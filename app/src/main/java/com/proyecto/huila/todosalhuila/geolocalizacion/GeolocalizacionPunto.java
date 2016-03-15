@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.menu.Agenda;
-import com.proyecto.huila.todosalhuila.menu.Categorias;
+import com.proyecto.huila.todosalhuila.categorias.Categorias;
 import com.proyecto.huila.todosalhuila.menu.Inicio;
 import com.proyecto.huila.todosalhuila.webservice.WS_Marcador;
 

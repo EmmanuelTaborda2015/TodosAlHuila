@@ -1,25 +1,20 @@
 package com.proyecto.huila.todosalhuila;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.proyecto.huila.todosalhuila.galeria.CircleImageView;
 import com.proyecto.huila.todosalhuila.menu.Inicio;
-import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexion;
 
-public class Login extends AppCompatActivity {
+public class Login extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
 
         Button boton = (Button) findViewById(R.id.botonBienvenida);

@@ -19,6 +19,249 @@
             android:background="@color/azul2"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:background="@color/white">
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria1"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria2"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria3"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria3"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria4"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria4"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria5"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria5"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria6"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria6"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria7"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria7"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria8"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria8"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria9"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria9"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria10"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria10"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria11"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria11"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria12"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria12"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria13"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria13"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria14"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria14"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_categoria15"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/categoria15"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+
+        </LinearLayout>
+
+        </HorizontalScrollView>
+
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:map="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"

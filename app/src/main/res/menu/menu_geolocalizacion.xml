@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/home"
+        android:orderInCategory="100"
+        android:title="Inicio"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_llegarconduciendo"
+        android:icon="@drawable/carro"
+        android:orderInCategory="200"
+        android:title="Llegar Conduciendo"
+        app:showAsAction="always"></item>
+
+    <item
+        android:id="@+id/action_llegarcaminando"
+        android:icon="@drawable/caminar"
+        android:orderInCategory="300"
+        android:title="Llegar Caminando"
+        app:showAsAction="always"></item>
+
+    <item
+        android:id="@+id/action_miubicacion"
+        android:icon="@drawable/gps"
+        android:orderInCategory="400"
+        android:title="Mi Ubicación"
+        app:showAsAction="always"></item>
+
+</menu>

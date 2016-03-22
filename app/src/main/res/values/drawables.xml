@@ -1,8 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <item name="inicio" type="drawable">@drawable/ic_home_24dp</item>
-    <item name="categorias" type="drawable">@drawable/ic_apps_24dp</item>
+    <item name="categorias1" type="drawable">@drawable/ic_home_24dp</item>
     <item name="localizacion" type="drawable">@drawable/ic_pin_drop_24dp</item>
     <item name="agenda" type="drawable">@drawable/ic_local_library_24dp</item>
     <item name="multimedia" type="drawable">@drawable/ic_videocam_24dp</item>
-    <item name="salir" type="drawable">@drawable/ic_reply_24dp</item>
+    <item name="salir1" type="drawable">@drawable/ic_reply_24dp</item>
 </resources>

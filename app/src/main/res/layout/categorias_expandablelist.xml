@@ -3,35 +3,35 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 	android:id="@+id/action0"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/azul1"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/azul2"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+
+    </android.support.design.widget.AppBarLayout>
 
     <ExpandableListView
         android:id="@+id/expandableListView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linear2"
+        android:layout_below="@+id/toolbar2"
         android:groupIndicator="@null"
-	    android:background="@color/azul2"
+	    android:background="@color/azul1"
 		android:headerDividersEnabled="false"
 		android:smoothScrollbar="false">
  	</ExpandableListView>
 
-    <LinearLayout android:id="@+id/linear2"
-	     android:orientation="vertical"
-	     android:layout_width="fill_parent"
-	     android:layout_height="wrap_content"
-	     android:layout_alignParentTop="true"
-	     android:gravity="center"
-		 android:background="@color/azul2">
 
-        <TextView
-	        android:id="@+id/text_intro"
-	        android:textSize="20sp"
-	        android:layout_width="fill_parent"
-	        android:layout_height="50dp"
-	        android:gravity="center_vertical|center_horizontal"
-	        android:textColor = "#FFFFFF"
-	        android:text="Select cars you want to buy" />
-     </LinearLayout>
 
 </RelativeLayout>

@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.proyecto.huila.todosalhuila.Login;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -44,6 +46,9 @@ public class WS_SubirArchivo extends AsyncTask<String, Void, String> {
     protected String doInBackground(String[] params) {
         ArrayList<NameValuePair> nameValuePairs = new
                 ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("function", params[6]));
+        nameValuePairs.add(new BasicNameValuePair("username", params[7]));
+        nameValuePairs.add(new BasicNameValuePair("password", params[8]));
         nameValuePairs.add(new BasicNameValuePair("file", params[0]));
         nameValuePairs.add(new BasicNameValuePair("title", params[1]));
         nameValuePairs.add(new BasicNameValuePair("caption", params[2]));

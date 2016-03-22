@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".menu.Inicio">
+    tools:context=".inicio.Inicio">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/view"
@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria9" />
+                        android:src="@drawable/segmento1" />
 
                 </LinearLayout>
 
@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria10" />
+                        android:src="@drawable/segmento2" />
 
                 </LinearLayout>
 
@@ -99,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria11" />
+                        android:src="@drawable/segmento3" />
 
                 </LinearLayout>
 
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria9" />
+                        android:src="@drawable/segmento1" />
 
                 </LinearLayout>
 
@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria10" />
+                        android:src="@drawable/segmento2" />
 
                 </LinearLayout>
 
@@ -167,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria11" />
+                        android:src="@drawable/segmento3" />
 
                 </LinearLayout>
 
@@ -195,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria9" />
+                        android:src="@drawable/segmento1" />
 
                 </LinearLayout>
 
@@ -215,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria10" />
+                        android:src="@drawable/segmento2" />
 
                 </LinearLayout>
 
@@ -235,7 +235,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria11" />
+                        android:src="@drawable/segmento3" />
 
                 </LinearLayout>
 
@@ -263,7 +263,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria9" />
+                        android:src="@drawable/segmento1" />
 
                 </LinearLayout>
 
@@ -283,7 +283,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria10" />
+                        android:src="@drawable/segmento2" />
 
                 </LinearLayout>
 
@@ -303,7 +303,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria11" />
+                        android:src="@drawable/segmento3" />
 
                 </LinearLayout>
 
@@ -331,7 +331,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria9" />
+                        android:src="@drawable/segmento1" />
 
                 </LinearLayout>
 
@@ -351,7 +351,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria10" />
+                        android:src="@drawable/segmento2" />
 
                 </LinearLayout>
 
@@ -371,7 +371,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/categoria11" />
+                        android:src="@drawable/segmento3" />
 
                 </LinearLayout>
 

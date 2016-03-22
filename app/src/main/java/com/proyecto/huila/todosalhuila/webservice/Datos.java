@@ -16,7 +16,8 @@ public class Datos {
         return HostMiPyme;
     }
 
-    private String HOST = "http://192.168.0.6/";
+    private String HOST = "http://52.36.201.248/";
+
     private String SERVICE = HOST + "ws_todosalhuila/turista/servicio/servicio.php";
 
     private String HostMiPyme = "http://54.86.192.0:8080/api/empresa/getInformacion/";

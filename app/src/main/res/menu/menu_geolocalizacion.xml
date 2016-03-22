@@ -29,4 +29,11 @@
         android:title="Mi Ubicación"
         app:showAsAction="always"></item>
 
+    <item
+        android:id="@+id/action_ubicacion"
+        android:icon="@drawable/ubicar"
+        android:orderInCategory="500"
+        android:title="Mi Ubicación"
+        app:showAsAction="always"></item>
+
 </menu>

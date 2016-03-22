@@ -85,7 +85,7 @@ public class PlaybackActivity extends Activity {
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PlaybackActivity.this, CameraActivity.class);
+                Intent i = new Intent(PlaybackActivity.this, Multimedia.class);
                 startActivity(i);
                 finish();
             }
@@ -143,7 +143,7 @@ public class PlaybackActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(PlaybackActivity.this, CameraActivity.class);
+        Intent i = new Intent(PlaybackActivity.this, Multimedia.class);
         startActivity(i);
         finish();
     }

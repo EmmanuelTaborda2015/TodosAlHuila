@@ -10,15 +10,13 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ToggleButton;
-import android.widget.VideoView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -41,11 +39,11 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.proyecto.huila.indicador.AutoPlayManager;
 import com.proyecto.huila.indicador.ImageIndicatorView;
 import com.proyecto.huila.todosalhuila.Login;
 import com.proyecto.huila.todosalhuila.R;
-import com.proyecto.huila.todosalhuila.menu.Inicio;
+import com.proyecto.huila.todosalhuila.inicio.Inicio;
+import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
 import com.proyecto.huila.todosalhuila.webservice.WS_MiPyme;
 
 import org.json.JSONArray;
@@ -105,45 +103,56 @@ public class Geolocalizacion extends AppCompatActivity
     private HashMap<Marker, Integer> mHashMap = new HashMap<Marker, Integer>();
 
 
-    @Bind(R.id.gl_tooglebutton_categoria1)
-    ToggleButton categoria1;
-    @Bind(R.id.gl_tooglebutton_categoria2)
-    ToggleButton categoria2;
-    @Bind(R.id.gl_tooglebutton_categoria3)
-    ToggleButton categoria3;
-    @Bind(R.id.gl_tooglebutton_categoria4)
-    ToggleButton categoria4;
-    @Bind(R.id.gl_tooglebutton_categoria5)
-    ToggleButton categoria5;
-    @Bind(R.id.gl_tooglebutton_categoria6)
-    ToggleButton categoria6;
-    @Bind(R.id.gl_tooglebutton_categoria7)
-    ToggleButton categoria7;
-    @Bind(R.id.gl_tooglebutton_categoria8)
-    ToggleButton categoria8;
-    @Bind(R.id.gl_tooglebutton_categoria9)
-    ToggleButton categoria9;
-    @Bind(R.id.gl_tooglebutton_categoria10)
-    ToggleButton categoria10;
-    @Bind(R.id.gl_tooglebutton_categoria11)
-    ToggleButton categoria11;
-    @Bind(R.id.gl_tooglebutton_categoria12)
-    ToggleButton categoria12;
-    @Bind(R.id.gl_tooglebutton_categoria13)
-    ToggleButton categoria13;
-    @Bind(R.id.gl_tooglebutton_categoria14)
-    ToggleButton categoria14;
-    @Bind(R.id.gl_tooglebutton_categoria15)
-    ToggleButton categoria15;
+    @Bind(R.id.gl_tooglebutton_segmento1)
+    ToggleButton segmento1;
+    @Bind(R.id.gl_tooglebutton_segmento2)
+    ToggleButton segmento2;
+    @Bind(R.id.gl_tooglebutton_segmento3)
+    ToggleButton segmento3;
+    @Bind(R.id.gl_tooglebutton_segmento4)
+    ToggleButton segmento4;
+    @Bind(R.id.gl_tooglebutton_segmento5)
+    ToggleButton segmento5;
+    @Bind(R.id.gl_tooglebutton_segmento6)
+    ToggleButton segmento6;
+    @Bind(R.id.gl_tooglebutton_segmento7)
+    ToggleButton segmento7;
+    @Bind(R.id.gl_tooglebutton_segmento8)
+    ToggleButton segmento8;
+    @Bind(R.id.gl_tooglebutton_segmento9)
+    ToggleButton segmento9;
+    @Bind(R.id.gl_tooglebutton_segmento10)
+    ToggleButton segmento10;
+    @Bind(R.id.gl_tooglebutton_segmento11)
+    ToggleButton segmento11;
+    @Bind(R.id.gl_tooglebutton_segmento12)
+    ToggleButton segmento12;
+    @Bind(R.id.gl_tooglebutton_segmento13)
+    ToggleButton segmento13;
+    @Bind(R.id.gl_tooglebutton_segmento14)
+    ToggleButton segmento14;
+    @Bind(R.id.gl_tooglebutton_segmento15)
+    ToggleButton segmento15;
+    @Bind(R.id.gl_tooglebutton_segmento16)
+    ToggleButton segmento16;
+
+    private String output;
+
+    ToggleButton[] buttons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_bar_localizacion);
+
         ButterKnife.bind(this);
+
+        buttons = new ToggleButton[]{segmento1, segmento2, segmento3, segmento4, segmento5, segmento6, segmento7, segmento8, segmento9, segmento10, segmento11, segmento12, segmento13, segmento14, segmento15, segmento16};
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        this.setTitle("");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -156,79 +165,34 @@ public class Geolocalizacion extends AppCompatActivity
 
         buildLocationSettingsRequest();
 
-        //contador = 0;
-
-        //checkLocationSettings();prue
-
         final WS_MiPyme asyncTask = new WS_MiPyme(new WS_MiPyme.AsyncResponse() {
 
             @Override
             public void processFinish(String output) {
-                JSONObject json = null;
-                try {
-                    json = new JSONObject(output);
-                    final JSONArray items = json.getJSONArray("getInformacion");
-                    for (int i = 0; i < items.length(); i++) {
-                        final JSONObject datos = new JSONObject(items.get(i).toString());
-                        JSONObject ubicacion = new JSONObject(datos.get("ubicacion").toString());
-                        JSONObject categorizacion = new JSONObject(datos.get("categorizacion").toString());
-
-                        Marker marker = mMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(Double.parseDouble(ubicacion.get("latitud").toString()), Double.parseDouble(ubicacion.get("longitud").toString())))
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.municipios))
-                                .title(datos.getString("nombre").toString()));
-                        mHashMap.put(marker, i);
-
-                        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                            @Override
-                            public boolean onMarkerClick(Marker arg0) {
-
-                                if (arg0.equals(previoMarker) && showMarker > 0) {
-                                    arg0.hideInfoWindow();
-                                    showMarker = 0;
-                                } else {
-                                    int zoom = (int) mMap.getCameraPosition().zoom;
-
-                                    if (zoom <= 7) {
-                                        zoom = 13;
-                                    }
-
-                                    CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(arg0.getPosition().latitude + (double) 90 / Math.pow(2, zoom), arg0.getPosition().longitude), zoom);
-                                    mMap.moveCamera(cu);
-                                    arg0.showInfoWindow();
-                                    showMarker++;
-                                }
-                                previoMarker = arg0;
-                                selectMarker = true;
-                                return true;
-                            }
-                        });
-                        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                            @Override
-                            public void onInfoWindowClick(Marker marker) {
-                                try {
-                                    Intent i = new Intent(Geolocalizacion.this, Informacion.class);
-                                    i.putExtra("datos", items.get(mHashMap.get(marker)).toString());
-                                    startActivity(i);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                dibujarMarker(output);
             }
         });
 
         asyncTask.execute();
 
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dibujarMarker(output);
+                }
+            });
+        }
+
     }
 
     public void dibujarMarker(String output) {
 
+        this.output = output;
+
         JSONObject json = null;
+
+        mMap.clear();
 
         try {
             json = new JSONObject(output);
@@ -239,83 +203,105 @@ public class Geolocalizacion extends AppCompatActivity
                 JSONObject categorizacion = new JSONObject(datos.get("categorizacion").toString());
 
                 boolean dibujar = false;
+                int icon = 0;
 
-                String subcategoria = "";
+                String segmento = categorizacion.getString("segmento");
 
-                switch (subcategoria) {
-                    case "a":
-                        if (categoria1.isChecked() == true) {
+                switch (segmento) {
+                    case "Ecoturismo":
+                        if (segmento1.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg1;
                         }
                         break;
-                    case "b":
-                        if (categoria2.isChecked() == true) {
+                    case "Turismo de aventura":
+                        if (segmento2.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg2;
                         }
                         break;
-                    case "c":
-                        if (categoria3.isChecked() == true) {
+                    case "Turismo rural":
+                        if (segmento3.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg3;
                         }
                         break;
-                    case "d":
-                        if (categoria4.isChecked() == true) {
+                    case "Atractivos turísticos":
+                        if (segmento4.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg4;
                         }
                         break;
-                    case "e":
-                        if (categoria5.isChecked() == true) {
+                    case "Gastronomia":
+                        if (segmento5.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg5;
                         }
                         break;
-                    case "f":
-                        if (categoria6.isChecked() == true) {
+                    case "Cultura":
+                        if (segmento6.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg6;
                         }
                         break;
-                    case "g":
-                        if (categoria7.isChecked() == true) {
+                    case "Salud y bienestar":
+                        if (segmento7.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg7;
                         }
                         break;
-                    case "h":
-                        if (categoria8.isChecked() == true) {
+                    case "Turismo corporativo":
+                        if (segmento8.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg8;
                         }
                         break;
-                    case "i":
-                        if (categoria9.isChecked() == true) {
+                    case "Sol y playa":
+                        if (segmento9.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg9;
                         }
                         break;
-                    case "j":
-                        if (categoria10.isChecked() == true) {
+                    case "Astronomía":
+                        if (segmento10.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg10;
                         }
                         break;
-                    case "k":
-                        if (categoria11.isChecked() == true) {
+                    case "Bares y Pubs":
+                        if (segmento11.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg11;
                         }
                         break;
-                    case "l":
-                        if (categoria12.isChecked() == true) {
+                    case "Comercio":
+                        if (segmento12.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg12;
                         }
                         break;
-                    case "m":
-                        if (categoria13.isChecked() == true) {
+                    case "Hospedaje":
+                        if (segmento13.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg12;
                         }
                         break;
-                    case "n":
-                        if (categoria14.isChecked() == true) {
+                    case "Recreación":
+                        if (segmento14.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg14;
                         }
                         break;
-                    case "o":
-                        if (categoria15.isChecked() == true) {
+                    case "Transporte":
+                        if (segmento15.isChecked() == true) {
                             dibujar = true;
+                            icon = R.drawable.seg15;
+                        }
+                        break;
+                    case "Municipios":
+                        if (segmento16.isChecked() == true) {
+                            dibujar = true;
+                            icon = R.drawable.seg16;
                         }
                         break;
                 }
@@ -323,7 +309,8 @@ public class Geolocalizacion extends AppCompatActivity
                 if(dibujar==true){
                     Marker marker = mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(Double.parseDouble(ubicacion.get("latitud").toString()), Double.parseDouble(ubicacion.get("longitud").toString())))
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.municipios))
+                            .icon(BitmapDescriptorFactory.fromResource(icon))
+                            .snippet(categorizacion.getString("subcategoria"))
                             .title(datos.getString("nombre").toString()));
                     mHashMap.put(marker, i);
 
@@ -337,9 +324,9 @@ public class Geolocalizacion extends AppCompatActivity
                             } else {
                                 int zoom = (int) mMap.getCameraPosition().zoom;
 
-                                if (zoom <= 7) {
-                                    zoom = 13;
-                                }
+                                //if (zoom <= 7) {
+                                //    zoom = 13;
+                                //}
 
                                 CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(arg0.getPosition().latitude + (double) 90 / Math.pow(2, zoom), arg0.getPosition().longitude), zoom);
                                 mMap.moveCamera(cu);
@@ -416,8 +403,17 @@ public class Geolocalizacion extends AppCompatActivity
                         .show();
             }
         } else if (id == R.id.action_home) {
-            Intent i = new Intent(Geolocalizacion.this, Inicio.class);
-            startActivity(i);
+            if(new Login().login == true){
+                Intent i = new Intent(Geolocalizacion.this, InicioLogin.class);
+                startActivity(i);
+                finish();
+            }else {
+                Intent i = new Intent(Geolocalizacion.this, Inicio.class);
+                startActivity(i);
+                finish();
+            }
+        } else if (id == R.id.action_ubicacion) {
+            ubicacionEspecifica();
         }
 
         return super.onOptionsItemSelected(item);
@@ -434,20 +430,39 @@ public class Geolocalizacion extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        ubicacionEspecifica();
+    }
+
+    public void salir(){
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.cerrar_aplicacion)
+                .setMessage(R.string.salir_aplicacion)
+                .setPositiveButton(R.string.opcionSi, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                    }
+                })
+                .setNegativeButton(R.string.opcionNo, null)
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        salir();
+    }
+
+    public void ubicacionEspecifica(){
         LatLng huila = new LatLng(2.92504, -75.2897);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(huila));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(huila, 13));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(huila, 12));
         //mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
-        mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-            @Override
-            public boolean onMyLocationButtonClick() {
-
-
-                return false;
-            }
-        });
     }
 
     protected synchronized void buildGoogleApiClient() {

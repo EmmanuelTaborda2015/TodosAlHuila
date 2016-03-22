@@ -75,67 +75,67 @@ public class ExpandableListAdapterCategorias extends BaseExpandableListAdapter i
 
         if(group_id == 0){
         	group = "Ecoturismo";
-        	id_res = R.drawable.categoria9;
+        	id_res = R.drawable.segmento1;
         }
         else if(group_id == 1){
         	group = "Turismo de aventura";
-        	id_res = R.drawable.categoria10;
+        	id_res = R.drawable.segmento2;
         }
         else if(group_id == 2){
         	group = "Turismo rural";
-        	id_res = R.drawable.categoria11;
+        	id_res = R.drawable.segmento3;
         }
         else if(group_id == 3){
             group = "Atractivos turísticos";
-            id_res = R.drawable.categoria12;
+            id_res = R.drawable.segmento4;
         }
         else if(group_id == 4){
             group = " Gastronomia";
-            id_res = R.drawable.categoria13;
+            id_res = R.drawable.segmento5;
         }
         else if(group_id == 5){
             group = "Cultura";
-            id_res = R.drawable.categoria14;
+            id_res = R.drawable.segmento6;
         }
         else if(group_id == 6){
             group = "Salud y bienestar";
-            id_res = R.drawable.categoria15;
+            id_res = R.drawable.segmento7;
         }
         else if(group_id == 7){
             group = "Turismo corporativo";
-            id_res = R.drawable.categoria8;
+            id_res = R.drawable.segmento8;
         }
         else if(group_id == 8){
             group = "Sol y playa";
-            id_res = R.drawable.categoria7;
+            id_res = R.drawable.segmento9;
         }
         else if(group_id == 9){
             group = "Astronomía";
-            id_res = R.drawable.categoria6;
+            id_res = R.drawable.segmento10;
         }
         else if(group_id == 10){
             group = "Bares y Pubs";
-            id_res = R.drawable.categoria5;
+            id_res = R.drawable.segmento11;
         }
         else if(group_id == 11){
             group = "Comercio";
-            id_res = R.drawable.categoria4;
+            id_res = R.drawable.segmento12;
         }
         else if(group_id == 12){
             group = "Hospedaje";
-            id_res = R.drawable.categoria3;
+            id_res = R.drawable.segmento14;
         }
         else if(group_id == 13){
             group = "Recreación";
-            id_res = R.drawable.categoria3;
+            id_res = R.drawable.segmento14;
         }
         else if(group_id == 14){
             group = "Transporte";
-            id_res = R.drawable.categoria2;
+            id_res = R.drawable.segmento15;
         }
         else if(group_id == 15){
             group = "Municipios";
-            id_res = R.drawable.categoria1;
+            id_res = R.drawable.segmento16;
         }
         
         if (group != null) {
@@ -147,7 +147,7 @@ public class ExpandableListAdapterCategorias extends BaseExpandableListAdapter i
 
             if (isExpanded) {
                 holder.imageviewIndicator.setImageResource(R.drawable.des);
-                v.setBackgroundColor(v.getResources().getColor(R.color.azul3));
+                v.setBackgroundColor(v.getResources().getColor(R.color.azul2));
             } else {
                 holder.imageviewIndicator.setImageResource(R.drawable.con);
             }

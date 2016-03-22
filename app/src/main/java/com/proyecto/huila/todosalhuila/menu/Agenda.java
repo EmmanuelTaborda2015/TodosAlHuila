@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.categorias.Categorias;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
+import com.proyecto.huila.todosalhuila.inicio.Inicio;
 
 public class Agenda extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

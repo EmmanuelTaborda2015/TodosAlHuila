@@ -4,22 +4,15 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Looper;
-import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,8 +29,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.proyecto.huila.indicador.ImageIndicatorViewUrl;
-import com.proyecto.huila.indicador.LoadImageFromURL;
+import com.proyecto.huila.todosalhuila.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.webservice.WS_SubirArchivo;
 
@@ -131,7 +123,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
             @Override
             public void processFinish(String output) {
                 circuloProgreso.dismiss();
-                Intent i = new Intent(SubirMultimedia.this, CameraActivity.class);
+                Intent i = new Intent(SubirMultimedia.this, Multimedia.class);
                 startActivity(i);
                 finish();
             }
@@ -183,13 +175,14 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
                     String caption = java.net.URLEncoder.encode(String.valueOf(descripcion.getText()), "utf-8");
 
                     if (contador == 0) {
-                        myTaskParams = new String[]{ImageBase64, title, caption, "", "", ""};
+                        myTaskParams = new String[]{ImageBase64, title, caption, "", "", "", "uploadfile", new Login().usuarioD, new Login().contrasenaD};
                     } else {
                         String address = java.net.URLEncoder.encode(String.valueOf(lugar.getText()), "utf-8");
                         String latitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLatitude()), "utf-8");
                         String longitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLongitude()), "utf-8");
-                        myTaskParams = new String[]{ImageBase64, title, caption, address, latitude, longitude};
+                        myTaskParams = new String[]{ImageBase64, title, caption, address, latitude, longitude, "uploadfile", new Login().usuarioD, new Login().contrasenaD};
                     }
+
                     asyncTask.execute(myTaskParams);
 
                 } catch (UnsupportedEncodingException e) {

@@ -6,35 +6,27 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.webkit.GeolocationPermissions;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.proyecto.huila.indicador.ImageIndicatorView;
 import com.proyecto.huila.indicador.ImageIndicatorViewUrl;
 import com.proyecto.huila.indicador.LoadImageFromURL;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.lista.Comentario;
-import com.proyecto.huila.todosalhuila.menu.Inicio;
+import com.proyecto.huila.todosalhuila.inicio.Inicio;
 import com.proyecto.huila.todosalhuila.webservice.WS_SitioTuristico;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 
 public class Informacion extends AppCompatActivity {
@@ -47,6 +39,8 @@ public class Informacion extends AppCompatActivity {
 
     private String sitio_turistico;
 
+    private String title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,14 +49,110 @@ public class Informacion extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        RelativeLayout tool = (RelativeLayout) findViewById(R.id.toolbar2);
+        tool.setVisibility(View.GONE);
+
         final Intent intent = getIntent();
         this.sitio_turistico = intent.getStringExtra("datos");
+
+        circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
 
 
         final JSONObject datos;
         try {
             datos = new JSONObject(sitio_turistico);
-            this.setTitle(datos.get("nombre").toString());
+
+            title = datos.get("nombre").toString();
+
+            LoadImageFromURL asyncTask = new LoadImageFromURL(new LoadImageFromURL.AsyncResponse() {
+
+                private ImageIndicatorViewUrl imageIndicatorView;
+
+                @Override
+                public void processFinish(final Bitmap[] output) {
+
+                    this.imageIndicatorView = (ImageIndicatorViewUrl) findViewById(R.id.indicate_view);
+                    Bitmap[] resArray = output;
+                    if (resArray.length == 0) {
+                        Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
+                        resArray = new Bitmap[1];
+                        resArray[0] = icon;
+                    }
+                    this.imageIndicatorView.setupLayoutByDrawable(resArray);
+                    this.imageIndicatorView.show();
+
+                    ImageView comentar = (ImageView) findViewById(R.id.botonComentar);
+                    comentar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Informacion.this, Comentario.class);
+                            i.putExtra("sitio_turistico", sitio_turistico);
+                            startActivity(i);
+                        }
+                    });
+
+                    ImageView calificar = (ImageView) findViewById(R.id.botonCalificar);
+                    calificar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Informacion.this, Calificar.class);
+                            if (output.length > 0) {
+                                try {
+                                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                    output[0].compress(Bitmap.CompressFormat.PNG, 50, bs);
+                                    i.putExtra("byteArray", bs.toByteArray());
+                                }catch (Exception e){
+                                    Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
+                                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                    icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                                    i.putExtra("byteArray", bs.toByteArray());
+                                }
+                            } else {
+                                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
+                                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                                i.putExtra("byteArray", bs.toByteArray());
+                            }
+                            i.putExtra("sitio_turistico", title);
+                            startActivity(i);
+                        }
+                    });
+
+                    ImageView compartir = (ImageView) findViewById(R.id.botonCompartir);
+                    compartir.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Informacion.this, Inicio.class);
+                            i.putExtra("sitio_turistico", title);
+                            startActivity(i);
+                        }
+                    });
+
+                    ImageView ubicar = (ImageView) findViewById(R.id.botonUbicar);
+                    ubicar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Informacion.this, GeolocalizacionPunto.class);
+                            i.putExtra("sitio_turistico", title);
+                            startActivity(i);
+                        }
+                    });
+
+                    circuloProgreso.dismiss();
+
+                }
+            });
+
+            if (!"".equals(datos.get("imagen").toString()) && !datos.get("imagen").toString().equals(null)) {
+                Log.v("image", "http://" + datos.get("imagen").toString());
+                String[] myTaskParams = {"http://" + datos.get("imagen").toString()};
+                asyncTask.execute(myTaskParams);
+            } else {
+                String[] myTaskParams = {};
+                asyncTask.execute(myTaskParams);
+            }
+
+            this.setTitle(title);
 
             TextView descripcion = (TextView) findViewById(R.id.textViewtab1);
             descripcion.setText(datos.get("descripcion").toString());
@@ -85,22 +175,6 @@ public class Informacion extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        //Se genera el llamado al web service que enviara los marcadores presentes en la base de datos.
-        //---circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
-
-        //---thread_sitio = new Thread() {
-        //---    public void run() {
-        //---        Looper.prepare();
-        //---        String id_dispositivo = Settings.Secure.getString(getApplication().getContentResolver(), Settings.Secure.ANDROID_ID);
-        //---        webResponseSitio = new WS_SitioTuristico();
-        //---        webResponseSitio.startWebAccess("usuario", id_dispositivo, intent.getStringExtra("sitio_turistico"));
-        //---        handler_sitio.post(sitio);
-        //---    }
-        //---};
-
-        //---thread_sitio.start();
-        ////////////////////////////////////////////////////////////////////////////////////////////////
 
         TabHost tabs = (TabHost) findViewById(android.R.id.tabhost);
         tabs.setup();
@@ -135,130 +209,5 @@ public class Informacion extends AppCompatActivity {
         x.setTextSize(10);
     }
 
-    //Se establece las acciones a tomar en el instante que llegue la respuesta del web service.
-    final Runnable sitio = new Runnable() {
-        public void run() {
-
-            LoadImageFromURL asyncTask = new LoadImageFromURL(new LoadImageFromURL.AsyncResponse() {
-
-                private ImageIndicatorViewUrl imageIndicatorView;
-
-                @Override
-                public void processFinish(final Bitmap[] output) {
-
-                    this.imageIndicatorView = (ImageIndicatorViewUrl) findViewById(R.id.indicate_view);
-                    Bitmap[] resArray = output;
-                    if (resArray.length == 0) {
-                        Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
-                        resArray = new Bitmap[1];
-                        resArray[0] = icon;
-                    }
-                    this.imageIndicatorView.setupLayoutByDrawable(resArray);
-                    this.imageIndicatorView.show();
-
-                    TextView descripcion = (TextView) findViewById(R.id.textViewtab1);
-                    descripcion.setText(webResponseSitio.getDescripcion().get(0));
-
-                    TextView datosContacto = (TextView) findViewById(R.id.textViewtab2);
-
-                    String linea = webResponseSitio.getInformacionContacto().get(0);
-                    String[] campos = linea.split(";");
-
-                    int j = 0;
-                    while (j < campos.length) {
-                        String[] dato = campos[j].split(",");
-                        if ("1".equals(dato[0])) {
-                            datosContacto.setText(datosContacto.getText() + getResources().getString(R.string.tipodato1) + " " + dato[1] + "\n");
-                        } else if ("2".equals(dato[0])) {
-                            datosContacto.setText(datosContacto.getText() + getResources().getString(R.string.tipodato2) + " " + dato[1] + "\n");
-                        } else if ("3".equals(dato[0])) {
-                            datosContacto.setText(datosContacto.getText() + getResources().getString(R.string.tipodato3) + " " + dato[1] + "\n");
-                        } else if ("4".equals(dato[0])) {
-                            datosContacto.setText(datosContacto.getText() + getResources().getString(R.string.tipodato4) + " " + dato[1] + "\n");
-                        } else if ("5".equals(dato[0])) {
-                            datosContacto.setText(datosContacto.getText() + getResources().getString(R.string.tipodato5) + " " + dato[1] + "\n");
-                        }
-                        j++;
-                    }
-
-                    ImageView comentar = (ImageView) findViewById(R.id.botonComentar);
-                    comentar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Informacion.this, Comentario.class);
-                            i.putExtra("sitio_turistico", sitio_turistico);
-                            //i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
-                            startActivity(i);
-                        }
-                    });
-
-                    ImageView calificar = (ImageView) findViewById(R.id.botonCalificar);
-                    calificar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Informacion.this, Calificar.class);
-                            if (output.length > 0) {
-                                ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                                output[0].compress(Bitmap.CompressFormat.PNG, 50, bs);
-                                i.putExtra("byteArray", bs.toByteArray());
-                            } else {
-                                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
-                                ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                                icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                                i.putExtra("byteArray", bs.toByteArray());
-                            }
-                            i.putExtra("sitio_turistico", sitio_turistico);
-                            //i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
-                            startActivity(i);
-                        }
-                    });
-
-                    ImageView compartir = (ImageView) findViewById(R.id.botonCompartir);
-                    compartir.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Informacion.this, Inicio.class);
-                            i.putExtra("sitio_turistico", sitio_turistico);
-                            //i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
-                            startActivity(i);
-                        }
-                    });
-
-                    ImageView ubicar = (ImageView) findViewById(R.id.botonUbicar);
-                    ubicar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Informacion.this, GeolocalizacionPunto.class);
-                            i.putExtra("sitio_turistico", sitio_turistico);
-                            //i.putExtra("nombre_sitio_turistico", nombre_sitio_turistico);
-                            startActivity(i);
-                        }
-                    });
-
-                    circuloProgreso.dismiss();
-                }
-            });
-
-            if (!"".equals(webResponseSitio.getImagenes().get(0))) {
-                String linea = webResponseSitio.getImagenes().get(0);
-                String[] campos = linea.split(";");
-
-                int j = 0;
-                String[] myTaskParams = new String[campos.length];
-                while (j < campos.length) {
-                    String[] dato = campos[j].split(",");
-                    myTaskParams[j] = dato[1];
-                    j++;
-                }
-                asyncTask.execute(myTaskParams);
-            } else {
-                String[] myTaskParams = {};
-                asyncTask.execute(myTaskParams);
-            }
-        }
-    };
-    ////////////////////////////////////////////////////////////////////////////////////////////
-
 }
-
 

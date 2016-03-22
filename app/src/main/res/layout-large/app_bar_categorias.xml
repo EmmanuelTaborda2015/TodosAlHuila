@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".menu.Inicio">
+    tools:context=".inicio.Inicio">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:openDrawer="start"
     android:background="@color/azul1"
-    tools:context=".menu.Inicio">
+    tools:context=".inicio.Inicio">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,6 +21,45 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/azul2"
             app:popupTheme="@style/AppTheme.AppBarOverlay" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azul2"
+            android:paddingBottom="5dp"
+            android:id="@+id/fram_search">
+
+            <AutoCompleteTextView
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:drawablePadding="8dp"
+                android:paddingLeft="45dp"
+                android:layout_gravity="right|center_vertical"
+                android:background="@color/white"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:singleLine="true" >
+            </AutoCompleteTextView>
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/cerrar" />
+
+            <Button
+                android:id="@+id/searchBtn"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/buscar" />
+        </FrameLayout>
 
     </android.support.design.widget.AppBarLayout>
 

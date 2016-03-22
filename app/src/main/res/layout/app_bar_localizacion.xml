@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".menu.Inicio">
+    tools:context=".inicio.Inicio">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:background="@color/white">
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria1"
+                android:id="@+id/gl_tooglebutton_segmento1"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -41,14 +41,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria1"
+                android:background="@drawable/segmento1"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria2"
+                android:id="@+id/gl_tooglebutton_segmento2"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -56,14 +56,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria2"
+                android:background="@drawable/segmento2"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria3"
+                android:id="@+id/gl_tooglebutton_segmento3"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -71,14 +71,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria3"
+                android:background="@drawable/segmento3"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria4"
+                android:id="@+id/gl_tooglebutton_segmento4"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -86,14 +86,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria4"
+                android:background="@drawable/segmento4"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria5"
+                android:id="@+id/gl_tooglebutton_segmento5"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -101,14 +101,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria5"
+                android:background="@drawable/segmento5"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria6"
+                android:id="@+id/gl_tooglebutton_segmento6"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -116,14 +116,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria6"
+                android:background="@drawable/segmento6"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria7"
+                android:id="@+id/gl_tooglebutton_segmento7"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -131,14 +131,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria7"
+                android:background="@drawable/segmento7"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria8"
+                android:id="@+id/gl_tooglebutton_segmento8"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -146,14 +146,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria8"
+                android:background="@drawable/segmento8"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria9"
+                android:id="@+id/gl_tooglebutton_segmento9"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -161,14 +161,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria9"
+                android:background="@drawable/segmento9"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria10"
+                android:id="@+id/gl_tooglebutton_segmento10"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -176,14 +176,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria10"
+                android:background="@drawable/segmento10"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria11"
+                android:id="@+id/gl_tooglebutton_segmento11"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -191,14 +191,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria11"
+                android:background="@drawable/segmento11"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria12"
+                android:id="@+id/gl_tooglebutton_segmento12"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -206,14 +206,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria12"
+                android:background="@drawable/segmento12"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria13"
+                android:id="@+id/gl_tooglebutton_segmento13"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -221,14 +221,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria13"
+                android:background="@drawable/segmento12"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria14"
+                android:id="@+id/gl_tooglebutton_segmento14"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -236,14 +236,14 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria14"
+                android:background="@drawable/segmento14"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"/>
 
             <ToggleButton
-                android:id="@+id/gl_tooglebutton_categoria15"
+                android:id="@+id/gl_tooglebutton_segmento15"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textOn="Si"
@@ -251,7 +251,22 @@
                 android:checked="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/categoria15"
+                android:background="@drawable/segmento15"
+                android:textSize="20dp"
+                android:paddingLeft="1dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart"/>
+
+            <ToggleButton
+                android:id="@+id/gl_tooglebutton_segmento16"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textOn="Si"
+                android:textOff="No"
+                android:checked="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/segmento16"
                 android:textSize="20dp"
                 android:paddingLeft="1dp"
                 android:paddingTop="15dp"

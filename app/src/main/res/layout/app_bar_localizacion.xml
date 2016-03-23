@@ -19,261 +19,287 @@
             android:background="@color/azul2"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+        <RelativeLayout
+            android:id="@+id/conexion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:padding="5dp"
+                android:src="@drawable/conexion" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Sin conexión a internet"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento1"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento1"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento1"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento2"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento2"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento2"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento3"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento3"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento3"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento4"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento4"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento4"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento5"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento5"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento5"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento6"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento6"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento6"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento7"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento7"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento7"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento8"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento8"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento8"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento9"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento9"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento9"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento10"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento10"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento10"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento11"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento11"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento11"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento12"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento12"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento12"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento13"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento12"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento12"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento14"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento14"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento14"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento15"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento15"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento15"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
-            <ToggleButton
-                android:id="@+id/gl_tooglebutton_segmento16"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textOn="Si"
-                android:textOff="No"
-                android:checked="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/segmento16"
-                android:textSize="20dp"
-                android:paddingLeft="1dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart"/>
+                <ToggleButton
+                    android:id="@+id/gl_tooglebutton_segmento16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/segmento16"
+                    android:checked="true"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="15dp"
+                    android:textAlignment="textStart"
+                    android:textOff="No"
+                    android:textOn="Si"
+                    android:textSize="20dp" />
 
 
-        </LinearLayout>
+            </LinearLayout>
 
         </HorizontalScrollView>
 

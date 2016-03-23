@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.location.Address;
 import android.location.Geocoder;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -42,6 +44,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.proyecto.huila.indicador.ImageIndicatorView;
 import com.proyecto.huila.todosalhuila.Login;
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
+import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.inicio.Inicio;
 import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
 import com.proyecto.huila.todosalhuila.webservice.WS_MiPyme;
@@ -64,9 +68,25 @@ public class Geolocalizacion extends AppCompatActivity
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         com.google.android.gms.location.LocationListener,
-        ResultCallback<LocationSettingsResult> {
+        ResultCallback<LocationSettingsResult>, NetworkStateReceiver.NetworkStateReceiverListener {
+
+    private NetworkStateReceiver networkStateReceiver;
+
+    private RelativeLayout connetion;
+
+    public void networkAvailable() {
+        connetion.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void networkUnavailable() {
+        connetion.setVisibility(View.VISIBLE);
+    }
+
 
     private static final String TAG = "Inicio";
+
+    int seleccion = 0;
 
     private ImageIndicatorView autoImageIndicatorView;
 
@@ -151,6 +171,18 @@ public class Geolocalizacion extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        connetion = (RelativeLayout) findViewById(R.id.conexion);
+
+        if (new NetworkUtil().isOnline() == false) {
+            connetion.setVisibility(View.VISIBLE);
+        }
+
+        connetion.setVisibility(View.GONE);
+
+        networkStateReceiver = new NetworkStateReceiver();
+        networkStateReceiver.addListener(this);
+        this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
 
         this.setTitle("");
 
@@ -306,7 +338,7 @@ public class Geolocalizacion extends AppCompatActivity
                         break;
                 }
 
-                if(dibujar==true){
+                if (dibujar == true) {
                     Marker marker = mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(Double.parseDouble(ubicacion.get("latitud").toString()), Double.parseDouble(ubicacion.get("longitud").toString())))
                             .icon(BitmapDescriptorFactory.fromResource(icon))
@@ -342,9 +374,21 @@ public class Geolocalizacion extends AppCompatActivity
                         @Override
                         public void onInfoWindowClick(Marker marker) {
                             try {
-                                Intent i = new Intent(Geolocalizacion.this, Informacion.class);
-                                i.putExtra("datos", items.get(mHashMap.get(marker)).toString());
-                                startActivity(i);
+                                if(seleccion==0) {
+                                    seleccion++;
+                                    if (new NetworkUtil().isOnline() == false) {
+                                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                            sinConexion();
+                                        } else {
+                                            conexionNoValida();
+                                        }
+                                    } else {
+                                        seleccion = 0;
+                                        Intent i = new Intent(Geolocalizacion.this, Informacion.class);
+                                        i.putExtra("datos", items.get(mHashMap.get(marker)).toString());
+                                        startActivity(i);
+                                    }
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -365,57 +409,72 @@ public class Geolocalizacion extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_miubicacion) {
-            contador = 0;
-            checkLocationSettings();
-        } else if (id == R.id.action_llegarcaminando) {
-            if (selectMarker) {
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=w");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
+        if (seleccion == 0) {
+            seleccion++;
+            if (new NetworkUtil().isOnline() == false) {
+                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                    sinConexion();
+                } else {
+                    conexionNoValida();
+                }
             } else {
-                new AlertDialog.Builder(this)
-                        .setTitle("¿Cómo Llegar Caminando?")
-                        .setMessage("Para encontrar las rutas que puede tomar caminando, primero debe seleccionar el destino.")
-                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        })
-                        .show();
-            }
-        } else if (id == R.id.action_llegarconduciendo) {
-            if (selectMarker) {
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=d");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
-            } else {
-                new AlertDialog.Builder(this)
-                        .setTitle("¿Cómo Llegar Conduciendo?")
-                        .setMessage("Para encontrar las rutas que puede tomar conduciendo, primero debe seleccionar el destino.")
-                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        })
-                        .show();
-            }
-        } else if (id == R.id.action_home) {
-            if(new Login().login == true){
-                Intent i = new Intent(Geolocalizacion.this, InicioLogin.class);
-                startActivity(i);
-                finish();
-            }else {
-                Intent i = new Intent(Geolocalizacion.this, Inicio.class);
-                startActivity(i);
-                finish();
-            }
-        } else if (id == R.id.action_ubicacion) {
-            ubicacionEspecifica();
-        }
 
+                if (id == R.id.action_miubicacion) {
+                    contador = 0;
+                    checkLocationSettings();
+                } else if (id == R.id.action_llegarcaminando) {
+                    if (selectMarker) {
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=w");
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+                    } else {
+                        new AlertDialog.Builder(this)
+                                .setTitle("¿Cómo Llegar Caminando?")
+                                .setMessage("Para encontrar las rutas que puede tomar caminando, primero debe seleccionar el destino.")
+                                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                })
+                                .setCancelable(false)
+                                .show();
+                    }
+                } else if (id == R.id.action_llegarconduciendo) {
+                    if (selectMarker) {
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=d");
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+                    } else {
+                        new AlertDialog.Builder(this)
+                                .setTitle("¿Cómo Llegar Conduciendo?")
+                                .setMessage("Para encontrar las rutas que puede tomar conduciendo, primero debe seleccionar el destino.")
+                                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                })
+                                .setCancelable(false)
+                                .show();
+                    }
+                } else if (id == R.id.action_home) {
+                    if (new Login().login == true) {
+                        Intent i = new Intent(Geolocalizacion.this, InicioLogin.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        Intent i = new Intent(Geolocalizacion.this, Inicio.class);
+                        startActivity(i);
+                        finish();
+                    }
+                } else if (id == R.id.action_ubicacion) {
+                    ubicacionEspecifica();
+                }
+
+                seleccion = 0;
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -433,7 +492,7 @@ public class Geolocalizacion extends AppCompatActivity
         ubicacionEspecifica();
     }
 
-    public void salir(){
+    public void salir() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.cerrar_aplicacion)
                 .setMessage(R.string.salir_aplicacion)
@@ -457,7 +516,7 @@ public class Geolocalizacion extends AppCompatActivity
         salir();
     }
 
-    public void ubicacionEspecifica(){
+    public void ubicacionEspecifica() {
         LatLng huila = new LatLng(2.92504, -75.2897);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(huila));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(huila, 12));
@@ -487,6 +546,7 @@ public class Geolocalizacion extends AppCompatActivity
     protected void buildLocationSettingsRequest() {
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
         builder.addLocationRequest(mLocationRequest);
+        builder.setAlwaysShow(true);
         mLocationSettingsRequest = builder.build();
     }
 
@@ -649,5 +709,32 @@ public class Geolocalizacion extends AppCompatActivity
         }
     }
 
+    public void conexionNoValida() {
+        new AlertDialog.Builder(this)
+                .setTitle("Conexión no válida!!!")
+                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion = 0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    public void sinConexion() {
+        new AlertDialog.Builder(this)
+                .setTitle("Sin conexión a internet!!!")
+                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion = 0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
 
 }

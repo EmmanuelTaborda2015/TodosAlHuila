@@ -1,7 +1,9 @@
 package com.proyecto.huila.todosalhuila.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Address;
@@ -31,6 +33,7 @@ import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.proyecto.huila.todosalhuila.Login;
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.webservice.WS_SubirArchivo;
 
 import org.apache.commons.io.FileUtils;
@@ -77,6 +80,8 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
 
     private ProgressDialog circuloProgreso;
 
+    int seleccion =0;
+
     protected static final String TAG = "MainActivity";
 
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
@@ -118,7 +123,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
 
         ButterKnife.bind(this);
 
-        final WS_SubirArchivo asyncTask =new WS_SubirArchivo(new WS_SubirArchivo.AsyncResponse() {
+        final WS_SubirArchivo asyncTask = new WS_SubirArchivo(new WS_SubirArchivo.AsyncResponse() {
 
             @Override
             public void processFinish(String output) {
@@ -147,7 +152,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
         ubicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contador=0;
+                contador = 0;
                 checkLocationSettings();
             }
         });
@@ -163,39 +168,51 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
             @Override
             public void onClick(View view) {
 
-                circuloProgreso = ProgressDialog.show(SubirMultimedia.this, "", "Subiendo Archivo ...", true);
-
-                String ImageBase64 = convertFileToString(path);
-
-                String[] myTaskParams = new String[0];
-
-                try {
-
-                    String title = java.net.URLEncoder.encode(String.valueOf(titulo.getText()), "utf-8");
-                    String caption = java.net.URLEncoder.encode(String.valueOf(descripcion.getText()), "utf-8");
-
-                    if (contador == 0) {
-                        myTaskParams = new String[]{ImageBase64, title, caption, "", "", "", "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                if (seleccion == 0) {
+                    seleccion++;
+                    if (new NetworkUtil().isOnline() == false) {
+                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                            sinConexion();
+                        } else {
+                            conexionNoValida();
+                        }
                     } else {
-                        String address = java.net.URLEncoder.encode(String.valueOf(lugar.getText()), "utf-8");
-                        String latitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLatitude()), "utf-8");
-                        String longitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLongitude()), "utf-8");
-                        myTaskParams = new String[]{ImageBase64, title, caption, address, latitude, longitude, "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                        circuloProgreso = ProgressDialog.show(SubirMultimedia.this, "", "Subiendo Archivo ...", true);
+
+                        String ImageBase64 = convertFileToString(path);
+
+                        String[] myTaskParams = new String[0];
+
+                        try {
+
+                            String title = java.net.URLEncoder.encode(String.valueOf(titulo.getText()), "utf-8");
+                            String caption = java.net.URLEncoder.encode(String.valueOf(descripcion.getText()), "utf-8");
+
+                            if (contador == 0) {
+                                myTaskParams = new String[]{ImageBase64, title, caption, "", "", "", "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                            } else {
+                                String address = java.net.URLEncoder.encode(String.valueOf(lugar.getText()), "utf-8");
+                                String latitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLatitude()), "utf-8");
+                                String longitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLongitude()), "utf-8");
+                                myTaskParams = new String[]{ImageBase64, title, caption, address, latitude, longitude, "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                            }
+
+                            asyncTask.execute(myTaskParams);
+
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
                     }
-
-                    asyncTask.execute(myTaskParams);
-
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                    seleccion = 0;
                 }
             }
         });
     }
 
-    public String convertFileToString(String pathOnSdCard){
+    public String convertFileToString(String pathOnSdCard) {
 
-        String strFile=null;
-        File file=new File(pathOnSdCard);
+        String strFile = null;
+        File file = new File(pathOnSdCard);
         try {
             byte[] data = FileUtils.readFileToByteArray(file);//Convert any file, image or video into byte array
             strFile = Base64.encodeToString(data, Base64.DEFAULT);//Convert byte array into string
@@ -228,6 +245,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
     protected void buildLocationSettingsRequest() {
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
         builder.addLocationRequest(mLocationRequest);
+        builder.setAlwaysShow(true);
         mLocationSettingsRequest = builder.build();
     }
 
@@ -266,7 +284,6 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
     }
 
 
-
     @Override
     public void onConnected(Bundle bundle) {
 
@@ -285,7 +302,8 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
     }
 
     @Override
-    public void onLocationChanged(Location location) {Log.v("Coorde", "aqui");
+    public void onLocationChanged(Location location) {
+        Log.v("Coorde", "aqui");
         if (contador == 0) {
             mCurrentLocation = location;
             mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
@@ -371,7 +389,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
     }
 
     @Override
-    protected void onStart () {
+    protected void onStart() {
         super.onStart();
 
 
@@ -392,7 +410,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
     }
 
     @Override
-    protected void onPause () {
+    protected void onPause() {
         super.onPause();
         if (mGoogleApiClient.isConnected()) {
             stopLocationUpdates();
@@ -403,5 +421,33 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
     protected void onStop() {
         super.onStop();
         mGoogleApiClient.disconnect();
+    }
+
+    public void conexionNoValida() {
+        new AlertDialog.Builder(this)
+                .setTitle("Conexión no válida!!!")
+                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion = 0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    public void sinConexion() {
+        new AlertDialog.Builder(this)
+                .setTitle("Sin conexión a internet!!!")
+                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion=0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 }

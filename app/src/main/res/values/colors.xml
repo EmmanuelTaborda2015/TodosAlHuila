@@ -23,6 +23,7 @@
     <item name="azul2" type="color">#0083FF</item>
     <item name="azul3" type="color">#0033FF</item>
     <item name="white" type="color">#FFFFFF</item>
+    <item name="gray" type="color">#FFD3D3D3</item>
 
 
     <integer-array name="androidcolors">

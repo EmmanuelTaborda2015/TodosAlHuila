@@ -2,6 +2,7 @@ package com.proyecto.huila.todosalhuila;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.inicio.Inicio;
 import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
 import com.proyecto.huila.todosalhuila.webservice.WS_Login;
@@ -27,6 +29,9 @@ public class Login extends Activity {
     public static String nombre = "";
     public static String usuarioD = "";
     public static String contrasenaD = "";
+
+    private ProgressDialog circuloProgreso;
+
 
     TextView et_usuario;
     TextView et_contrasena;
@@ -45,44 +50,57 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
 
-                if("".equals(et_usuario.getText().toString()) && "".equals(et_contrasena.getText().toString())){
-                    ingreseUsuarioContraseña();
-                }else if("".equals(et_usuario.getText().toString())){
-                    ingreseUsuario();
-                }else if("".equals(et_contrasena.getText().toString())){
-                    ingreseContraseña();
-                }else {
+                if (new NetworkUtil().isOnline() == false) {
+                    if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                        sinConexion();
+                    } else {
+                        conexionNoValida();
+                    }
+                } else {
+                    if ("".equals(et_usuario.getText().toString()) && "".equals(et_contrasena.getText().toString())) {
+                        ingreseUsuarioContraseña();
+                    } else if ("".equals(et_usuario.getText().toString())) {
+                        ingreseUsuario();
+                    } else if ("".equals(et_contrasena.getText().toString())) {
+                        ingreseContraseña();
+                    } else {
 
-                    final WS_Login asyncTask = new WS_Login(new WS_Login.AsyncResponse() {
+                        final WS_Login asyncTask = new WS_Login(new WS_Login.AsyncResponse() {
 
-                        @Override
-                        public void processFinish(String output) {
-                            try {
-                                final JSONObject datos;
-                                datos = new JSONObject(output);
-                                final JSONObject respuesta;
-                                respuesta = new JSONObject(datos.get("datos").toString());
-                                if("correcto".equals(respuesta.get("estado").toString())){
-                                    usuario = respuesta.get("usuario").toString();
-                                    nombre = respuesta.get("nombre").toString();
-                                    login = true;
-                                    usuarioD = et_usuario.getText().toString();
-                                    contrasenaD = et_contrasena.getText().toString();
+                            @Override
+                            public void processFinish(String output) {
+                                try {
+                                    final JSONObject datos;
+                                    datos = new JSONObject(output);
+                                    final JSONObject respuesta;
+                                    respuesta = new JSONObject(datos.get("datos").toString());
+                                    if ("correcto".equals(respuesta.get("estado").toString())) {
+                                        usuario = respuesta.get("usuario").toString();
+                                        nombre = respuesta.get("nombre").toString();
+                                        login = true;
+                                        usuarioD = et_usuario.getText().toString();
+                                        contrasenaD = et_contrasena.getText().toString();
 
-                                    Intent i = new Intent(Login.this, InicioLogin.class);
-                                    startActivity(i);
-                                    finish();
-                                }else{
-                                    datosInvalidos();
+                                        Intent i = new Intent(Login.this, InicioLogin.class);
+                                        startActivity(i);
+                                        finish();
+                                    } else {
+                                        datosInvalidos();
+                                    }
+
+                                    circuloProgreso.dismiss();
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                                Log.v("login", respuesta.get("estado").toString());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
-                        }
-                    });
-                    String[] myTaskParams = {et_usuario.getText().toString(), et_contrasena.getText().toString()};
-                    asyncTask.execute(myTaskParams);
+                        });
+                        String[] myTaskParams = {et_usuario.getText().toString(), et_contrasena.getText().toString()};
+                        asyncTask.execute(myTaskParams);
+
+                        circuloProgreso = ProgressDialog.show(Login.this, "", "Espere por favor ...", true);
+                    }
+
                 }
             }
         });
@@ -98,6 +116,7 @@ public class Login extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
+                .setCancelable(false)
                 .show();
     }
 
@@ -110,6 +129,7 @@ public class Login extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
+                .setCancelable(false)
                 .show();
     }
 
@@ -122,6 +142,7 @@ public class Login extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
+                .setCancelable(false)
                 .show();
     }
 
@@ -134,6 +155,33 @@ public class Login extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
+                .setCancelable(false)
+                .show();
+    }
+
+    public void conexionNoValida() {
+        new AlertDialog.Builder(this)
+                .setTitle("Conexión no válida!!!")
+                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    public void sinConexion() {
+        new AlertDialog.Builder(this)
+                .setTitle("Sin conexión a internet!!!")
+                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setCancelable(false)
                 .show();
     }
 }

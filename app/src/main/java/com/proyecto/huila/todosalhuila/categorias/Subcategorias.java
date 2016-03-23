@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -13,14 +14,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
+import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Informacion;
 import com.proyecto.huila.todosalhuila.webservice.WS_MiPyme;
 
@@ -32,7 +38,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Subcategorias extends AppCompatActivity {
+public class Subcategorias extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
+
+    private NetworkStateReceiver networkStateReceiver;
+
+    private RelativeLayout connetion;
+
+    public void networkAvailable() {
+        connetion.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void networkUnavailable() {
+        connetion.setVisibility(View.VISIBLE);
+    }
 
     private ArrayList<TitularItemsSubcategorias> Items;
 
@@ -52,7 +71,11 @@ public class Subcategorias extends AppCompatActivity {
 
     AutoCompleteTextView textView;
 
+    int seleccion = 0;
+
     int parmSearch = -1;
+
+    String paramSearchText = "";
 
     ArrayList<Integer> posicionInicial;
     ArrayList<Integer> posicionActual;
@@ -65,6 +88,18 @@ public class Subcategorias extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        connetion = (RelativeLayout) findViewById(R.id.conexion);
+
+        if (new NetworkUtil().isOnline() == false) {
+            connetion.setVisibility(View.VISIBLE);
+        }
+
+        connetion.setVisibility(View.GONE);
+
+        networkStateReceiver = new NetworkStateReceiver();
+        networkStateReceiver.addListener(this);
+        this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
 
         final Intent intent = getIntent();
         this.categoria = intent.getStringExtra("subcategoria");
@@ -88,40 +123,53 @@ public class Subcategorias extends AppCompatActivity {
         fm_search = (FrameLayout) findViewById(R.id.fram_search);
         fm_search.setVisibility(View.GONE);
 
-        Button buscar = (Button) findViewById(R.id.searchBtn);
+        final Button buscar = (Button) findViewById(R.id.searchBtn);
         Button cerrar = (Button) findViewById(R.id.delete);
 
         buscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listaItems.setAdapter(null);
-                ItemsSearch = new ArrayList<TitularItemsSubcategorias>();
 
-                if (parmSearch > -1) {
-                    for (int i = 0; i < Items.size(); i++) {
-                        if (lista.get(parmSearch).equals(Items.get(i).getCiudad()) | lista.get(parmSearch).equals(Items.get(i).getTitle())) {
-                            ItemsSearch.add(new TitularItemsSubcategorias(Items.get(i).getSitio(), Items.get(i).getTitle().toString(), Items.get(i).getDescription(), Items.get(i).getImg(), Items.get(i).getCiudad(), Items.get(i).getItem()));
-                            Adaptador = new AdaptadorSubcategorias(Subcategorias.this, ItemsSearch);
-                            posicionActual.add(Items.get(i).getItem());
+                if (seleccion == 0) {
+                    seleccion++;
+                    if (new NetworkUtil().isOnline() == false) {
+                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                            sinConexion();
+                        } else {
+                            conexionNoValida();
                         }
+                    } else {
+                        if (parmSearch > -1) {
+
+                            listaItems.setAdapter(null);
+                            ItemsSearch = new ArrayList<TitularItemsSubcategorias>();
+
+                            for (int i = 0; i < Items.size(); i++) {
+                                if (paramSearchText.equals(Items.get(i).getCiudad()) | paramSearchText.equals(Items.get(i).getTitle())) {
+                                    ItemsSearch.add(new TitularItemsSubcategorias(Items.get(i).getSitio(), Items.get(i).getTitle().toString(), Items.get(i).getDescription(), Items.get(i).getImg(), Items.get(i).getCiudad(), Items.get(i).getItem()));
+                                    Adaptador = new AdaptadorSubcategorias(Subcategorias.this, ItemsSearch);
+                                    posicionActual.add(Items.get(i).getItem());
+                                }
+                            }
+
+                            posicionFinal = new ArrayList<Integer>();
+                            posicionFinal = posicionActual;
+
+                            listaItems.setAdapter(Adaptador);
+                            textView.setText("");
+                        } else {
+                    /*Adaptador = new AdaptadorSubcategorias(Subcategorias.this, Items);
+                    listaItems.setAdapter(Adaptador);
+                    posicionFinal = new ArrayList<Integer>();
+                    posicionFinal = posicionInicial;*/
+                            sinSeleccion();
+                        }
+
+                        parmSearch = -1;
+
+                        seleccion = 0;
                     }
-
-                    posicionFinal = new ArrayList<Integer>();
-                    posicionFinal = posicionActual;
-
-                    listaItems.setAdapter(Adaptador);
-                    textView.setText("");
-                } else {
-                    Adaptador = new AdaptadorSubcategorias(Subcategorias.this, Items);
-                    listaItems.setAdapter(Adaptador);
-
-                    posicionFinal = new ArrayList<Integer>();
-                    posicionFinal = posicionInicial;
-
-                    sinSeleccion();
                 }
-
-                parmSearch = -1;
             }
         });
 
@@ -133,10 +181,22 @@ public class Subcategorias extends AppCompatActivity {
             }
         });
 
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setText("");
+                paramSearchText = "";
+                parmSearch = -1;
+            }
+        });
+
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 parmSearch = position;
+                paramSearchText = textView.getText().toString();
+                InputMethodManager imm = (InputMethodManager) getSystemService(getApplication().INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
             }
         });
 
@@ -181,13 +241,25 @@ public class Subcategorias extends AppCompatActivity {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view,
                                                     int position, long id) {
+                                if (seleccion == 0) {
+                                    seleccion++;
+                                    if (new NetworkUtil().isOnline() == false) {
+                                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                            sinConexion();
+                                        } else {
+                                            conexionNoValida();
+                                        }
+                                    } else {
+                                        Intent i = new Intent(Subcategorias.this, Informacion.class);
+                                        try {
+                                            i.putExtra("datos", items.get(posicionFinal.get(position)).toString());
+                                            startActivity(i);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
 
-                                Intent i = new Intent(Subcategorias.this, Informacion.class);
-                                try {
-                                    i.putExtra("datos", items.get(posicionFinal.get(position)).toString());
-                                    startActivity(i);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                        seleccion = 0;
+                                    }
                                 }
                             }
                         });
@@ -258,8 +330,21 @@ public class Subcategorias extends AppCompatActivity {
             Intent i = new Intent(Subcategorias.this, Categorias.class);
             startActivity(i);
             finish();
-        } else if (id == R.id.action_buscar) {
-            fm_search.setVisibility(View.VISIBLE);
+        }
+        if (seleccion == 0) {
+            seleccion++;
+            if (new NetworkUtil().isOnline() == false) {
+                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                    sinConexion();
+                } else {
+                    conexionNoValida();
+                }
+            } else {
+                if (id == R.id.action_buscar) {
+                    fm_search.setVisibility(View.VISIBLE);
+                }
+                seleccion = 0;
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -270,6 +355,34 @@ public class Subcategorias extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_subcategorias, menu);
         return true;
+    }
+
+    public void conexionNoValida() {
+        new AlertDialog.Builder(this)
+                .setTitle("Conexión no válida!!!")
+                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion = 0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    public void sinConexion() {
+        new AlertDialog.Builder(this)
+                .setTitle("Sin conexión a internet!!!")
+                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion = 0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.graphics.Color;
 import android.location.Address;
@@ -19,6 +20,8 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -46,6 +49,8 @@ import com.proyecto.huila.todosalhuila.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.activities.Multimedia;
 import com.proyecto.huila.todosalhuila.categorias.Categorias;
+import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
+import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Informacion;
 import com.proyecto.huila.todosalhuila.menu.Agenda;
@@ -62,7 +67,22 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class InicioLogin extends AppCompatActivity {
+public class InicioLogin extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
+
+    private NetworkStateReceiver networkStateReceiver;
+
+    private RelativeLayout connetion;
+
+    int seleccion =0;
+
+    public void networkAvailable() {
+        connetion.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void networkUnavailable() {
+        connetion.setVisibility(View.VISIBLE);
+    }
 
     private ImageIndicatorView autoImageIndicatorView;
 
@@ -75,6 +95,18 @@ public class InicioLogin extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        connetion = (RelativeLayout) findViewById(R.id.conexion);
+
+        if (new NetworkUtil().isOnline() == false) {
+            connetion.setVisibility(View.VISIBLE);
+        }
+
+        connetion.setVisibility(View.GONE);
+
+        networkStateReceiver = new NetworkStateReceiver();
+        networkStateReceiver.addListener(this);
+        this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
 
         this.autoImageIndicatorView = (ImageIndicatorView) findViewById(R.id.indicate_view);
 
@@ -99,7 +131,7 @@ public class InicioLogin extends AppCompatActivity {
         salir();
     }
 
-    public void salir(){
+    public void salir() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.cerrar_aplicacion)
                 .setMessage(R.string.salir_aplicacion)
@@ -115,6 +147,7 @@ public class InicioLogin extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton(R.string.opcionNo, null)
+                .setCancelable(false)
                 .show();
     }
 
@@ -124,27 +157,37 @@ public class InicioLogin extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-
-
         int id = item.getItemId();
 
-        if(id==R.id.action_salir){
+        if (id == R.id.action_salir) {
             salir();
-        }else if(id==R.id.action_noticias){
-            Intent i = new Intent(InicioLogin.this, Agenda.class);
-            startActivity(i);
-            finish();
-        }else if(id==R.id.action_multimedia){
-            Intent i = new Intent(InicioLogin.this, Multimedia.class);
-            startActivity(i);
-        }else if(id==R.id.action_categoria){
-            Intent i = new Intent(InicioLogin.this, Categorias.class);
-            startActivity(i);
-            finish();
-        }else if(id==R.id.action_geolocalizacion){
-            Intent i = new Intent(InicioLogin.this, Geolocalizacion.class);
-            startActivity(i);
-            finish();
+        }else if(seleccion==0){
+            seleccion++;
+            if (new NetworkUtil().isOnline() == false) {
+                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                    sinConexion();
+                } else {
+                    conexionNoValida();
+                }
+            } else {
+                if (id == R.id.action_noticias) {
+                    Intent i = new Intent(InicioLogin.this, Agenda.class);
+                    startActivity(i);
+                    finish();
+                } else if (id == R.id.action_multimedia) {
+                    Intent i = new Intent(InicioLogin.this, Multimedia.class);
+                    startActivity(i);
+                } else if (id == R.id.action_categoria) {
+                    Intent i = new Intent(InicioLogin.this, Categorias.class);
+                    startActivity(i);
+                    finish();
+                } else if (id == R.id.action_geolocalizacion) {
+                    Intent i = new Intent(InicioLogin.this, Geolocalizacion.class);
+                    startActivity(i);
+                    finish();
+                }
+                seleccion=0;
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -158,5 +201,31 @@ public class InicioLogin extends AppCompatActivity {
         return true;
     }
 
+    public void conexionNoValida() {
+        new AlertDialog.Builder(this)
+                .setTitle("Conexión no válida!!!")
+                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion = 0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
 
+    public void sinConexion() {
+        new AlertDialog.Builder(this)
+                .setTitle("Sin conexión a internet!!!")
+                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion=0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
 }

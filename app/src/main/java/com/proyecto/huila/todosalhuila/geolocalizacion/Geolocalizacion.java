@@ -116,6 +116,8 @@ public class Geolocalizacion extends AppCompatActivity
 
     int contador = 0;
 
+    boolean login = false;
+
     private Marker previoMarker;
     private int showMarker = 0;
     private boolean selectMarker = false;
@@ -166,6 +168,9 @@ public class Geolocalizacion extends AppCompatActivity
         setContentView(R.layout.app_bar_localizacion);
 
         ButterKnife.bind(this);
+
+        final Intent intent = getIntent();
+        this.login = intent.getBooleanExtra("login", false);
 
         buttons = new ToggleButton[]{segmento1, segmento2, segmento3, segmento4, segmento5, segmento6, segmento7, segmento8, segmento9, segmento10, segmento11, segmento12, segmento13, segmento14, segmento15, segmento16};
 
@@ -459,7 +464,7 @@ public class Geolocalizacion extends AppCompatActivity
                                 .show();
                     }
                 } else if (id == R.id.action_home) {
-                    if (new Login().login == true) {
+                    if (login) {
                         Intent i = new Intent(Geolocalizacion.this, InicioLogin.class);
                         startActivity(i);
                         finish();

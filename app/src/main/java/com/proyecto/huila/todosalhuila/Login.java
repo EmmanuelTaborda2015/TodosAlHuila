@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -49,6 +50,11 @@ public class Login extends Activity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(getApplication().INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(et_usuario.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(et_contrasena.getWindowToken(), 0);
+
 
                 if (new NetworkUtil().isOnline() == false) {
                     if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {

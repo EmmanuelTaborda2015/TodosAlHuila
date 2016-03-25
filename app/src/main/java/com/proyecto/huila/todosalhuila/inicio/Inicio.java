@@ -137,6 +137,7 @@ public class Inicio extends AppCompatActivity implements NetworkStateReceiver.Ne
                     startActivity(i);
                 } else if (id == R.id.action_geolocalizacion) {
                     Intent i = new Intent(Inicio.this, Geolocalizacion.class);
+                    i.putExtra("login", false);
                     startActivity(i);
                     finish();
                 }

@@ -28,7 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.categorias.Categorias;
 import com.proyecto.huila.todosalhuila.herramientas.ServicioWeb;
-import com.proyecto.huila.todosalhuila.menu.Agenda;
+import com.proyecto.huila.todosalhuila.menu.Noticias;
 import com.proyecto.huila.todosalhuila.inicio.Inicio;
 import com.proyecto.huila.todosalhuila.webservice.WS_Marcador;
 
@@ -162,7 +162,7 @@ public class GeolocalizacionLogin extends AppCompatActivity
             overridePendingTransition(0, 0);
             finish();
         } else if (id == R.id.menu4) {
-            Intent i = new Intent(GeolocalizacionLogin.this, Agenda.class);
+            Intent i = new Intent(GeolocalizacionLogin.this, Noticias.class);
             startActivity(i);
             overridePendingTransition(0, 0);
             finish();

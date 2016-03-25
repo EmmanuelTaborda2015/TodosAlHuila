@@ -74,7 +74,7 @@
             android:name=".inicio.InicioLogin"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".menu.Agenda"
+            android:name=".menu.Noticias"
             android:label="@string/title_activity_agenda"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

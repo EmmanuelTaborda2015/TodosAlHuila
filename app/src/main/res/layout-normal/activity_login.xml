@@ -32,7 +32,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
-                android:src="@drawable/diseologo4"
+                android:src="@drawable/diseologo6"
                 android:layout_marginBottom="15dp"/>
 
             <EditText

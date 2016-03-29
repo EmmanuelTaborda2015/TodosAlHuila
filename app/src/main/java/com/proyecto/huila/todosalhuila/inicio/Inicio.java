@@ -27,6 +27,9 @@ import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
+import com.proyecto.huila.todosalhuila.webservice.WS_ConsultarCalificacion;
+import com.proyecto.huila.todosalhuila.webservice.WS_Login;
+import com.proyecto.huila.todosalhuila.webservice.WS_RegistrarCalificacion;
 
 
 public class Inicio extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
@@ -58,6 +61,7 @@ public class Inicio extends AppCompatActivity implements NetworkStateReceiver.Ne
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 

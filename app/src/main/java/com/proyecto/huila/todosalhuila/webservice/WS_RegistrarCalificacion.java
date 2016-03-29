@@ -1,48 +1,88 @@
 package com.proyecto.huila.todosalhuila.webservice;
 
-/**
- * Created by emmanuel on 9/12/15.
- */
+import android.os.AsyncTask;
+import android.util.Log;
 
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
-public class WS_RegistrarCalificacion {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-    private final String NAMESPACE = "urn:app";
-    private String URL;
-    private final String SOAP_ACTION = "urn:app/registrarCalificacion";
-    private final String METHOD_NAME = "registrarCalificacion";
+public class WS_RegistrarCalificacion extends AsyncTask<String, Void, String> {
 
-    public String getWebResponse() {
-        return webResponse;
+    String url = "http://52.36.201.248/ws_todosalhuila/turista/aplicativo/setcalificacion/";
+
+    public AsyncResponse delegate = null;
+
+    public WS_RegistrarCalificacion(AsyncResponse asyncResponse) {
+        delegate = (AsyncResponse) asyncResponse;
     }
 
-    private String webResponse = "";
+    public interface AsyncResponse {
+        void processFinish(String output);
+    }
 
-    public void startWebAccess(String usuario, String dispositivo, String sitio_turistico, String calificacion) {
+    @Override
+    protected String doInBackground(String[] params) {
+        ArrayList<NameValuePair> nameValuePairs = new
+                ArrayList<NameValuePair>();
 
-        Datos url = new Datos();
-        URL = url.getSERVICE();
+        nameValuePairs.add(new BasicNameValuePair("user", params[0]));
+        nameValuePairs.add(new BasicNameValuePair("dispositivo", params[1]));
+        nameValuePairs.add(new BasicNameValuePair("mipyme", params[2]));
+        nameValuePairs.add(new BasicNameValuePair("calificacion", params[3]));
 
-        SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-
-        request.addProperty("usuario", usuario);
-        request.addProperty("dispositivo", dispositivo);
-        request.addProperty("sitioTuristico", sitio_turistico);
-        request.addProperty("calificacion", calificacion);
-
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-        envelope.setOutputSoapObject(request);
-        HttpTransportSE httpTransport = new HttpTransportSE(URL);
         try {
-            httpTransport.call(SOAP_ACTION, envelope);
-            Object response = envelope.getResponse();
-            webResponse = response.toString();
-        } catch (Exception exception) {
-            webResponse = "false";
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new
+                    HttpPost(url);
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            InputStream is = entity.getContent();
+            String result = convertStreamToString(is);
+            Log.v("resultado", result);
+
+        } catch (Exception e) {
+            Log.e("log_tag", "Error in http connection " + e.toString());
         }
+
+        return "true";
+    }
+    public String convertStreamToString(InputStream is) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+        } catch (IOException e) {
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+            }
+        }
+
+        return sb.toString();
+    }
+
+
+    @Override
+    protected void onPostExecute(String result) {
+        delegate.processFinish(result);
     }
 }
+

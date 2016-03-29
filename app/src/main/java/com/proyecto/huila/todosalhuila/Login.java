@@ -71,6 +71,14 @@ public class Login extends Activity {
                         ingreseContraseña();
                     } else {
 
+                        /*final WS_Login asyncTask = new WS_Login(new WS_Login.AsyncResponse() {
+
+                            @Override
+                            public void processFinish(String output) {
+
+                            }
+                        });
+                        asyncTask.execute();*/
                         final WS_Login asyncTask = new WS_Login(new WS_Login.AsyncResponse() {
 
                             @Override

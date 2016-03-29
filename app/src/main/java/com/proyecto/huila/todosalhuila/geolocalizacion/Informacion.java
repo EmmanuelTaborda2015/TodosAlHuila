@@ -41,6 +41,8 @@ public class Informacion extends AppCompatActivity {
 
     private String title;
 
+    private String mipyme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class Informacion extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         RelativeLayout tool = (RelativeLayout) findViewById(R.id.toolbar2);
-        tool.setVisibility(View.GONE);
+        //tool.setVisibility(View.GONE);
 
         final Intent intent = getIntent();
         this.sitio_turistico = intent.getStringExtra("datos");
@@ -63,6 +65,8 @@ public class Informacion extends AppCompatActivity {
             datos = new JSONObject(sitio_turistico);
 
             title = datos.get("nombre").toString();
+
+            mipyme = datos.get("id").toString();
 
             LoadImageFromURL asyncTask = new LoadImageFromURL(new LoadImageFromURL.AsyncResponse() {
 
@@ -113,6 +117,7 @@ public class Informacion extends AppCompatActivity {
                                 icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
                                 i.putExtra("byteArray", bs.toByteArray());
                             }
+                            i.putExtra("mipyme",mipyme);
                             i.putExtra("sitio_turistico", title);
                             startActivity(i);
                         }

@@ -11,6 +11,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -28,8 +29,11 @@ import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 import com.proyecto.huila.todosalhuila.webservice.WS_ConsultarCalificacion;
+import com.proyecto.huila.todosalhuila.webservice.WS_ConsultarComentario;
 import com.proyecto.huila.todosalhuila.webservice.WS_Login;
 import com.proyecto.huila.todosalhuila.webservice.WS_RegistrarCalificacion;
+import com.proyecto.huila.todosalhuila.webservice.WS_RegistrarComentario;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 
 public class Inicio extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
@@ -62,14 +66,21 @@ public class Inicio extends AppCompatActivity implements NetworkStateReceiver.Ne
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 
-        if (new NetworkUtil().isOnline() == false) {
-            connetion.setVisibility(View.VISIBLE);
-        }
-
         connetion.setVisibility(View.GONE);
+
+        final WS_ValidarConexionGoogle asyncTask = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+            @Override
+            public void processFinish(String output) {
+
+                if (output=="false") {
+                    connetion.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        asyncTask.execute();
+
 
         this.autoImageIndicatorView = (ImageIndicatorView) findViewById(R.id.indicate_view);
 
@@ -123,30 +134,39 @@ public class Inicio extends AppCompatActivity implements NetworkStateReceiver.Ne
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
         if (id == R.id.action_salir) {
             salir();
         }else if(seleccion == 0) {
             seleccion++;
-            if (new NetworkUtil().isOnline() == false) {
-                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
-                    sinConexion();
-                } else {
-                    conexionNoValida();
+            final WS_ValidarConexionGoogle asyncTask = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                @Override
+                public void processFinish(String output) {
+
+                    if (output=="false") {
+                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                            sinConexion();
+                        } else {
+                            conexionNoValida();
+                        }
+                    } else {
+                        if (id == R.id.action_user) {
+                            Intent i = new Intent(Inicio.this, Login.class);
+                            startActivity(i);
+                        } else if (id == R.id.action_geolocalizacion) {
+                            Intent i = new Intent(Inicio.this, Geolocalizacion.class);
+                            i.putExtra("login", false);
+                            startActivity(i);
+                            finish();
+                        }
+                        seleccion=0;
+                    }
                 }
-            } else {
-                if (id == R.id.action_user) {
-                    Intent i = new Intent(Inicio.this, Login.class);
-                    startActivity(i);
-                } else if (id == R.id.action_geolocalizacion) {
-                    Intent i = new Intent(Inicio.this, Geolocalizacion.class);
-                    i.putExtra("login", false);
-                    startActivity(i);
-                    finish();
-                }
-                seleccion=0;
-            }
+        });
+        asyncTask.execute();
+
+
         }
 
         return super.onOptionsItemSelected(item);

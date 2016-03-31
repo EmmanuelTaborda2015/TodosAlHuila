@@ -29,6 +29,7 @@ import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Informacion;
 import com.proyecto.huila.todosalhuila.webservice.WS_MiPyme;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -91,9 +92,16 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
 
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 
-        if (new NetworkUtil().isOnline() == false) {
-            connetion.setVisibility(View.VISIBLE);
-        }
+        final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+            @Override
+            public void processFinish(String con) {
+
+                if (con == "false") {
+                    connetion.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        asyncTaskConection.execute();
 
         connetion.setVisibility(View.GONE);
 
@@ -132,43 +140,51 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
 
                 if (seleccion == 0) {
                     seleccion++;
-                    if (new NetworkUtil().isOnline() == false) {
-                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
-                            sinConexion();
-                        } else {
-                            conexionNoValida();
-                        }
-                    } else {
-                        if (parmSearch > -1) {
+                    final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                        @Override
+                        public void processFinish(String con) {
 
-                            listaItems.setAdapter(null);
-                            ItemsSearch = new ArrayList<TitularItemsSubcategorias>();
-
-                            for (int i = 0; i < Items.size(); i++) {
-                                if (paramSearchText.equals(Items.get(i).getCiudad()) | paramSearchText.equals(Items.get(i).getTitle())) {
-                                    ItemsSearch.add(new TitularItemsSubcategorias(Items.get(i).getSitio(), Items.get(i).getTitle().toString(), Items.get(i).getDescription(), Items.get(i).getImg(), Items.get(i).getCiudad(), Items.get(i).getItem()));
-                                    Adaptador = new AdaptadorSubcategorias(Subcategorias.this, ItemsSearch);
-                                    posicionActual.add(Items.get(i).getItem());
+                            if (con == "false") {
+                                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                    sinConexion();
+                                } else {
+                                    conexionNoValida();
                                 }
-                            }
+                            } else {
+                                if (parmSearch > -1) {
 
-                            posicionFinal = new ArrayList<Integer>();
-                            posicionFinal = posicionActual;
+                                    listaItems.setAdapter(null);
+                                    ItemsSearch = new ArrayList<TitularItemsSubcategorias>();
 
-                            listaItems.setAdapter(Adaptador);
-                            textView.setText("");
-                        } else {
+                                    for (int i = 0; i < Items.size(); i++) {
+                                        if (paramSearchText.equals(Items.get(i).getCiudad()) | paramSearchText.equals(Items.get(i).getTitle())) {
+                                            ItemsSearch.add(new TitularItemsSubcategorias(Items.get(i).getSitio(), Items.get(i).getTitle().toString(), Items.get(i).getDescription(), Items.get(i).getImg(), Items.get(i).getCiudad(), Items.get(i).getItem()));
+                                            Adaptador = new AdaptadorSubcategorias(Subcategorias.this, ItemsSearch);
+                                            posicionActual.add(Items.get(i).getItem());
+                                        }
+                                    }
+
+                                    posicionFinal = new ArrayList<Integer>();
+                                    posicionFinal = posicionActual;
+
+                                    listaItems.setAdapter(Adaptador);
+                                    textView.setText("");
+                                } else {
                     /*Adaptador = new AdaptadorSubcategorias(Subcategorias.this, Items);
                     listaItems.setAdapter(Adaptador);
                     posicionFinal = new ArrayList<Integer>();
                     posicionFinal = posicionInicial;*/
-                            sinSeleccion();
+                                    sinSeleccion();
+                                }
+
+                                parmSearch = -1;
+
+                                seleccion = 0;
+                            }
                         }
+                    });
+                    asyncTaskConection.execute();
 
-                        parmSearch = -1;
-
-                        seleccion = 0;
-                    }
                 }
             }
         });
@@ -240,26 +256,34 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
                         listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view,
-                                                    int position, long id) {
+                                                    final int position, long id) {
                                 if (seleccion == 0) {
                                     seleccion++;
-                                    if (new NetworkUtil().isOnline() == false) {
-                                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
-                                            sinConexion();
-                                        } else {
-                                            conexionNoValida();
-                                        }
-                                    } else {
-                                        Intent i = new Intent(Subcategorias.this, Informacion.class);
-                                        try {
-                                            i.putExtra("datos", items.get(posicionFinal.get(position)).toString());
-                                            startActivity(i);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
+                                    final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                                        @Override
+                                        public void processFinish(String con) {
 
-                                        seleccion = 0;
-                                    }
+                                            if (con == "false") {
+                                                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                                    sinConexion();
+                                                } else {
+                                                    conexionNoValida();
+                                                }
+                                            } else {
+                                                Intent i = new Intent(Subcategorias.this, Informacion.class);
+                                                try {
+                                                    i.putExtra("datos", items.get(posicionFinal.get(position)).toString());
+                                                    startActivity(i);
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+
+                                                seleccion = 0;
+                                            }
+                                        }
+                                    });
+                                    asyncTaskConection.execute();
+
                                 }
                             }
                         });
@@ -324,7 +348,7 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
         if (id == R.id.action_atras) {
             Intent i = new Intent(Subcategorias.this, Categorias.class);
@@ -333,18 +357,26 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
         }
         if (seleccion == 0) {
             seleccion++;
-            if (new NetworkUtil().isOnline() == false) {
-                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
-                    sinConexion();
-                } else {
-                    conexionNoValida();
+            final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                @Override
+                public void processFinish(String con) {
+
+                    if (con == "false") {
+                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                            sinConexion();
+                        } else {
+                            conexionNoValida();
+                        }
+                    } else {
+                        if (id == R.id.action_buscar) {
+                            fm_search.setVisibility(View.VISIBLE);
+                        }
+                        seleccion = 0;
+                    }
                 }
-            } else {
-                if (id == R.id.action_buscar) {
-                    fm_search.setVisibility(View.VISIBLE);
-                }
-                seleccion = 0;
-            }
+            });
+            asyncTaskConection.execute();
+
         }
 
         return super.onOptionsItemSelected(item);

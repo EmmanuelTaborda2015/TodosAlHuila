@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:openDrawer="start"
-    android:background="@color/azul1"
-    tools:context=".inicio.Inicio">
+    android:background="@drawable/fondo5"
+    tools:context=".inicio.Inicio"
+    android:weightSum="1">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -24,10 +25,74 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <RelativeLayout
+        android:id="@+id/conexion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:background="@color/gray">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:padding="5dp"
+            android:src="@drawable/conexion" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="Sin conexión a internet"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listItems" />
+        android:id="@+id/listItems"
+        android:paddingBottom="65dp"
+        android:layout_below="@+id/conexion"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="5dp"
+        android:id="@+id/comentario"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:text=""
+            android:padding="5dp"
+            android:id="@+id/editText_comentar"
+            android:background="@drawable/edittext"
+            android:layout_toLeftOf="@+id/imageView_comentar"
+            android:layout_toStartOf="@+id/imageView_comentar" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/enviar"
+            android:paddingLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/imageView_comentar" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

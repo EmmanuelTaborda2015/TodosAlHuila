@@ -16,6 +16,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class WS_ConsultarCalificacion extends AsyncTask<String, Void, String> {
@@ -37,9 +39,13 @@ public class WS_ConsultarCalificacion extends AsyncTask<String, Void, String> {
         ArrayList<NameValuePair> nameValuePairs = new
                 ArrayList<NameValuePair>();
 
-        nameValuePairs.add(new BasicNameValuePair("user", params[0]));
-        nameValuePairs.add(new BasicNameValuePair("dispositivo", params[1]));
-        nameValuePairs.add(new BasicNameValuePair("mipyme", params[2]));
+        try {
+            nameValuePairs.add(new BasicNameValuePair("user", URLEncoder.encode(params[0], "UTF-8")));
+            nameValuePairs.add(new BasicNameValuePair("dispositivo", URLEncoder.encode(params[1], "UTF-8")));
+            nameValuePairs.add(new BasicNameValuePair("mipyme", URLEncoder.encode(params[2], "UTF-8")));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         String result = null;
         try {

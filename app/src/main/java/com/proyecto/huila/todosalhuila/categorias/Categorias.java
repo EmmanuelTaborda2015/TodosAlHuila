@@ -22,6 +22,7 @@ import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 public class Categorias extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
 
@@ -73,9 +74,16 @@ public class Categorias extends AppCompatActivity implements NetworkStateReceive
 
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 
-        if (new NetworkUtil().isOnline() == false) {
-            connetion.setVisibility(View.VISIBLE);
-        }
+        final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+            @Override
+            public void processFinish(String con) {
+
+                if (con == "false") {
+                    connetion.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        asyncTaskConection.execute();
 
         connetion.setVisibility(View.GONE);
 
@@ -120,23 +128,31 @@ public class Categorias extends AppCompatActivity implements NetworkStateReceive
 
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
+                                        final int groupPosition, final int childPosition, long id) {
 
                 if (seleccion == 0) {
                     seleccion++;
-                    if (new NetworkUtil().isOnline() == false) {
-                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
-                            sinConexion();
-                        } else {
-                            conexionNoValida();
+                    final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                        @Override
+                        public void processFinish(String con) {
+
+                            if (con == "false") {
+                                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                    sinConexion();
+                                } else {
+                                    conexionNoValida();
+                                }
+                            } else {
+                                seleccion = 0;
+                                String itemclicked = data[groupPosition][childPosition];
+                                Intent i = new Intent(Categorias.this, Subcategorias.class);
+                                i.putExtra("subcategoria", itemclicked);
+                                startActivity(i);
+                            }
                         }
-                    } else {
-                        seleccion = 0;
-                        String itemclicked = data[groupPosition][childPosition];
-                        Intent i = new Intent(Categorias.this, Subcategorias.class);
-                        i.putExtra("subcategoria", itemclicked);
-                        startActivity(i);
-                    }
+                    });
+                    asyncTaskConection.execute();
+
                 }
                 return false;
             }

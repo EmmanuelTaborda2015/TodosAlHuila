@@ -21,6 +21,7 @@ import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 import com.proyecto.huila.todosalhuila.menu.Noticias;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 
 public class InicioLogin extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
@@ -29,7 +30,7 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
 
     private RelativeLayout connetion;
 
-    int seleccion =0;
+    int seleccion = 0;
 
     public void networkAvailable() {
         connetion.setVisibility(View.GONE);
@@ -54,9 +55,16 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
 
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 
-        if (new NetworkUtil().isOnline() == false) {
-            connetion.setVisibility(View.VISIBLE);
-        }
+        final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+            @Override
+            public void processFinish(String con) {
+
+                if (con == "false") {
+                    connetion.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        asyncTaskConection.execute();
 
         connetion.setVisibility(View.GONE);
 
@@ -113,38 +121,46 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
         if (id == R.id.action_salir) {
             salir();
-        }else if(seleccion==0){
+        } else if (seleccion == 0) {
             seleccion++;
-            if (new NetworkUtil().isOnline() == false) {
-                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
-                    sinConexion();
-                } else {
-                    conexionNoValida();
+            final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                @Override
+                public void processFinish(String con) {
+
+                    if (con == "false") {
+                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                            sinConexion();
+                        } else {
+                            conexionNoValida();
+                        }
+                    } else {
+                        if (id == R.id.action_noticias) {
+                            Intent i = new Intent(InicioLogin.this, Noticias.class);
+                            startActivity(i);
+                            finish();
+                        } else if (id == R.id.action_multimedia) {
+                            Intent i = new Intent(InicioLogin.this, Multimedia.class);
+                            startActivity(i);
+                        } else if (id == R.id.action_categoria) {
+                            Intent i = new Intent(InicioLogin.this, Categorias.class);
+                            startActivity(i);
+                            finish();
+                        } else if (id == R.id.action_geolocalizacion) {
+                            Intent i = new Intent(InicioLogin.this, Geolocalizacion.class);
+                            i.putExtra("login", true);
+                            startActivity(i);
+                            finish();
+                        }
+                        seleccion = 0;
+                    }
                 }
-            } else {
-                if (id == R.id.action_noticias) {
-                    Intent i = new Intent(InicioLogin.this, Noticias.class);
-                    startActivity(i);
-                    finish();
-                } else if (id == R.id.action_multimedia) {
-                    Intent i = new Intent(InicioLogin.this, Multimedia.class);
-                    startActivity(i);
-                } else if (id == R.id.action_categoria) {
-                    Intent i = new Intent(InicioLogin.this, Categorias.class);
-                    startActivity(i);
-                    finish();
-                } else if (id == R.id.action_geolocalizacion) {
-                    Intent i = new Intent(InicioLogin.this, Geolocalizacion.class);
-                    startActivity(i);
-                    i.putExtra("login", true);
-                    finish();
-                }
-                seleccion=0;
-            }
+            });
+            asyncTaskConection.execute();
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -179,7 +195,7 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        seleccion=0;
+                        seleccion = 0;
                     }
                 })
                 .setCancelable(false)

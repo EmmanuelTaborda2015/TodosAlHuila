@@ -37,6 +37,7 @@ import com.proyecto.huila.todosalhuila.inicio.Inicio;
 import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
 import com.proyecto.huila.todosalhuila.webservice.WS_MiPyme;
 import com.proyecto.huila.todosalhuila.webservice.WS_Noticias;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,9 +76,16 @@ public class Noticias extends AppCompatActivity implements NetworkStateReceiver.
         setSupportActionBar(toolbar);
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 
-        if (new NetworkUtil().isOnline() == false) {
-            connetion.setVisibility(View.VISIBLE);
-        }
+        final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+            @Override
+            public void processFinish(String con) {
+
+                if (con=="false") {
+                    connetion.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        asyncTaskConection.execute();
 
         connetion.setVisibility(View.GONE);
 

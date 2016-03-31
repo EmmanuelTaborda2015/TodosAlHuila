@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/azul1">
+    android:background="@drawable/fondo5">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/view">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/azul2"
+            app:popupTheme="@style/AppTheme.AppBarOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/conexion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:background="@color/gray">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:padding="5dp"
+            android:src="@drawable/conexion" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="Sin conexión a internet"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -37,9 +80,8 @@
         android:textColor="@color/white"
         android:id="@+id/label_lugar_calificar"
         android:gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp" />
+        android:layout_below="@+id/conexion"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_height="150dp"
@@ -49,8 +91,8 @@
         android:background="@drawable/imageview"
         android:layout_gravity="center"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/calificar_boton1"
+        android:layout_alignEnd="@+id/calificar_boton1" />
 
     <Button
         android:id="@+id/calificar_boton1"
@@ -91,17 +133,17 @@
         android:foregroundTint="#ffffff" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text=""
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:textAlignment="center"
         android:id="@+id/calificar_label2"
         android:textColor="@color/white"
         android:layout_below="@+id/ratingBar2"
-        android:layout_alignRight="@+id/ratingBar"
-        android:layout_alignEnd="@+id/ratingBar"
-        android:layout_marginTop="5dp" />
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

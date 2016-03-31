@@ -34,12 +34,14 @@
         <activity
             android:name=".Login"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog">
 
         </activity>
         <activity
             android:name=".inicio.Inicio"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,6 +53,7 @@
         <activity
             android:name=".categorias.Categorias"
             android:label="@string/title_activity_categorias"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!--
@@ -68,46 +71,53 @@
         <activity
             android:name=".geolocalizacion.Geolocalizacion"
             android:label="@string/title_activity_localizacion"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".inicio.InicioLogin"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".menu.Noticias"
             android:label="@string/title_activity_agenda"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".categorias.Subcategorias"
             android:label="@string/title_activity_lugares"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".geolocalizacion.Informacion"
             android:label="@string/title_activity_informacion"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".geolocalizacion.Calificar"
             android:label="@string/title_activity_calificar"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".galeria.MainActivity"
             android:label="@string/title_activity_informacion"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".geolocalizacion.Comentar"
+            android:name=".comentarios.Comentarios"
             android:label="@string/title_activity_comentar"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".geolocalizacion.GeolocalizacionPunto"
             android:label="@string/title_activity_geolocalizacion_punto"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".geolocalizacion.Comentarios"
-            android:label="@string/title_activity_comentarios"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".lista.Comentario"
             android:label="@string/title_activity_comentarios"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.PlaybackActivity"
@@ -120,6 +130,7 @@
         <activity
             android:name=".activities.SubirMultimedia"
             android:label="@string/title_activity_subir"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"></activity>
     </application>
 

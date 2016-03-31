@@ -18,6 +18,7 @@ import com.proyecto.huila.todosalhuila.inicio.Inicio;
 import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
 import com.proyecto.huila.todosalhuila.webservice.WS_Login;
 import com.proyecto.huila.todosalhuila.webservice.WS_MiPyme;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,21 +56,24 @@ public class Login extends Activity {
                 imm.hideSoftInputFromWindow(et_usuario.getWindowToken(), 0);
                 imm.hideSoftInputFromWindow(et_contrasena.getWindowToken(), 0);
 
+                final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                    @Override
+                    public void processFinish(String output) {
 
-                if (new NetworkUtil().isOnline() == false) {
-                    if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
-                        sinConexion();
-                    } else {
-                        conexionNoValida();
-                    }
-                } else {
-                    if ("".equals(et_usuario.getText().toString()) && "".equals(et_contrasena.getText().toString())) {
-                        ingreseUsuarioContraseña();
-                    } else if ("".equals(et_usuario.getText().toString())) {
-                        ingreseUsuario();
-                    } else if ("".equals(et_contrasena.getText().toString())) {
-                        ingreseContraseña();
-                    } else {
+                        if (output == "false") {
+                            if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                sinConexion();
+                            } else {
+                                conexionNoValida();
+                            }
+                        } else {
+                            if ("".equals(et_usuario.getText().toString()) && "".equals(et_contrasena.getText().toString())) {
+                                ingreseUsuarioContraseña();
+                            } else if ("".equals(et_usuario.getText().toString())) {
+                                ingreseUsuario();
+                            } else if ("".equals(et_contrasena.getText().toString())) {
+                                ingreseContraseña();
+                            } else {
 
                         /*final WS_Login asyncTask = new WS_Login(new WS_Login.AsyncResponse() {
 
@@ -79,43 +83,47 @@ public class Login extends Activity {
                             }
                         });
                         asyncTask.execute();*/
-                        final WS_Login asyncTask = new WS_Login(new WS_Login.AsyncResponse() {
+                                final WS_Login asyncTask = new WS_Login(new WS_Login.AsyncResponse() {
 
-                            @Override
-                            public void processFinish(String output) {
-                                try {
-                                    final JSONObject datos;
-                                    datos = new JSONObject(output);
-                                    final JSONObject respuesta;
-                                    respuesta = new JSONObject(datos.get("datos").toString());
-                                    if ("correcto".equals(respuesta.get("estado").toString())) {
-                                        usuario = respuesta.get("usuario").toString();
-                                        nombre = respuesta.get("nombre").toString();
-                                        login = true;
-                                        usuarioD = et_usuario.getText().toString();
-                                        contrasenaD = et_contrasena.getText().toString();
+                                    @Override
+                                    public void processFinish(String output) {
+                                        try {
+                                            final JSONObject datos;
+                                            datos = new JSONObject(output);
+                                            final JSONObject respuesta;
+                                            respuesta = new JSONObject(datos.get("datos").toString());
+                                            if ("correcto".equals(respuesta.get("estado").toString())) {
+                                                usuario = respuesta.get("usuario").toString();
+                                                nombre = respuesta.get("nombre").toString();
+                                                login = true;
+                                                usuarioD = et_usuario.getText().toString();
+                                                contrasenaD = et_contrasena.getText().toString();
 
-                                        Intent i = new Intent(Login.this, InicioLogin.class);
-                                        startActivity(i);
-                                        finish();
-                                    } else {
-                                        datosInvalidos();
+                                                Intent i = new Intent(Login.this, InicioLogin.class);
+                                                startActivity(i);
+                                                finish();
+                                            } else {
+                                                datosInvalidos();
+                                            }
+
+                                            circuloProgreso.dismiss();
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
+                                });
+                                String[] myTaskParams = {et_usuario.getText().toString(), et_contrasena.getText().toString()};
+                                asyncTask.execute(myTaskParams);
 
-                                    circuloProgreso.dismiss();
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                circuloProgreso = ProgressDialog.show(Login.this, "", "Espere por favor ...", true);
                             }
-                        });
-                        String[] myTaskParams = {et_usuario.getText().toString(), et_contrasena.getText().toString()};
-                        asyncTask.execute(myTaskParams);
 
-                        circuloProgreso = ProgressDialog.show(Login.this, "", "Espere por favor ...", true);
+                        }
                     }
+                });
+                asyncTaskConection.execute();
 
-                }
             }
         });
 

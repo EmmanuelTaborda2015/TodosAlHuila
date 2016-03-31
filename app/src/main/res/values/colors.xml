@@ -22,6 +22,9 @@
     <item name="azul1" type="color">#00A8FF</item>
     <item name="azul2" type="color">#0083FF</item>
     <item name="azul3" type="color">#0033FF</item>
+    <item name="azul1_1" type="color">#880000</item>
+    <item name="azul2_1" type="color">#770000</item>
+    <item name="azul3_1" type="color">#440000</item>
     <item name="white" type="color">#FFFFFF</item>
     <item name="gray" type="color">#FFD3D3D3</item>
 

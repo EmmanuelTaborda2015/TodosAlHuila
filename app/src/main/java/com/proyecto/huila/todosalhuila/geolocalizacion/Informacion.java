@@ -1,7 +1,10 @@
 package com.proyecto.huila.todosalhuila.geolocalizacion;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -9,6 +12,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,12 +21,18 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.LocationSettingsResult;
 import com.proyecto.huila.indicador.ImageIndicatorViewUrl;
 import com.proyecto.huila.indicador.LoadImageFromURL;
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.comentarios.Comentarios;
+import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
+import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.lista.Comentario;
 import com.proyecto.huila.todosalhuila.inicio.Inicio;
 import com.proyecto.huila.todosalhuila.webservice.WS_SitioTuristico;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +40,21 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 
 
-public class Informacion extends AppCompatActivity {
+public class Informacion extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
+
+    private NetworkStateReceiver networkStateReceiver;
+
+    private RelativeLayout connetion;
+
+    public void networkAvailable() {
+        connetion.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void networkUnavailable() {
+        connetion.setVisibility(View.VISIBLE);
+    }
+
 
     private Handler handler_sitio = new Handler();
     private Thread thread_sitio;
@@ -37,11 +62,13 @@ public class Informacion extends AppCompatActivity {
 
     private ProgressDialog circuloProgreso;
 
-    private String sitio_turistico;
+    private String pyme;
 
     private String title;
 
     private String mipyme;
+
+    private int seleccion = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +78,35 @@ public class Informacion extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        RelativeLayout tool = (RelativeLayout) findViewById(R.id.toolbar2);
-        //tool.setVisibility(View.GONE);
+        connetion = (RelativeLayout) findViewById(R.id.conexion);
+
+        connetion.setVisibility(View.GONE);
+
+        final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+            @Override
+            public void processFinish(String con) {
+
+                if (con == "false") {
+                    connetion.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        asyncTaskConection.execute();
+
+        networkStateReceiver = new NetworkStateReceiver();
+        networkStateReceiver.addListener(this);
+        this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+
 
         final Intent intent = getIntent();
-        this.sitio_turistico = intent.getStringExtra("datos");
+        this.pyme = intent.getStringExtra("datos");
 
         circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
 
 
         final JSONObject datos;
         try {
-            datos = new JSONObject(sitio_turistico);
+            datos = new JSONObject(pyme);
 
             title = datos.get("nombre").toString();
 
@@ -89,9 +133,29 @@ public class Informacion extends AppCompatActivity {
                     comentar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Informacion.this, Comentario.class);
-                            i.putExtra("sitio_turistico", sitio_turistico);
-                            startActivity(i);
+                            if (seleccion == 0) {
+                                seleccion++;
+                                final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                                    @Override
+                                    public void processFinish(String con) {
+
+                                        if (con == "false") {
+                                            if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                                sinConexion();
+                                            } else {
+                                                conexionNoValida();
+                                            }
+                                        } else {
+                                            seleccion = 0;
+                                            Intent i = new Intent(Informacion.this, Comentarios.class);
+                                            i.putExtra("pyme", pyme);
+                                            i.putExtra("pyme", mipyme);
+                                            startActivity(i);
+                                        }
+                                    }
+                                });
+                                asyncTaskConection.execute();
+                            }
                         }
                     });
 
@@ -99,37 +163,47 @@ public class Informacion extends AppCompatActivity {
                     calificar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Informacion.this, Calificar.class);
-                            if (output.length > 0) {
-                                try {
-                                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                                    output[0].compress(Bitmap.CompressFormat.PNG, 50, bs);
-                                    i.putExtra("byteArray", bs.toByteArray());
-                                }catch (Exception e){
-                                    Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
-                                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                                    icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                                    i.putExtra("byteArray", bs.toByteArray());
-                                }
-                            } else {
-                                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
-                                ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                                icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                                i.putExtra("byteArray", bs.toByteArray());
-                            }
-                            i.putExtra("mipyme",mipyme);
-                            i.putExtra("sitio_turistico", title);
-                            startActivity(i);
-                        }
-                    });
+                            if (seleccion == 0) {
+                                seleccion++;
+                                final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                                    @Override
+                                    public void processFinish(String con) {
 
-                    ImageView compartir = (ImageView) findViewById(R.id.botonCompartir);
-                    compartir.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Informacion.this, Inicio.class);
-                            i.putExtra("sitio_turistico", title);
-                            startActivity(i);
+                                        if (con == "false") {
+                                            if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                                sinConexion();
+                                            } else {
+                                                conexionNoValida();
+                                            }
+                                        } else {
+                                            seleccion = 0;
+                                            Intent i = new Intent(Informacion.this, Calificar.class);
+                                            if (output.length > 0) {
+                                                try {
+                                                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                                    output[0].compress(Bitmap.CompressFormat.PNG, 50, bs);
+                                                    i.putExtra("byteArray", bs.toByteArray());
+                                                } catch (Exception e) {
+                                                    Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
+                                                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                                    icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                                                    i.putExtra("byteArray", bs.toByteArray());
+                                                }
+                                            } else {
+                                                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
+                                                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                                icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                                                i.putExtra("byteArray", bs.toByteArray());
+                                            }
+                                            i.putExtra("mipyme", mipyme);
+                                            i.putExtra("pyme", title);
+                                            startActivity(i);
+                                        }
+                                    }
+                                });
+                                asyncTaskConection.execute();
+
+                            }
                         }
                     });
 
@@ -137,14 +211,43 @@ public class Informacion extends AppCompatActivity {
                     ubicar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Informacion.this, GeolocalizacionPunto.class);
-                            i.putExtra("sitio_turistico", title);
-                            startActivity(i);
+                            if (seleccion == 0) {
+                                seleccion++;
+                                final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                                    @Override
+                                    public void processFinish(String con) {
+
+                                        if (con == "false") {
+                                            if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                                sinConexion();
+                                            } else {
+                                                conexionNoValida();
+                                            }
+                                        } else {
+                                            seleccion = 0;
+                                            Intent i = new Intent(Informacion.this, GeolocalizacionPunto.class);
+                                            i.putExtra("pyme", pyme);
+                                            i.putExtra("login", true);
+                                            startActivity(i);
+                                        }
+                                    }
+                                });
+                                asyncTaskConection.execute();
+
+                            }
                         }
                     });
 
                     circuloProgreso.dismiss();
 
+                }
+            });
+
+            ImageView atras = (ImageView) findViewById(R.id.botonAtras);
+            atras.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
                 }
             });
 
@@ -214,5 +317,32 @@ public class Informacion extends AppCompatActivity {
         x.setTextSize(10);
     }
 
+    public void conexionNoValida() {
+        new AlertDialog.Builder(this)
+                .setTitle("Conexión no válida!!!")
+                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion = 0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    public void sinConexion() {
+        new AlertDialog.Builder(this)
+                .setTitle("Sin conexión a internet!!!")
+                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        seleccion = 0;
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
 }
 

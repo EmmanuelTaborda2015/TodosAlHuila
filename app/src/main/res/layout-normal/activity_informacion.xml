@@ -33,29 +33,31 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:src="@drawable/comentarios"
-                android:layout_marginLeft="10dp"
+                android:id="@+id/botonComentar"
+                android:layout_marginLeft="48dp"
+                android:layout_marginStart="48dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/botonComentar" />
+                android:layout_toRightOf="@+id/botonAtras"
+                android:layout_toEndOf="@+id/botonAtras" />
 
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:src="@drawable/startshape"
                 android:id="@+id/botonCalificar"
-                android:layout_marginLeft="58dp"
-                android:layout_marginStart="58dp"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/botonComentar"
-                android:layout_toEndOf="@+id/botonComentar" />
+                android:layout_toEndOf="@+id/botonComentar"
+                android:layout_marginLeft="51dp"
+                android:layout_marginStart="51dp" />
 
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/compartir"
-                android:id="@+id/botonCompartir"
+                android:src="@drawable/ubicar"
+                android:id="@+id/botonUbicar"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -63,16 +65,42 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/ubicar"
-                android:id="@+id/botonUbicar"
-                android:layout_marginLeft="61dp"
-                android:layout_marginStart="61dp"
+                android:src="@drawable/atras"
+                android:id="@+id/botonAtras"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/botonCalificar"
-                android:layout_toEndOf="@+id/botonCalificar" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp" />
         </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/conexion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:padding="5dp"
+            android:src="@drawable/conexion" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="Sin conexión a internet"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <LinearLayout android:orientation="vertical"  android:layout_height="fill_parent" android:layout_width="fill_parent">
         <LinearLayout android:background="@color/azul1"  android:layout_height="150dp" android:layout_width="fill_parent">

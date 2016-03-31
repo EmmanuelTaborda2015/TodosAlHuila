@@ -55,7 +55,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar2"
         android:groupIndicator="@null"
-	    android:background="@color/azul1"
+	    android:background="@drawable/fondo5"
 		android:headerDividersEnabled="false"
 		android:smoothScrollbar="false">
  	</ExpandableListView>

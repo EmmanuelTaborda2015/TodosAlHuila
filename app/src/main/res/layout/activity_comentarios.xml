@@ -20,15 +20,15 @@
             android:layout_alignParentLeft="true"
             android:layout_marginRight="5dip">
 
-            <com.proyecto.huila.todosalhuila.galeria.CircleImageView
+         <!--   <com.proyecto.huila.todosalhuila.galeria.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/profile_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 app:civ_border_width="2dp"
                 android:layout_margin="5dp"
-                android:src="@drawable/imagen_no_disponible"
-                app:civ_border_color="#FF000000"/>
+                android:src="@drawable/usuario"
+                app:civ_border_color="@color/white"/>-->
 
 
         </LinearLayout>
@@ -49,7 +49,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/txtDescription"
+            android:id="@+id/fecha"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtTitle"
@@ -59,9 +59,26 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:fontFamily="sans-serif-thin"
+            android:layout_marginBottom="5dp"
             android:textStyle="normal"
             android:layout_marginTop="1dip"
             android:layout_toRightOf="@+id/thumbnail" />
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text=""
+            android:textSize="13dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:fontFamily="sans-serif-thin"
+            android:textStyle="normal"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@+id/fecha"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:layout_toEndOf="@+id/thumbnail" />
 
     </RelativeLayout>
 

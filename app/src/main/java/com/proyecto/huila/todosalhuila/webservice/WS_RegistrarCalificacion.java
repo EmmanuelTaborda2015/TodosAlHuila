@@ -16,6 +16,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class WS_RegistrarCalificacion extends AsyncTask<String, Void, String> {
@@ -37,10 +39,16 @@ public class WS_RegistrarCalificacion extends AsyncTask<String, Void, String> {
         ArrayList<NameValuePair> nameValuePairs = new
                 ArrayList<NameValuePair>();
 
-        nameValuePairs.add(new BasicNameValuePair("user", params[0]));
-        nameValuePairs.add(new BasicNameValuePair("dispositivo", params[1]));
-        nameValuePairs.add(new BasicNameValuePair("mipyme", params[2]));
-        nameValuePairs.add(new BasicNameValuePair("calificacion", params[3]));
+        String result = null;
+
+        try {
+            nameValuePairs.add(new BasicNameValuePair("user", URLEncoder.encode(params[0], "UTF-8")));
+            nameValuePairs.add(new BasicNameValuePair("dispositivo", URLEncoder.encode(params[1], "UTF-8")));
+            nameValuePairs.add(new BasicNameValuePair("mipyme", URLEncoder.encode(params[2], "UTF-8")));
+            nameValuePairs.add(new BasicNameValuePair("calificacion", URLEncoder.encode(params[3], "UTF-8")));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         try {
             HttpClient httpclient = new DefaultHttpClient();
@@ -50,14 +58,13 @@ public class WS_RegistrarCalificacion extends AsyncTask<String, Void, String> {
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             InputStream is = entity.getContent();
-            String result = convertStreamToString(is);
-            Log.v("resultado", result);
+            result = convertStreamToString(is);
 
         } catch (Exception e) {
             Log.e("log_tag", "Error in http connection " + e.toString());
         }
 
-        return "true";
+        return result;
     }
     public String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));

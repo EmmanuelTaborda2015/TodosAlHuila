@@ -35,6 +35,7 @@ import com.proyecto.huila.todosalhuila.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.webservice.WS_SubirArchivo;
+import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 import org.apache.commons.io.FileUtils;
 
@@ -80,7 +81,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
 
     private ProgressDialog circuloProgreso;
 
-    int seleccion =0;
+    int seleccion = 0;
 
     protected static final String TAG = "MainActivity";
 
@@ -170,39 +171,47 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
 
                 if (seleccion == 0) {
                     seleccion++;
-                    if (new NetworkUtil().isOnline() == false) {
-                        if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
-                            sinConexion();
-                        } else {
-                            conexionNoValida();
-                        }
-                    } else {
-                        circuloProgreso = ProgressDialog.show(SubirMultimedia.this, "", "Subiendo Archivo ...", true);
+                    final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
+                        @Override
+                        public void processFinish(String con) {
 
-                        String ImageBase64 = convertFileToString(path);
-
-                        String[] myTaskParams = new String[0];
-
-                        try {
-
-                            String title = java.net.URLEncoder.encode(String.valueOf(titulo.getText()), "utf-8");
-                            String caption = java.net.URLEncoder.encode(String.valueOf(descripcion.getText()), "utf-8");
-
-                            if (contador == 0) {
-                                myTaskParams = new String[]{ImageBase64, title, caption, "", "", "", "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                            if (con == "false") {
+                                if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
+                                    sinConexion();
+                                } else {
+                                    conexionNoValida();
+                                }
                             } else {
-                                String address = java.net.URLEncoder.encode(String.valueOf(lugar.getText()), "utf-8");
-                                String latitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLatitude()), "utf-8");
-                                String longitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLongitude()), "utf-8");
-                                myTaskParams = new String[]{ImageBase64, title, caption, address, latitude, longitude, "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                                circuloProgreso = ProgressDialog.show(SubirMultimedia.this, "", "Subiendo Archivo ...", true);
+
+                                String ImageBase64 = convertFileToString(path);
+
+                                String[] myTaskParams = new String[0];
+
+                                try {
+
+                                    String title = java.net.URLEncoder.encode(String.valueOf(titulo.getText()), "utf-8");
+                                    String caption = java.net.URLEncoder.encode(String.valueOf(descripcion.getText()), "utf-8");
+
+                                    if (contador == 0) {
+                                        myTaskParams = new String[]{ImageBase64, title, caption, "", "", "", "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                                    } else {
+                                        String address = java.net.URLEncoder.encode(String.valueOf(lugar.getText()), "utf-8");
+                                        String latitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLatitude()), "utf-8");
+                                        String longitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLongitude()), "utf-8");
+                                        myTaskParams = new String[]{ImageBase64, title, caption, address, latitude, longitude, "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                                    }
+
+                                    asyncTask.execute(myTaskParams);
+
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
                             }
-
-                            asyncTask.execute(myTaskParams);
-
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
                         }
-                    }
+                    });
+                    asyncTaskConection.execute();
+
                     seleccion = 0;
                 }
             }
@@ -444,7 +453,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        seleccion=0;
+                        seleccion = 0;
                     }
                 })
                 .setCancelable(false)

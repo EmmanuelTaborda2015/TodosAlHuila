@@ -68,8 +68,6 @@ public class Inicio extends AppCompatActivity implements NetworkStateReceiver.Ne
 
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 
-        connetion.setVisibility(View.GONE);
-
         final WS_ValidarConexionGoogle asyncTask = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
             @Override
             public void processFinish(String output) {
@@ -80,6 +78,8 @@ public class Inicio extends AppCompatActivity implements NetworkStateReceiver.Ne
             }
         });
         asyncTask.execute();
+
+        connetion.setVisibility(View.GONE);
 
 
         this.autoImageIndicatorView = (ImageIndicatorView) findViewById(R.id.indicate_view);

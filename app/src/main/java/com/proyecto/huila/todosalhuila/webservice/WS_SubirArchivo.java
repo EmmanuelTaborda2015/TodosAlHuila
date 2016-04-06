@@ -51,8 +51,8 @@ public class WS_SubirArchivo extends AsyncTask<String, Void, String> {
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
-            InputStream is = entity.getContent();
-            Log.v("resultado", is.toString());
+            //InputStream is = entity.getContent();
+            //Log.v("resultado", is.toString());
 
         } catch (Exception e) {
             Log.e("log_tag", "Error in http connection " + e.toString());

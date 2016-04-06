@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:orientation="vertical"
             android:layout_marginRight="5dip">
 
          <!--   <com.proyecto.huila.todosalhuila.galeria.CircleImageView
@@ -75,6 +76,7 @@
             android:paddingRight="16dp"
             android:fontFamily="sans-serif-thin"
             android:textStyle="normal"
+            android:shadowDx="3" android:shadowDy="2" android:shadowRadius="1.8"
             android:layout_marginBottom="5dp"
             android:layout_below="@+id/fecha"
             android:layout_toRightOf="@+id/thumbnail"

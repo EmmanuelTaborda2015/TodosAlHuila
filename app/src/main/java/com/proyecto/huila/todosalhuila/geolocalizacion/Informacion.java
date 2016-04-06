@@ -80,8 +80,6 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
 
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 
-        connetion.setVisibility(View.GONE);
-
         final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
             @Override
             public void processFinish(String con) {
@@ -93,6 +91,8 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
         });
         asyncTaskConection.execute();
 
+        connetion.setVisibility(View.GONE);
+
         networkStateReceiver = new NetworkStateReceiver();
         networkStateReceiver.addListener(this);
         this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
@@ -100,6 +100,13 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
 
         final Intent intent = getIntent();
         this.pyme = intent.getStringExtra("datos");
+        boolean login = intent.getBooleanExtra("login", false);
+
+        RelativeLayout toolbar2 = (RelativeLayout) findViewById(R.id.toolbar2);
+
+        if(!login){
+            toolbar2.setVisibility(View.GONE);
+        }
 
         circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
 

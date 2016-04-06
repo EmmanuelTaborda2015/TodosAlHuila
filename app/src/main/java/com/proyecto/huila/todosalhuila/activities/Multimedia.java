@@ -514,6 +514,7 @@ public class Multimedia extends Activity {
                 i.putExtra(INTENT_PATH, pathFile);
                 i.putExtra(INTENT_TYPE_FILE, MEDIA_TYPE_VIDEO);
                 startActivity(i);
+                finish();
 
 
             } else {
@@ -595,7 +596,7 @@ public class Multimedia extends Activity {
         mediaRecorder.setOutputFile(getOutputMediaFile(MEDIA_TYPE_VIDEO).toString());
 
         mediaRecorder.setMaxDuration(MAX_VIDEO_LENGTH); // Set max duration 15 sec.
-        mediaRecorder.setMaxFileSize(CameraConfig.MAX_FILE_SIZE_RECORD); // Set max file size 50M
+        mediaRecorder.setMaxFileSize(CameraConfig.MAX_FILE_SIZE_RECORD);
 
         try {
             mediaRecorder.prepare();
@@ -728,6 +729,7 @@ public class Multimedia extends Activity {
                     i.putExtra(INTENT_PATH, pathFile);
                     i.putExtra(INTENT_TYPE_FILE, MEDIA_TYPE_VIDEO);
                     startActivity(i);
+                    finish();
                 }
             }
         });

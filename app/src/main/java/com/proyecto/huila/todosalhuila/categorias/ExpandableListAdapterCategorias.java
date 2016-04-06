@@ -147,7 +147,7 @@ public class ExpandableListAdapterCategorias extends BaseExpandableListAdapter i
 
             if (isExpanded) {
                 holder.imageviewIndicator.setImageResource(R.drawable.des);
-                v.setBackgroundColor(v.getResources().getColor(R.color.azul2));
+                v.setBackgroundColor(v.getResources().getColor(R.color.black));
             } else {
                 holder.imageviewIndicator.setImageResource(R.drawable.con);
             }

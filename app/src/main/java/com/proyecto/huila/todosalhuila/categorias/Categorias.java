@@ -148,6 +148,7 @@ public class Categorias extends AppCompatActivity implements NetworkStateReceive
                                 Intent i = new Intent(Categorias.this, Subcategorias.class);
                                 i.putExtra("subcategoria", itemclicked);
                                 startActivity(i);
+                                finish();
                             }
                         }
                     });

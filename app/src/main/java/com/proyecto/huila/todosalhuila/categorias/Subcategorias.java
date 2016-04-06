@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -85,7 +84,7 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lugares);
+        setContentView(R.layout.subcategorias_group_item);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -273,6 +272,7 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
                                                 Intent i = new Intent(Subcategorias.this, Informacion.class);
                                                 try {
                                                     i.putExtra("datos", items.get(posicionFinal.get(position)).toString());
+                                                    i.putExtra("login",true);
                                                     startActivity(i);
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
@@ -309,6 +309,8 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(Subcategorias.this, Categorias.class);
+                        startActivity(i);
                         finish();
                     }
                 })

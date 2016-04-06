@@ -408,6 +408,7 @@ public class Geolocalizacion extends AppCompatActivity
                                                 seleccion = 0;
                                                 Intent i = new Intent(Geolocalizacion.this, Informacion.class);
                                                 i.putExtra("datos", items.get(mHashMap.get(marker)).toString());
+                                                i.putExtra("login",login);
                                                 startActivity(i);
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
@@ -553,9 +554,7 @@ public class Geolocalizacion extends AppCompatActivity
 
     public void ubicacionEspecifica() {
         LatLng huila = new LatLng(2.92504, -75.2897);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(huila));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(huila, 12));
-        //mMap.setMyLocationEnabled(true);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(huila, 12));
         mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 

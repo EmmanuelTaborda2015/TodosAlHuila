@@ -3,7 +3,6 @@ package com.proyecto.huila.todosalhuila.categorias;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,7 @@ public class AdaptadorSubcategorias extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.image_list_item, null);
+            convertView = layoutInflater.inflate(R.layout.subcategorias_image_list_item, null);
             holder = new ViewHolder();
             holder.headlineView = (TextView) convertView.findViewById(R.id.txtTitle);
             holder.reporterNameView = (TextView) convertView.findViewById(R.id.txtDescription);

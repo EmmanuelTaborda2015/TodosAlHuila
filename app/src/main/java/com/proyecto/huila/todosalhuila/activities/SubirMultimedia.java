@@ -194,12 +194,20 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
                                     String caption = java.net.URLEncoder.encode(String.valueOf(descripcion.getText()), "utf-8");
 
                                     if (contador == 0) {
-                                        myTaskParams = new String[]{ImageBase64, title, caption, "", "", "", "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                                        if(type==1){
+                                            myTaskParams = new String[]{ImageBase64, title, caption, "", "", "", "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                                        }else if(type==2){
+                                            myTaskParams = new String[]{ImageBase64, title, caption, "", "", "", "uploadvideo", new Login().usuarioD, new Login().contrasenaD};
+                                        }
                                     } else {
                                         String address = java.net.URLEncoder.encode(String.valueOf(lugar.getText()), "utf-8");
                                         String latitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLatitude()), "utf-8");
                                         String longitude = java.net.URLEncoder.encode(String.valueOf(mCurrentLocation.getLongitude()), "utf-8");
-                                        myTaskParams = new String[]{ImageBase64, title, caption, address, latitude, longitude, "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                                        if(type==1){
+                                            myTaskParams = new String[]{ImageBase64, title, caption, address, latitude, longitude, "uploadfile", new Login().usuarioD, new Login().contrasenaD};
+                                        }else if(type==2){
+                                            myTaskParams = new String[]{ImageBase64, title, caption, address, latitude, longitude, "uploadvideo", new Login().usuarioD, new Login().contrasenaD};
+                                        }
                                     }
 
                                     asyncTask.execute(myTaskParams);
@@ -312,7 +320,6 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.v("Coorde", "aqui");
         if (contador == 0) {
             mCurrentLocation = location;
             mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());

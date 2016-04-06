@@ -4,7 +4,8 @@
     android:layout_height="fill_parent"
 	android:id="@+id/action0"
     android:orientation="vertical"
-    android:background="@color/azul1"
+    android:background="@color/white"
+
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -55,8 +56,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar2"
         android:groupIndicator="@null"
-	    android:background="@drawable/fondo5"
-		android:headerDividersEnabled="false"
+        android:headerDividersEnabled="false"
 		android:smoothScrollbar="false">
  	</ExpandableListView>
 

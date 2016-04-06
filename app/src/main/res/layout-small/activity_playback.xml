@@ -1,134 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/azul2"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+        <RelativeLayout
+            android:id="@+id/conexion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:padding="5dp"
+                android:src="@drawable/conexion" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Sin conexión a internet"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
-        android:id="@+id/RelativeLayout01"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/LinearLayout02"
+        <VideoView
+            android:id="@+id/vv_playback"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"></VideoView>
+
+        <ImageView
+            android:id="@+id/im_playback"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/azul1"
-            android:padding="20dp"
-            android:paddingBottom="20dp">
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="true" ></ImageView>
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/LinearLayout01"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/azul1"
-            android:padding="20dp"
-            android:paddingBottom="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/sf_textview_titulo"
-                android:text="Título"/>
-
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sf_edittex_titulo" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/sf_textview_descripcion"
-                android:text="Descripción"/>
-
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sf_editText_descripcion" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Button
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Subir"
-                        android:id="@+id/sf_button_cargar"
-                        android:layout_alignParentBottom="true"
-                        android:layout_toLeftOf="@+id/sf_button_cancelar"
-                        android:layout_toStartOf="@+id/sf_button_cancelar" />
-
-                    <Button
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Cancelar"
-                        android:id="@+id/sf_button_cancelar"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
     </RelativeLayout>
 
 
-    <VideoView android:id="@+id/vv_playback"
-        android:layout_width="fill_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_height="fill_parent">
-    </VideoView>
-
-    <ImageView android:id="@+id/im_playback"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_alignParentBottom="true">
-    </ImageView>
-
-    <ImageView android:id="@+id/cargar_plaback"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/cargar"
-        android:layout_below="@+id/atras_plaback"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="58dp" />
-
-    <ImageView android:id="@+id/atras_plaback"
-        android:layout_width="38dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:src="@drawable/atras"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-</RelativeLayout>
+</LinearLayout>

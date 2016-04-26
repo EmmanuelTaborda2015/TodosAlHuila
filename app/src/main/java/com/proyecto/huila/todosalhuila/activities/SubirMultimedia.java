@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -31,21 +32,32 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.proyecto.huila.todosalhuila.Login;
+import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
+import com.proyecto.huila.todosalhuila.login.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.webservice.WS_SubirArchivo;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -122,13 +134,29 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_subir_multimedia);
 
+        this.setFinishOnTouchOutside(false);
+
         ButterKnife.bind(this);
 
         final WS_SubirArchivo asyncTask = new WS_SubirArchivo(new WS_SubirArchivo.AsyncResponse() {
 
             @Override
             public void processFinish(String output) {
+
+                Log.v("tama", output);
                 circuloProgreso.dismiss();
+                //AlertDialog.Builder dialogo1 = new AlertDialog.Builder(SubirMultimedia.this);
+                //dialogo1.setTitle("Importante");
+                //dialogo1.setMessage("¿ Acepta la ejecución de este programa en modo prueba ?");
+                //dialogo1.setCancelable(false);
+                //dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                //    public void onClick(DialogInterface dialogo1, int id) {
+
+                //    }
+                //});
+                //dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+                Toast.makeText(SubirMultimedia.this, "Se ha cargado correctamente el archivo multimedia.", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(SubirMultimedia.this, Multimedia.class);
                 startActivity(i);
                 finish();
@@ -161,6 +189,8 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(SubirMultimedia.this, Multimedia.class);
+                startActivity(i);
                 finish();
             }
         });
@@ -228,15 +258,22 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
 
     public String convertFileToString(String pathOnSdCard) {
 
+
         String strFile = null;
         File file = new File(pathOnSdCard);
+
         try {
+
             byte[] data = FileUtils.readFileToByteArray(file);//Convert any file, image or video into byte array
+
             strFile = Base64.encodeToString(data, Base64.DEFAULT);//Convert byte array into string
+
         } catch (IOException e) {
 
             e.printStackTrace();
         }
+
+
         return strFile;
     }
 

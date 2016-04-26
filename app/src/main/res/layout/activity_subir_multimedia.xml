@@ -39,6 +39,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:id="@+id/sf_textview_titulo"
                 android:text="Título"/>
 
@@ -51,6 +53,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:id="@+id/sf_textview_descripcion"
                 android:text="Descripción"/>
 
@@ -63,6 +67,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:id="@+id/sf_textview_lugar"
                 android:text="Lugar"/>
 
@@ -82,19 +88,36 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Cargar"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingTop="10dp"
+                        android:shadowColor="#A8A8A8"
+                        android:layout_marginRight="3dp"
                         android:id="@+id/sf_button_cargar"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@drawable/buttonselect"
                         android:layout_alignParentBottom="true"
                         android:layout_toLeftOf="@+id/sf_button_cancelar"
                         android:layout_toStartOf="@+id/sf_button_cancelar" />
 
                     <Button
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Cancelar"
                         android:id="@+id/sf_button_cancelar"
+                        android:textStyle="bold"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingTop="10dp"
+                        android:shadowColor="#A8A8A8"
+                        android:textColor="@color/white"
+                        android:background="@drawable/buttonselect"
                         android:layout_gravity="center_horizontal"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"

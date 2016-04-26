@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.proyecto.huila.indicador.LoadImageFromURL;
 import com.proyecto.huila.todosalhuila.R;
-import com.proyecto.huila.todosalhuila.galeria.CircleImageView;
 
 import java.util.ArrayList;
 
@@ -47,7 +46,7 @@ public class AdaptadorComentario extends BaseAdapter {
             holder = new ViewHolder();
             holder.headlineView = (TextView) convertView.findViewById(R.id.txtTitle);
             holder.reporterNameView = (TextView) convertView.findViewById(R.id.txtDescription);
-            holder.imageView = (CircleImageView) convertView.findViewById(R.id.profile_image);
+            //holder.imageView = (CircleImageView) convertView.findViewById(R.id.profile_image);
             convertView.setTag(holder);
 
         } else {

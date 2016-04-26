@@ -1,6 +1,5 @@
 package com.proyecto.huila.todosalhuila.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,11 +21,9 @@ import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
 import com.proyecto.huila.indicador.ImageIndicatorView;
-import com.proyecto.huila.todosalhuila.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
-import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 import butterknife.Bind;
@@ -207,6 +204,8 @@ public class PlaybackActivity extends AppCompatActivity implements NetworkStateR
                                         i.putExtra("INTENT_TYPE_FILE", type);
                                         i.putExtra("INTENT_PATH", path);
                                         startActivity(i);
+                                        finish();
+
                                 }
                             });
                         }

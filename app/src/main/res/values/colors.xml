@@ -19,12 +19,12 @@
     <item name="naranja1" type="color">#CC6600</item>
     <item name="naranja2" type="color">#CC6633</item>
     <item name="naranja3" type="color">#996633</item>
-    <item name="azul1" type="color">#00A8FF</item>
-    <item name="azul2" type="color">#0083FF</item>
-    <item name="azul3" type="color">#0033FF</item>
-    <item name="azul1_1" type="color">#880000</item>
-    <item name="azul2_1" type="color">#770000</item>
-    <item name="azul3_1" type="color">#440000</item>
+    <item name="azul1_1" type="color">#00A8FF</item>
+    <item name="azul2_2" type="color">#0083FF</item>
+    <item name="azul3_3" type="color">#0033FF</item>
+    <item name="azul1" type="color">#F0F0F0</item>
+    <item name="azul2" type="color">#993333</item>
+    <item name="azul3" type="color">#440000</item>
     <item name="white" type="color">#FFFFFF</item>
     <item name="gray" type="color">#FFD3D3D3</item>
 

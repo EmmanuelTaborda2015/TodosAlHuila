@@ -1,5 +1,6 @@
 package com.proyecto.huila.todosalhuila.crypto;
 
+import java.nio.CharBuffer;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Cipher;
@@ -11,12 +12,12 @@ public class MCrypt {
 
     static char[] HEX_CHARS = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
 
-    private String iv = "fedcba9876543210";//Dummy iv (CHANGE IT!)
+    private String iv = "b57994462c03a475";
     private IvParameterSpec ivspec;
     private SecretKeySpec keyspec;
     private Cipher cipher;
 
-    private String SecretKey = "0123456789abcdef";//Dummy secretKey (CHANGE IT!)
+    private String SecretKey = "8941bdd3e13e47fa";
 
     public MCrypt()
     {

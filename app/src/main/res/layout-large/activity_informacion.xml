@@ -21,41 +21,44 @@
             android:background="@color/azul2"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
-
         <RelativeLayout
             android:orientation="horizontal"
+            android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/azul2"
-            android:paddingBottom="5dp">
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
             <ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:src="@drawable/comentarios"
-                android:layout_marginLeft="10dp"
+                android:id="@+id/botonComentar"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/botonComentar" />
+                android:layout_toLeftOf="@+id/botonCalificar"
+                android:layout_toStartOf="@+id/botonCalificar"
+                android:layout_marginRight="53dp"
+                android:layout_marginEnd="53dp" />
 
             <ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:src="@drawable/startshape"
                 android:id="@+id/botonCalificar"
-                android:layout_marginLeft="141dp"
-                android:layout_marginStart="141dp"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/botonComentar"
-                android:layout_toEndOf="@+id/botonComentar" />
+                android:layout_toLeftOf="@+id/botonUbicar"
+                android:layout_toStartOf="@+id/botonUbicar"
+                android:layout_marginRight="47dp"
+                android:layout_marginEnd="47dp" />
 
             <ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/compartir"
-                android:id="@+id/botonCompartir"
+                android:src="@drawable/ubicar"
+                android:id="@+id/botonUbicar"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -63,20 +66,45 @@
             <ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
-                android:src="@drawable/ubicar"
-                android:id="@+id/botonUbicar"
+                android:src="@drawable/atras"
+                android:id="@+id/botonAtras"
                 android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/botonCompartir"
-                android:layout_toStartOf="@+id/botonCompartir"
-                android:layout_marginRight="129dp"
-                android:layout_marginEnd="129dp" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp" />
         </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
 
+    <RelativeLayout
+        android:id="@+id/conexion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray">
 
-    <LinearLayout android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="match_parent">
-        <LinearLayout android:background="@color/azul1"  android:layout_height="350dp" android:layout_width="match_parent">
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:padding="5dp"
+            android:src="@drawable/conexion" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="Sin conexión a internet"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <LinearLayout android:orientation="vertical"  android:layout_height="fill_parent" android:layout_width="fill_parent">
+        <LinearLayout android:background="@color/azul1"  android:layout_height="350dp" android:layout_width="fill_parent">
 
             <com.proyecto.huila.indicador.ImageIndicatorViewUrl
                 android:id="@+id/indicate_view"
@@ -107,7 +135,7 @@
 
                         <LinearLayout android:id="@+id/tab1"
                             android:orientation="vertical"
-                            android:padding="10dp"
+                            android:paddingTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
 
@@ -117,11 +145,10 @@
                                 android:id="@+id/scrollView" >
 
                                 <TextView android:id="@+id/textViewtab1"
-                                    android:text=""
+                                    android:textColor="@color/black"
                                     android:paddingLeft="15dp"
                                     android:paddingRight="15dp"
                                     android:paddingBottom="15dp"
-                                    android:textColor="@color/black"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                             </ScrollView>
@@ -130,7 +157,7 @@
 
                         <LinearLayout android:id="@+id/tab2"
                             android:orientation="vertical"
-                            android:padding="10dp"
+                            android:paddingTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
 

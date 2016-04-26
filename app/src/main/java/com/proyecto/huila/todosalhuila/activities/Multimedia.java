@@ -49,6 +49,7 @@ import android.widget.Toast;
 import com.proyecto.huila.todosalhuila.CameraConfig;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.custom.CameraPreview;
+import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -124,12 +125,14 @@ public class Multimedia extends Activity {
     public static final String INTENT_TYPE_FILE = "INTENT_TYPE_FILE";
 
     private static final int MAX_VIDEO_LENGTH = 15 * 1000;
-    private static final int MAX_VIDEO_LENGTH_SEG = 15;
+    private static final int MAX_VIDEO_LENGTH_SEG = 16;
 
     private static String pathFile;
 
     private int quality = CamcorderProfile.QUALITY_480P;
 
+
+    private boolean ciclo = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,6 +145,8 @@ public class Multimedia extends Activity {
         ButterKnife.bind(this);
 
         initialize();
+
+        ciclo = false;
 
         captureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +170,8 @@ public class Multimedia extends Activity {
                 FileOutputStream fos = new FileOutputStream(pictureFile);
                 fos.write(data);
                 fos.close();
+
+                ciclo = true;
 
                 Intent i = new Intent(Multimedia.this, PlaybackActivity.class);
                 i.putExtra(INTENT_PATH, pathFile);
@@ -215,7 +222,7 @@ public class Multimedia extends Activity {
     public void onResume() {
         super.onResume();
         if (!hasCamera(myContext)) {
-            Toast toast = Toast.makeText(myContext, "Sorry, your phone does not have a camera!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(myContext, "Lo sentimos, tu dispositivo no cuenta con una cámara!", Toast.LENGTH_LONG);
             toast.show();
             finish();
         }
@@ -233,7 +240,7 @@ public class Multimedia extends Activity {
                 switchCameraListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(Multimedia.this, "No front facing camera found.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Multimedia.this, "Lo sentimos, tu dispositivo no cuenta con una cámara frontal!", Toast.LENGTH_LONG).show();
                     }
                 };
 
@@ -330,6 +337,7 @@ public class Multimedia extends Activity {
                 android.R.layout.simple_list_item_1, list);
         listOfQualities.setAdapter(adapter);
 
+
         listOfQualities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -420,7 +428,7 @@ public class Multimedia extends Activity {
                     releaseCamera();
                     chooseCamera();
                 } else {
-                    Toast toast = Toast.makeText(myContext, "Sorry, your phone has only one camera!", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(myContext, "Lo sentimos, tu dispositivo no cuenta con una cámara frontal!", Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
@@ -484,6 +492,17 @@ public class Multimedia extends Activity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (ciclo==false) {
+            Intent i = new Intent(Multimedia.this, InicioLogin.class);
+            startActivity(i);
+            finish();
+        }
+    }
+
     private boolean hasCamera(Context context) {
         // check if the device has camera
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
@@ -509,6 +528,7 @@ public class Multimedia extends Activity {
 
                 recording = false;
 
+                ciclo = true;
 
                 Intent i = new Intent(Multimedia.this, PlaybackActivity.class);
                 i.putExtra(INTENT_PATH, pathFile);
@@ -596,7 +616,7 @@ public class Multimedia extends Activity {
         mediaRecorder.setOutputFile(getOutputMediaFile(MEDIA_TYPE_VIDEO).toString());
 
         mediaRecorder.setMaxDuration(MAX_VIDEO_LENGTH); // Set max duration 15 sec.
-        mediaRecorder.setMaxFileSize(CameraConfig.MAX_FILE_SIZE_RECORD);
+        //mediaRecorder.setMaxFileSize(CameraConfig.MAX_FILE_SIZE_RECORD);
 
         try {
             mediaRecorder.prepare();

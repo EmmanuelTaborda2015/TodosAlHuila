@@ -1,8 +1,11 @@
 package com.proyecto.huila.todosalhuila.webservice;
 
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 
+
+import com.proyecto.huila.todosalhuila.activities.SubirMultimedia;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -13,7 +16,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class WS_SubirArchivo extends AsyncTask<String, Void, String> {
@@ -44,22 +50,44 @@ public class WS_SubirArchivo extends AsyncTask<String, Void, String> {
         nameValuePairs.add(new BasicNameValuePair("latitude", params[4]));
         nameValuePairs.add(new BasicNameValuePair("longitude", params[5]));
 
+            String result = null;
+
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new
-                    HttpPost(url);
+            HttpPost httppost = new HttpPost(url);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
-            //InputStream is = entity.getContent();
-            //Log.v("resultado", is.toString());
+            InputStream is = entity.getContent();
+            result = convertStreamToString(is);
 
         } catch (Exception e) {
             Log.e("log_tag", "Error in http connection " + e.toString());
         }
 
-        return "true";
+        return result;
     }
+
+    public String convertStreamToString(InputStream is) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+        } catch (IOException e) {
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+            }
+        }
+
+        return sb.toString();
+    }
+
 
     @Override
     protected void onPostExecute(String result) {

@@ -78,7 +78,7 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
     }
 
     private void initView() {
-        final Integer[] resArray = new Integer[]{R.drawable.image2, R.drawable.image1, R.drawable.image3, R.drawable.image4};
+        final Integer[] resArray = new Integer[]{R.drawable.imagen1, R.drawable.imagen2, R.drawable.imagen3, R.drawable.imagen4, R.drawable.imagen5, R.drawable.imagen6};
 
         this.autoImageIndicatorView.setupLayoutByDrawable(resArray);
         this.autoImageIndicatorView.show();

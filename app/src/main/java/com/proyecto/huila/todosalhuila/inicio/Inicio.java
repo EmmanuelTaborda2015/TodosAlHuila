@@ -1,42 +1,28 @@
 package com.proyecto.huila.todosalhuila.inicio;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.proyecto.huila.indicador.AutoPlayManager;
 import com.proyecto.huila.indicador.ImageIndicatorView;
-import com.proyecto.huila.todosalhuila.Login;
+import com.proyecto.huila.todosalhuila.login.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
-import com.proyecto.huila.todosalhuila.webservice.WS_ConsultarCalificacion;
-import com.proyecto.huila.todosalhuila.webservice.WS_ConsultarComentario;
-import com.proyecto.huila.todosalhuila.webservice.WS_Login;
-import com.proyecto.huila.todosalhuila.webservice.WS_RegistrarCalificacion;
-import com.proyecto.huila.todosalhuila.webservice.WS_RegistrarComentario;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 
-public class Inicio extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
+public class Inicio extends AppCompatActivity {
 
     private NetworkStateReceiver networkStateReceiver;
 
@@ -46,14 +32,7 @@ public class Inicio extends AppCompatActivity implements NetworkStateReceiver.Ne
 
     int seleccion =0;
 
-    public void networkAvailable() {
-        connetion.setVisibility(View.GONE);
-    }
 
-    @Override
-    public void networkUnavailable() {
-        connetion.setVisibility(View.VISIBLE);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,14 +65,12 @@ public class Inicio extends AppCompatActivity implements NetworkStateReceiver.Ne
 
         initView();
 
-        networkStateReceiver = new NetworkStateReceiver();
-        networkStateReceiver.addListener(this);
-        this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+
 
     }
 
     private void initView() {
-        final Integer[] resArray = new Integer[]{R.drawable.image2, R.drawable.image1, R.drawable.image3, R.drawable.image4};
+        final Integer[] resArray = new Integer[]{R.drawable.imagen1, R.drawable.imagen2, R.drawable.imagen3, R.drawable.imagen4, R.drawable.imagen5, R.drawable.imagen6};
 
         this.autoImageIndicatorView.setupLayoutByDrawable(resArray);
         this.autoImageIndicatorView.show();

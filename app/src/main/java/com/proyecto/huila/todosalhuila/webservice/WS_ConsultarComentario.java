@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class WS_ConsultarComentario extends AsyncTask<String, Void, String> {
 
-    String url = "http://52.36.201.248/ws_todosalhuila/turista/aplicativo/getcomentario/";
+    String url = "http://54.209.151.146/ws_todosalhuila/turista/aplicativo/getcomentario/";
 
     public AsyncResponse delegate = null;
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TodosAlHuila</string>
+    <string name="app_name">Todos Al Huila</string>
     <string name="action_settings">Settings</string>
     <string name="botonBienvenida">Ingresar</string>
     <string name="title_activity_inicio">Inicio</string>

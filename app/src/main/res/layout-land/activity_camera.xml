@@ -17,7 +17,8 @@
         android:text="720p"
         android:textAllCaps="false"
         android:id="@+id/buttonQuality"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:visibility="gone" />
 
     <Chronometer
         android:id="@+id/textChrono"

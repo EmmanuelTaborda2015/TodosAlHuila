@@ -9,10 +9,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,19 +28,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.proyecto.huila.todosalhuila.Login;
+import com.proyecto.huila.todosalhuila.login.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
-import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.webservice.WS_ConsultarCalificacion;
 import com.proyecto.huila.todosalhuila.webservice.WS_RegistrarCalificacion;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 
 public class Calificar extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
@@ -133,11 +130,11 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
                         ratingBar2.setRating(stars);
 
                         LayerDrawable stars3 = (LayerDrawable) ratingBar2.getProgressDrawable();
-                        stars3.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+                        stars3.getDrawable(2).setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.azul2), PorterDuff.Mode.SRC_ATOP));
                         stars3.getDrawable(1).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
                         stars3.getDrawable(0).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
-                        if (!cal.get("mical").toString().equals(null)) {
+                        if (!cal.get("mical").toString().equals(null) && !cal.get("mical").toString().equals("null")) {
                             float stars2 = Float.parseFloat(cal.get("mical").toString());
 
                             BigDecimal a2 = new BigDecimal(stars2);
@@ -146,9 +143,11 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
                             ratingBar.setRating(stars2);
 
                             LayerDrawable stars4 = (LayerDrawable) ratingBar.getProgressDrawable();
-                            stars4.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+                            stars4.getDrawable(2).setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.azul2), PorterDuff.Mode.SRC_ATOP));
                             stars4.getDrawable(1).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
                             stars4.getDrawable(0).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                        }else{
+                            
                         }
 
                     }
@@ -229,9 +228,8 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
                 findViewById(R.id.ratingBar);
 
         LayerDrawable stars2 = (LayerDrawable) ratingBar.getProgressDrawable();
-        stars2.getDrawable(2).
+        stars2.getDrawable(2).setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.azul2), PorterDuff.Mode.SRC_ATOP));
 
-                setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
 
         stars2.getDrawable(0).
 
@@ -253,7 +251,7 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
 
                                                  RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
                                                  LayerDrawable stars2 = (LayerDrawable) ratingBar.getProgressDrawable();
-                                                 stars2.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+                                                 stars2.getDrawable(2).setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.azul2), PorterDuff.Mode.SRC_ATOP));
                                                  stars2.getDrawable(0).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
                                              }

@@ -11,7 +11,6 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,10 +21,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.proyecto.huila.todosalhuila.Login;
+import com.proyecto.huila.todosalhuila.login.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
-import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.webservice.WS_ConsultarComentario;
 import com.proyecto.huila.todosalhuila.webservice.WS_RegistrarComentario;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
@@ -34,8 +32,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class Comentarios extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {

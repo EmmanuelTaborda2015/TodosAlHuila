@@ -1,39 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-android:id="@+id/formularioBienvenida"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/azul1">
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
-<ImageView
-    android:layout_width="480dp"
-    android:layout_height="300dp"
-    android:id="@+id/imageView"
-    android:src="@drawable/logohuila3"
-    android:layout_marginBottom="80dp"
-    android:layout_above="@+id/botonBienvenida"
-    android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:id="@+id/LinearLayout02"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/azul1"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:paddingBottom="20dp">
 
-<Button
-    android:id="@+id/botonBienvenida"
-    android:text="@string/botonBienvenida"
+        </LinearLayout>
 
-    android:textColor="#FFFFFFFF"
-    android:textSize="25sp"
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/buttonselect"
-    android:shadowColor="#A8A8A8"
-    android:paddingLeft="70dp"
-    android:paddingRight="70dp"
-    android:paddingTop="15dp"
-    android:paddingBottom="15dp"
-    android:gravity="center_horizontal"
-    android:layout_marginBottom="248dp"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/azul1"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:paddingBottom="20dp"
+            android:layout_alignParentBottom="true">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:src="@drawable/diseologo6"
+                android:layout_marginBottom="15dp"/>
+
+            <EditText
+                android:id="@+id/lg_edittext_user"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:drawableLeft="@drawable/loginusuario"
+                android:hint="Usuario"
+                android:background="@drawable/edittext"
+                android:paddingLeft="5dp"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/lg_edittext_password"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:drawableLeft="@drawable/lockusuario"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:background="@drawable/edittext"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:password="true"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:id="@+id/botonBienvenida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/buttonselect"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:paddingTop="10dp"
+                    android:shadowColor="#A8A8A8"
+                    android:text="@string/botonBienvenida"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </RelativeLayout>
+
+
+
+
+
+
+
+
+
 

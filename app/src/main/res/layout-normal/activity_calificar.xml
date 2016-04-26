@@ -58,7 +58,7 @@
         android:rating="0"
         android:paddingTop="5dp"
         android:paddingLeft="3dp"
-        android:progressTint="#f9f907"
+        android:progressTint="#FF9900"
         android:progressBackgroundTint="#ffffff"
         android:backgroundTintMode="src_atop"
         android:layout_alignBottom="@+id/calificar_boton1"
@@ -91,8 +91,8 @@
         android:background="@drawable/imageview"
         android:layout_gravity="center"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/calificar_boton1"
-        android:layout_alignEnd="@+id/calificar_boton1" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/calificar_boton1"
@@ -141,7 +141,7 @@
         android:paddingRight="5dp"
         android:textAlignment="center"
         android:id="@+id/calificar_label2"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_below="@+id/ratingBar2"
         android:layout_centerHorizontal="true" />
 

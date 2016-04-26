@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.proyecto.huila.todosalhuila">
+    package="com.proyecto.huila.todosalhuila"
+   >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,11 +12,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <receiver android:name="com.proyecto.huila.todosalhuila.conexion.NetworkChangeReceiver" >
-        <intent-filter android:priority="100">
-            <action android:name="android.net.wifi.STATE_CHANGE" />
-        </intent-filter>
-    </receiver>
+
 
     <uses-feature android:name="android.hardware.microphone" />
 
@@ -30,9 +27,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Login"
+            android:name=".login.Login"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog">

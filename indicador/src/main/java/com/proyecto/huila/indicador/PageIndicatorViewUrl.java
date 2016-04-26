@@ -246,19 +246,19 @@ public class PageIndicatorViewUrl extends RelativeLayout {
                     titulo.setTextSize(20);
                     titulo.setTypeface(null, Typeface.BOLD);
                     titulo.setText(json.get("titulo").toString());
-                    titulo.setTextColor(Color.WHITE);
+                    titulo.setTextColor(Color.BLACK);
                     titulo.setGravity(Gravity.CENTER_HORIZONTAL);
                     titulo.setLayoutParams(llp);
 
                     final TextView compannia = new TextView(getContext());
                     compannia.setTextSize(15);
-                    compannia.setTextColor(Color.WHITE);
+                    compannia.setTextColor(Color.BLACK);
                     compannia.setText(json.get("compania").toString());
                     compannia.setLayoutParams(llp);
 
                     final TextView oferta = new TextView(getContext());
                     oferta.setTextSize(15);
-                    oferta.setTextColor(Color.WHITE);
+                    oferta.setTextColor(Color.BLACK);
                     oferta.setText(json.get("blog_entrada").toString());
                     oferta.setLayoutParams(llp);
 
@@ -281,7 +281,7 @@ public class PageIndicatorViewUrl extends RelativeLayout {
 
                     mWebView.loadDataWithBaseURL("about:blank", myFullString, "text/html", "utf-8", null);
 
-                    mWebView.setBackgroundColor(Color.parseColor("#00A8FF"));
+                    mWebView.setBackgroundColor(Color.parseColor("#F0F0F0"));
 
                     linearLayout.addView(titulo);
                     linearLayout.addView(compannia);

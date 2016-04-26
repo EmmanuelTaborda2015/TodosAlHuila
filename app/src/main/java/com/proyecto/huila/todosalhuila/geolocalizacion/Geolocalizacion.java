@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -42,7 +44,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.proyecto.huila.indicador.ImageIndicatorView;
-import com.proyecto.huila.todosalhuila.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
@@ -456,10 +457,22 @@ public class Geolocalizacion extends AppCompatActivity
                             checkLocationSettings();
                         } else if (id == R.id.action_llegarcaminando) {
                             if (selectMarker) {
-                                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=w");
-                                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                                mapIntent.setPackage("com.google.android.apps.maps");
-                                startActivity(mapIntent);
+
+                               if(isGoogleMapsInstalled() ){
+                                   String uri = "http://maps.google.com/maps?daddr="+ previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&dirflg=w";
+                                   Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                                   intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                                   startActivity(intent);
+                               }else{
+                                   sinGoogleMaps();
+                               }
+
+                                //Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=w");
+                                //Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                                //mapIntent.setPackage("com.google.android.apps.maps");
+                                //startActivity(mapIntent);
+
+
                             } else {
                                 new AlertDialog.Builder(Geolocalizacion.this)
                                         .setTitle("¿Cómo Llegar Caminando?")
@@ -474,10 +487,21 @@ public class Geolocalizacion extends AppCompatActivity
                             }
                         } else if (id == R.id.action_llegarconduciendo) {
                             if (selectMarker) {
-                                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=d");
-                                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                                mapIntent.setPackage("com.google.android.apps.maps");
-                                startActivity(mapIntent);
+
+                                if(isGoogleMapsInstalled() ){
+                                    String uri = "http://maps.google.com/maps?daddr="+ previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&dirflg=d";
+                                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                                    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                                    startActivity(intent);
+                                }else{
+                                    sinGoogleMaps();
+                                }
+
+
+                                //Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=d");
+                                //Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                                //mapIntent.setPackage("com.google.android.apps.maps");
+                                //startActivity(mapIntent);
                             } else {
                                 new AlertDialog.Builder(Geolocalizacion.this)
                                         .setTitle("¿Cómo Llegar Conduciendo?")
@@ -769,6 +793,64 @@ public class Geolocalizacion extends AppCompatActivity
                 })
                 .setCancelable(false)
                 .show();
+    }
+
+
+    public void sinGoogleMaps() {
+        new AlertDialog.Builder(this)
+                .setTitle("Función Deshabilitada")
+                .setMessage("Su dispositivo móvil no tiene instalada la aplicación Google Maps. \n ¿Desea instalarla?")
+                .setPositiveButton("Instalar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent a = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.apps.maps"));
+                        startActivity(a);
+                    }
+                })
+                .setNegativeButton("Cerrar",  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (login) {
+                            Intent i = new Intent(Geolocalizacion.this, InicioLogin.class);
+                            startActivity(i);
+                            finish();
+                        } else {
+                            Intent i = new Intent(Geolocalizacion.this, Inicio.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }
+                })
+                .show();
+    }
+
+    public boolean isGoogleMapsInstalled()
+    {
+        try
+        {
+            ApplicationInfo info = getPackageManager().getApplicationInfo("com.google.android.apps.maps", 0 );
+            return true;
+        }
+        catch(PackageManager.NameNotFoundException e)
+        {
+            return false;
+        }
+    }
+
+    public DialogInterface.OnClickListener getGoogleMapsListener()
+    {
+        return new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.apps.maps"));
+                startActivity(intent);
+
+                //Finish the activity so they can't circumvent the check
+                finish();
+            }
+        };
     }
 
 }

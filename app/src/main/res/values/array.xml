@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerItems">
+        <item>Seleccione la categoría</item>
+        <item>Transporte</item>
+        <item>Gastronomía</item>
+        <item>Hospedaje</item>
+        <item>Atractivos Turísticos</item>
+        <item>Bares</item>
+        <item>Comercio</item>
+    </string-array>
+
+    <string-array name="spinnerItems2">
+        <item>Todas las palabras</item>
+        <item>Algunas palabras</item>
+        <item>Palabras exactas</item>
+    </string-array>
+</resources>

@@ -147,7 +147,7 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
                             stars4.getDrawable(1).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
                             stars4.getDrawable(0).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
                         }else{
-                            
+
                         }
 
                     }

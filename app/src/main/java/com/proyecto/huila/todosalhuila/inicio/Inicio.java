@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 
 import com.proyecto.huila.indicador.AutoPlayManager;
 import com.proyecto.huila.indicador.ImageIndicatorView;
+import com.proyecto.huila.todosalhuila.directorio.Directorio;
 import com.proyecto.huila.todosalhuila.login.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
@@ -136,7 +137,13 @@ public class Inicio extends AppCompatActivity {
                             i.putExtra("login", false);
                             startActivity(i);
                             finish();
+                        }else if (id == R.id.action_directorio) {
+                            Intent i = new Intent(Inicio.this, Directorio.class);
+                            i.putExtra("login", false);
+                            startActivity(i);
+                            finish();
                         }
+
                         seleccion=0;
                     }
                 }

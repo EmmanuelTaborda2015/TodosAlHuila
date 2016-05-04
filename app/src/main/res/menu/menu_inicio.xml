@@ -25,12 +25,6 @@
         android:title="Salir"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/action_directorio"
-        android:icon="@drawable/list"
-        android:orderInCategory="400"
-        android:title="Directorio Sitios"
-        app:showAsAction="always" />
 
 
 </menu>

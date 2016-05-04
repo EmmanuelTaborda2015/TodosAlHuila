@@ -1,8 +1,10 @@
 package com.proyecto.huila.todosalhuila.directorio;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
@@ -26,20 +28,33 @@ import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 import com.proyecto.huila.todosalhuila.inicio.Inicio;
+import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
 import com.proyecto.huila.todosalhuila.login.Login;
 import com.proyecto.huila.todosalhuila.webservice.WS_Directorio;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Directorio extends AppCompatActivity {
+public class Directorio extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
 
     private NetworkStateReceiver networkStateReceiver;
 
-    private ImageIndicatorView autoImageIndicatorView;
+    public void networkAvailable() {
+        connetion.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void networkUnavailable() {
+        connetion.setVisibility(View.VISIBLE);
+    }
 
     private RelativeLayout connetion;
+
+    private ProgressDialog circuloProgreso;
+
+
 
     int seleccion = 0;
 
@@ -56,6 +71,11 @@ public class Directorio extends AppCompatActivity {
 
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 
+        networkStateReceiver = new NetworkStateReceiver();
+        networkStateReceiver.addListener(this);
+        this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+
+
         final WS_ValidarConexionGoogle asyncTask = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
             @Override
             public void processFinish(String output) {
@@ -71,7 +91,7 @@ public class Directorio extends AppCompatActivity {
 
         Button buscar = (Button) findViewById(R.id.buttonBuscarDirectorio);
         final EditText palabra = (EditText) findViewById(R.id.buscarPalabra);
-        Spinner categoria = (Spinner) findViewById(R.id.spinnerCategoriaDirectorio);
+        final Spinner categoria = (Spinner) findViewById(R.id.spinnerCategoriaDirectorio);
         Spinner tipo = (Spinner) findViewById(R.id.spinnerTipoBusquedaDirectorio);
 
         buscar.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +116,7 @@ public class Directorio extends AppCompatActivity {
                                 ingresePalabra();
                             } else {
 
+                                circuloProgreso = ProgressDialog.show(Directorio.this, "", "Espere por favor ...", true);
 
                                 final WS_Directorio asyncTask = new WS_Directorio(new WS_Directorio.AsyncResponse() {
 
@@ -108,27 +129,73 @@ public class Directorio extends AppCompatActivity {
                                             datos = new JSONObject(output);
                                             final JSONObject respuesta;
                                             respuesta = new JSONObject(datos.get("datos").toString());
-                                            Log.v("respue",respuesta.toString());
-                                            if ("correcto".equals(respuesta.get("estado").toString())) {
 
-                                                //Intent i = new Intent(Login.this, InicioLogin.class);
-                                                //startActivity(i);
-                                                //finish();
+                                            if ("correcto".equals(respuesta.get("estado").toString())) {
+                                                JSONArray items = respuesta.getJSONArray("directorio");
+                                                if(items.length() == 0){
+                                                    sinSitios();
+                                                }else{
+                                                    Intent i = new Intent(Directorio.this, Sitios.class);
+                                                    i.putExtra("sitios", output);
+                                                    startActivity(i);
+                                                    finish();
+                                                }
                                             } else {
-                                                //datosInvalidos();
+                                                datosInvalidos();
                                             }
 
-                                            //circuloProgreso.dismiss();
+                                            circuloProgreso.dismiss();
 
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
                                     }
                                 });
+
+                                int posicionCategoria = categoria.getSelectedItemPosition();
+                                String categoria = "";
+
+                                switch (posicionCategoria){
+                                    case 0:
+                                        categoria="";
+                                        break;
+                                    case 1:
+                                        categoria="2";
+                                        break;
+                                    case 2:
+                                        categoria="3";
+                                        break;
+                                    case 3:
+                                        categoria="4";
+                                        break;
+                                    case 56:
+                                        categoria="5";
+                                        break;
+                                    case 57:
+                                        categoria="6";
+                                        break;
+                                    case 58:
+                                        categoria="7";
+                                        break;
+                                }
+
+                                String palabraBusqueda = "";
+
+                                switch (posicionCategoria){
+                                    case 0:
+                                        palabraBusqueda="all";
+                                        break;
+                                    case 1:
+                                        palabraBusqueda="any";
+                                        break;
+                                    case 2:
+                                        palabraBusqueda="exact";
+                                        break;
+                                }
+
                                 String id_dispositivo = Settings.Secure.getString(getApplication().getContentResolver(), Settings.Secure.ANDROID_ID);
-                                String[] myTaskParams = {"neiva", "", ""};
+                                String[] myTaskParams = {palabra.getText().toString(), categoria, palabraBusqueda};
                                 asyncTask.execute(myTaskParams);
-                                // circuloProgreso = ProgressDialog.show(Login.this, "", "Espere por favor ...", true);
                             }
 
                         }
@@ -196,7 +263,7 @@ public class Directorio extends AppCompatActivity {
         if (id == R.id.action_salir) {
             salir();
         } else if (id == R.id.action_home) {
-            Intent i = new Intent(Directorio.this, Inicio.class);
+            Intent i = new Intent(Directorio.this, InicioLogin.class);
             startActivity(i);
             finish();
         }
@@ -243,6 +310,32 @@ public class Directorio extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Mensaje")
                 .setMessage("Debe ingresar una palabra para iniciar la búsqueda.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    public void datosInvalidos() {
+        new AlertDialog.Builder(this)
+                .setTitle("Mensaje")
+                .setMessage("Se ha presentado un error realizando la consulta, por favor intente nuevamente.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    public void sinSitios() {
+        new AlertDialog.Builder(this)
+                .setTitle("Mensaje")
+                .setMessage("No se encontro ningún sitio para los criterios ingresados.")
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

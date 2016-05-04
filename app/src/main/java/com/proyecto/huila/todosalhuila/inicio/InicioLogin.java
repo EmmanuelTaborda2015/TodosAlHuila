@@ -19,6 +19,7 @@ import com.proyecto.huila.todosalhuila.activities.Multimedia;
 import com.proyecto.huila.todosalhuila.categorias.Categorias;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
+import com.proyecto.huila.todosalhuila.directorio.Directorio;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 import com.proyecto.huila.todosalhuila.menu.Noticias;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
@@ -152,6 +153,11 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
                         } else if (id == R.id.action_geolocalizacion) {
                             Intent i = new Intent(InicioLogin.this, Geolocalizacion.class);
                             i.putExtra("login", true);
+                            startActivity(i);
+                            finish();
+                        }else if (id == R.id.action_directorio) {
+                            Intent i = new Intent(InicioLogin.this, Directorio.class);
+                            i.putExtra("login", false);
                             startActivity(i);
                             finish();
                         }

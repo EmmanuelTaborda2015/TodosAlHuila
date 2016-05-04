@@ -29,7 +29,7 @@ import java.util.List;
 
 public class WS_Login extends AsyncTask<String, Void, String> {
 
-    String url = "http://54.209.151.146/ws_todosalhuila/turista/aplicativo/login/";
+    String url = "http://52.20.189.85/ws_todosalhuila/turista/aplicativo/login/";
 
     public AsyncResponse delegate = null;
 

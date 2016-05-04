@@ -23,9 +23,18 @@ import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 
-public class Inicio extends AppCompatActivity {
+public class Inicio extends AppCompatActivity  implements NetworkStateReceiver.NetworkStateReceiverListener {
 
     private NetworkStateReceiver networkStateReceiver;
+
+    public void networkAvailable() {
+        connetion.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void networkUnavailable() {
+        connetion.setVisibility(View.VISIBLE);
+    }
 
     private ImageIndicatorView autoImageIndicatorView;
 
@@ -43,10 +52,15 @@ public class Inicio extends AppCompatActivity {
 
         this.setTitle("");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         connetion = (RelativeLayout) findViewById(R.id.conexion);
+
+        networkStateReceiver = new NetworkStateReceiver();
+        networkStateReceiver.addListener(this);
+        this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         final WS_ValidarConexionGoogle asyncTask = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
             @Override
@@ -134,11 +148,6 @@ public class Inicio extends AppCompatActivity {
                             startActivity(i);
                         } else if (id == R.id.action_geolocalizacion) {
                             Intent i = new Intent(Inicio.this, Geolocalizacion.class);
-                            i.putExtra("login", false);
-                            startActivity(i);
-                            finish();
-                        }else if (id == R.id.action_directorio) {
-                            Intent i = new Intent(Inicio.this, Directorio.class);
                             i.putExtra("login", false);
                             startActivity(i);
                             finish();

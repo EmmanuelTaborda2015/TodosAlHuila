@@ -92,11 +92,13 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
         Button buscar = (Button) findViewById(R.id.buttonBuscarDirectorio);
         final EditText palabra = (EditText) findViewById(R.id.buscarPalabra);
         final Spinner categoria = (Spinner) findViewById(R.id.spinnerCategoriaDirectorio);
-        Spinner tipo = (Spinner) findViewById(R.id.spinnerTipoBusquedaDirectorio);
+        final Spinner tipo = (Spinner) findViewById(R.id.spinnerTipoBusquedaDirectorio);
 
         buscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                circuloProgreso = ProgressDialog.show(Directorio.this, "", "Espere por favor ...", true);
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(getApplication().INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(palabra.getWindowToken(), 0);
@@ -108,46 +110,52 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
                         if (output == "false") {
                             if (new NetworkUtil().getConnectivityStatus(getApplicationContext()) == 0) {
                                 sinConexion();
+                                circuloProgreso.dismiss();
                             } else {
                                 conexionNoValida();
+                                circuloProgreso.dismiss();
                             }
                         } else {
                             if ("".equals(palabra.getText().toString())) {
                                 ingresePalabra();
+                                circuloProgreso.dismiss();
                             } else {
-
-                                circuloProgreso = ProgressDialog.show(Directorio.this, "", "Espere por favor ...", true);
 
                                 final WS_Directorio asyncTask = new WS_Directorio(new WS_Directorio.AsyncResponse() {
 
                                     @Override
                                     public void processFinish(String output) {
 
+                                        if (!output.equals("")) {
+                                            try {
+                                                final JSONObject datos;
+                                                datos = new JSONObject(output);
+                                                final JSONObject respuesta;
+                                                respuesta = new JSONObject(datos.get("datos").toString());
 
-                                        try {
-                                            final JSONObject datos;
-                                            datos = new JSONObject(output);
-                                            final JSONObject respuesta;
-                                            respuesta = new JSONObject(datos.get("datos").toString());
+                                                if ("correcto".equals(respuesta.get("estado").toString())) {
+                                                    JSONArray items = respuesta.getJSONArray("directorio");
+                                                    if (items.length() == 0) {
+                                                        sinSitios();
+                                                    } else {
+                                                        Intent i = new Intent(Directorio.this, Sitios.class);
+                                                        i.putExtra("sitios", output);
+                                                        startActivity(i);
+                                                    }
+                                                } else {
+                                                    datosInvalidos();
+                                                    circuloProgreso.dismiss();
 
-                                            if ("correcto".equals(respuesta.get("estado").toString())) {
-                                                JSONArray items = respuesta.getJSONArray("directorio");
-                                                if(items.length() == 0){
-                                                    sinSitios();
-                                                }else{
-                                                    Intent i = new Intent(Directorio.this, Sitios.class);
-                                                    i.putExtra("sitios", output);
-                                                    startActivity(i);
-                                                    finish();
                                                 }
-                                            } else {
-                                                datosInvalidos();
+
+                                                circuloProgreso.dismiss();
+
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
                                             }
-
+                                        }else{
+                                            datosInvalidos();
                                             circuloProgreso.dismiss();
-
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
                                         }
                                     }
                                 });
@@ -157,31 +165,32 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
 
                                 switch (posicionCategoria){
                                     case 0:
-                                        categoria="";
+                                        categoria="54";
                                         break;
                                     case 1:
-                                        categoria="2";
+                                        categoria="55";
                                         break;
                                     case 2:
-                                        categoria="3";
+                                        categoria="57";
                                         break;
                                     case 3:
-                                        categoria="4";
+                                        categoria="58";
                                         break;
-                                    case 56:
-                                        categoria="5";
+                                    case 4:
+                                        categoria="59";
                                         break;
-                                    case 57:
-                                        categoria="6";
+                                    case 5:
+                                        categoria="60";
                                         break;
-                                    case 58:
-                                        categoria="7";
+                                    case 6:
+                                        categoria="61";
                                         break;
                                 }
 
+                                int posicionPalabra = tipo.getSelectedItemPosition();
                                 String palabraBusqueda = "";
 
-                                switch (posicionCategoria){
+                                switch (posicionPalabra){
                                     case 0:
                                         palabraBusqueda="all";
                                         break;

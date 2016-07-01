@@ -39,6 +39,8 @@ public class WS_Directorio extends AsyncTask<String, Void, String> {
         ArrayList<NameValuePair> nameValuePairs = new
                 ArrayList<NameValuePair>();
 
+        String result = null;
+
         try {
             nameValuePairs.add(new BasicNameValuePair("word", URLEncoder.encode(params[0], "UTF-8")));
             nameValuePairs.add(new BasicNameValuePair("category", URLEncoder.encode(params[1], "UTF-8")));
@@ -47,18 +49,18 @@ public class WS_Directorio extends AsyncTask<String, Void, String> {
             e.printStackTrace();
         }
 
-        String result = null;
+
         try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new
                     HttpPost(url);
+
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
-
             HttpEntity entity = response.getEntity();
             InputStream is = entity.getContent();
             result = convertStreamToString(is);
-
+            Log.v("directorio", "Aquí6" + result.toString());
         } catch (Exception e) {
             Log.e("log_tag", "Error in http connection " + e.toString());
         }

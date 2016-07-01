@@ -271,7 +271,7 @@ public class GeolocalizacionPunto extends AppCompatActivity
                         imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento4));
                     }
                     break;
-                case "Gastronomia":
+                case "Gastronomía":
                     if (segmento5.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg5;

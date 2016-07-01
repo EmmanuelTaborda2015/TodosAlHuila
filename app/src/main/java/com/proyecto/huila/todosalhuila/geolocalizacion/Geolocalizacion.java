@@ -247,6 +247,7 @@ public class Geolocalizacion extends AppCompatActivity
         try {
             json = new JSONObject(output);
             final JSONArray items = json.getJSONArray("getInformacion");
+
             for (int i = 0; i < items.length(); i++) {
                 final JSONObject datos = new JSONObject(items.get(i).toString());
                 JSONObject ubicacion = new JSONObject(datos.get("ubicacion").toString());
@@ -282,7 +283,7 @@ public class Geolocalizacion extends AppCompatActivity
                             icon = R.drawable.seg4;
                         }
                         break;
-                    case "Gastronomia":
+                    case "Gastronomía":
                         if (segmento5.isChecked() == true) {
                             dibujar = true;
                             icon = R.drawable.seg5;

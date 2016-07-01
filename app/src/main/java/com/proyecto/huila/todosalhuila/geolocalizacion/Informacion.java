@@ -38,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 
 public class Informacion extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
@@ -170,6 +171,7 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
                     calificar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
                             if (seleccion == 0) {
                                 seleccion++;
                                 final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
@@ -186,16 +188,9 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
                                             seleccion = 0;
                                             Intent i = new Intent(Informacion.this, Calificar.class);
                                             if (output.length > 0) {
-                                                try {
-                                                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                                                    output[0].compress(Bitmap.CompressFormat.PNG, 50, bs);
-                                                    i.putExtra("byteArray", bs.toByteArray());
-                                                } catch (Exception e) {
-                                                    Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
-                                                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                                                    icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                                                    i.putExtra("byteArray", bs.toByteArray());
-                                                }
+                                                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                                output[0].compress(Bitmap.CompressFormat.WEBP, 50, bs);
+                                                i.putExtra("byteArray", bs.toByteArray());
                                             } else {
                                                 Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
                                                 ByteArrayOutputStream bs = new ByteArrayOutputStream();
@@ -258,7 +253,9 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
                 }
             });
 
-            if (!"".equals(datos.get("imagen").toString()) && !datos.get("imagen").toString().equals(null)) {
+            int resultado = datos.get("imagen").toString().indexOf("private");
+
+            if (!"".equals(datos.get("imagen").toString()) && !datos.get("imagen").toString().equals(null) && resultado == -1) {
                 Log.v("image", "http://" + datos.get("imagen").toString());
                 String[] myTaskParams = {"http://" + datos.get("imagen").toString()};
                 asyncTask.execute(myTaskParams);

@@ -15,9 +15,8 @@ android {
         applicationId "com.proyecto.huila.todosalhuila"
         minSdkVersion 14
         targetSdkVersion 23
-        versionName '1.1'
+        versionName '1.2'
         signingConfig signingConfigs.config
-        versionCode 2
     }
     buildTypes {
         release {
@@ -28,7 +27,7 @@ android {
             debuggable false
         }
         debug {
-            debuggable true
+            debuggable false
             zipAlignEnabled true
         }
     }
@@ -41,8 +40,8 @@ android {
             applicationId 'com.proyecto.huila.todosalhuila'
             signingConfig signingConfigs.config
             targetSdkVersion 23
-            versionCode 2
-            versionName '1.1'
+            versionCode 3
+            versionName '1.2'
         }
     }
 }

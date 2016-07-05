@@ -158,8 +158,8 @@ public class GeolocalizacionPunto extends AppCompatActivity
     ToggleButton segmento14;
     @Bind(R.id.gl_tooglebutton_segmento15)
     ToggleButton segmento15;
-    @Bind(R.id.gl_tooglebutton_segmento16)
-    ToggleButton segmento16;
+    //@Bind(R.id.gl_tooglebutton_segmento16)
+    //ToggleButton segmento16;
     @Bind(R.id.layout_categorias)
     HorizontalScrollView layoutcategorias;
     @Bind(R.id.imageview_punto)
@@ -185,7 +185,7 @@ public class GeolocalizacionPunto extends AppCompatActivity
         this.pyme = intent.getStringExtra("pyme");
 
 
-        buttons = new ToggleButton[]{segmento1, segmento2, segmento3, segmento4, segmento5, segmento6, segmento7, segmento8, segmento9, segmento10, segmento11, segmento12, segmento13, segmento14, segmento15, segmento16};
+        buttons = new ToggleButton[]{segmento1, segmento2, segmento3, segmento4, segmento5, segmento6, segmento7, segmento8, segmento9, segmento10, segmento11, segmento12, segmento13, segmento14, segmento15/*, segmento16*/};
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -348,13 +348,13 @@ public class GeolocalizacionPunto extends AppCompatActivity
                         imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento15));
                     }
                     break;
-                case "Municipios":
-                    if (segmento16.isChecked() == true) {
-                        dibujar = true;
-                        icon = R.drawable.seg16;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento16));
-                    }
-                    break;
+               // case "Municipios":
+                 //   if (segmento16.isChecked() == true) {
+                   //     dibujar = true;
+                     //   icon = R.drawable.seg16;
+                       // imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento16));
+                    //}
+                    //break;
             }
 
             if (dibujar == true) {

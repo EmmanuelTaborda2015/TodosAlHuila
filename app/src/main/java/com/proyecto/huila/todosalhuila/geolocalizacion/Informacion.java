@@ -283,6 +283,17 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
             if (!"null".equals(datos.get("site").toString())) {
                 datosContacto.setText(datosContacto.getText() + getResources().getString(R.string.tipodato4) + " " + datos.get("site").toString() + "\n");
             }
+
+            if("".equals(datosContacto.getText())){
+                datosContacto.setText("Sin Información Disponible \n\nDatos de Contacto de la Gobernación \n\nDirección: Neiva-Huila-Colombia - Carrera 4 Calle 8 esquina\n PBX (57 + 8) 8671300  -  Línea gratuita 01 8000 968 716 \n Horario de Atención: Lunes a Jueves de 7:00 a.m. a 11:30 a.m. y de 2:00 p.m. a 5:30 p.m.\n" +
+                        "Viernes de 7:00 a.m. a 11:30 a.m. y de 2:00 p.m. a 4:30 p.m.");
+            }
+
+            if("".equals(descripcion.getText())){
+                descripcion.setText("Sin Información Disponible \n\nNuestra Visión \n\nEn el año 2020 el Huila será el corazón verde de Colombia, pacífico, solidario y emprendedor; líder de una región dinámica donde florecen los sueños de todos");
+
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

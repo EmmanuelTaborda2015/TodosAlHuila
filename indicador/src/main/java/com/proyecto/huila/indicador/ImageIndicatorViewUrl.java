@@ -1,7 +1,9 @@
 package com.proyecto.huila.indicador;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
@@ -212,6 +214,7 @@ public class ImageIndicatorViewUrl extends RelativeLayout {
 	 * @param resList
 	 *            Drawable list
 	 */
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	public void setupLayoutByDrawable(final List<Bitmap> resList) {
 		if (resList == null)
 			throw new NullPointerException();
@@ -220,7 +223,17 @@ public class ImageIndicatorViewUrl extends RelativeLayout {
 		if (len > 0) {
 			for (int index = 0; index < len; index++) {
 				final ImageView pageItem = new ImageView(getContext());
-				pageItem.setScaleType(ImageView.ScaleType.FIT_XY);
+
+				if(android.os.Build.VERSION.SDK_INT > 15)
+				{
+					// for API above 15
+					pageItem.setBackground(getResources().getDrawable(R.drawable.imageviewind));
+				}
+				else
+				{
+					// for API below 15
+					pageItem.setBackgroundDrawable(getResources().getDrawable(R.drawable.imageviewind));
+				}
 				pageItem.setImageBitmap(resList.get(index));
 				addViewItem(pageItem);
 			}

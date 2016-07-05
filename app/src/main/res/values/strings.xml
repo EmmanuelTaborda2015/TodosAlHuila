@@ -56,6 +56,8 @@
     <string name="title_activity_verificacion_internet">VerificacionInternet</string>
     <string name="title_activity_comentarios">Comentarios</string>
     <string name="title_activity_multimedia">Multimedia</string>
+    <string name="title_activity_portal">Ir al Portal</string>
+
 
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>

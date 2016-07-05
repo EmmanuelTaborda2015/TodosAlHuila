@@ -157,8 +157,8 @@ public class Geolocalizacion extends AppCompatActivity
     ToggleButton segmento14;
     @Bind(R.id.gl_tooglebutton_segmento15)
     ToggleButton segmento15;
-    @Bind(R.id.gl_tooglebutton_segmento16)
-    ToggleButton segmento16;
+    //@Bind(R.id.gl_tooglebutton_segmento16)
+    //ToggleButton segmento16;
     @Bind(R.id.layout_punto)
     RelativeLayout layoutpunto;
 
@@ -178,7 +178,7 @@ public class Geolocalizacion extends AppCompatActivity
         final Intent intent = getIntent();
         this.login = intent.getBooleanExtra("login", false);
 
-        buttons = new ToggleButton[]{segmento1, segmento2, segmento3, segmento4, segmento5, segmento6, segmento7, segmento8, segmento9, segmento10, segmento11, segmento12, segmento13, segmento14, segmento15, segmento16};
+        buttons = new ToggleButton[]{segmento1, segmento2, segmento3, segmento4, segmento5, segmento6, segmento7, segmento8, segmento9, segmento10, segmento11, segmento12, segmento13, segmento14, segmento15 /*, segmento16*/};
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -307,7 +307,7 @@ public class Geolocalizacion extends AppCompatActivity
                             icon = R.drawable.seg8;
                         }
                         break;
-                    case "Sol y playa":
+                    case "Sol y Veraneo":
                         if (segmento9.isChecked() == true) {
                             dibujar = true;
                             icon = R.drawable.seg9;
@@ -334,7 +334,7 @@ public class Geolocalizacion extends AppCompatActivity
                     case "Hospedaje":
                         if (segmento13.isChecked() == true) {
                             dibujar = true;
-                            icon = R.drawable.seg12;
+                            icon = R.drawable.seg8;
                         }
                         break;
                     case "Recreación":
@@ -349,12 +349,12 @@ public class Geolocalizacion extends AppCompatActivity
                             icon = R.drawable.seg15;
                         }
                         break;
-                    case "Municipios":
-                        if (segmento16.isChecked() == true) {
-                            dibujar = true;
-                            icon = R.drawable.seg16;
-                        }
-                        break;
+                    //case "Municipios":
+                      //  if (segmento16.isChecked() == true) {
+                        //    dibujar = true;
+                          //  icon = R.drawable.seg16;
+                        //}
+                        //break;
                 }
 
                 if (dibujar == true) {

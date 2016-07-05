@@ -266,8 +266,7 @@ public class PageIndicatorViewUrl extends RelativeLayout {
                     WebSettings webSettings = mWebView.getSettings();
                     webSettings.setJavaScriptEnabled(true);
 
-                    String str = "Visitamos en el portal&nbsp;<a href=\"http://54.209.151.146/joomlaH/index.php/artesania\" target=\"_blank\">Todos al Huila</a>!!!!";
-                    str = "Bienvenidos al sitio de la MiPyME Empanas Do\u00f1a Juana\n<img src=\"/files/home.jpg\" >\n\n<iframe src=\"https://www.youtube.com/embed/unMhfS1eg6c\" frameborder=\"0\"></iframe>";
+                    String str = "";
                     str = json.get("contenido").toString();
 
                     ArrayList<String> myArray = new ArrayList<String>();

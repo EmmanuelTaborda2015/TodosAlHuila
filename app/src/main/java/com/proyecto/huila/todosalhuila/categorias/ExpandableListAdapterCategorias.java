@@ -90,7 +90,7 @@ public class ExpandableListAdapterCategorias extends BaseExpandableListAdapter i
             id_res = R.drawable.segmento4;
         }
         else if(group_id == 4){
-            group = " Gastronomia";
+            group = " Gastronomía";
             id_res = R.drawable.segmento5;
         }
         else if(group_id == 5){
@@ -106,7 +106,7 @@ public class ExpandableListAdapterCategorias extends BaseExpandableListAdapter i
             id_res = R.drawable.segmento8;
         }
         else if(group_id == 8){
-            group = "Sol y playa";
+            group = "Sol y Veraneo";
             id_res = R.drawable.segmento9;
         }
         else if(group_id == 9){
@@ -123,7 +123,7 @@ public class ExpandableListAdapterCategorias extends BaseExpandableListAdapter i
         }
         else if(group_id == 12){
             group = "Hospedaje";
-            id_res = R.drawable.segmento14;
+            id_res = R.drawable.segmento13;
         }
         else if(group_id == 13){
             group = "Recreación";

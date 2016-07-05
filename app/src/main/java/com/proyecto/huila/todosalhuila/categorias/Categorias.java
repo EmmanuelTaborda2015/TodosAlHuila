@@ -41,22 +41,52 @@ public class Categorias extends AppCompatActivity implements NetworkStateReceive
 
     final Context context = this;
     private static final String[][] data = {
-            {"Avistamiento de aves", "Avistamiento de ballenas", "Senderos", "Flora y fauna", "servicios ambientales"},
-            {"Ciclomontañismo", "Ciclismo", "Cicloturismo", "Downhill", "Parapente", "Espeleologia", "Rapel", "Torrentismo", "Escalada", "Senderismo - Trekking", "Caminata", "Carrera", "Pesca deportiva", "Cabalgata", "Natacion", "Lancha", "Moto de agua", "Kayak", "Canotaje - Rafting", "Naútica", "Carro"},
-            {"Haciendas", "Agroecoturismo", "Vivero agrofotrestal", "Agroindustria de Chocolate"},
-            {"Arquitectura y monumentos", "Parques y plazas", "Iglesias"},
-            {"Cafés", "Restaurantes", "Comida internacional", "Comida típica", "Comida rápida", "Banquetes", "Panadería, bizcochería y/o repostería", "Heladería"},
-            {"Fiestas y celebraciones", "Religioso", "Artesanias", "Museos", "Exposiciones itinerantes", "Teatro", "Danza", "Música", "Arqueologia", "Bibliotecas", "Gestor cultural", "Fundacion", "Educación turismo"},
-            {"Clínicas de cirugía estética", "Termalismo", "Talasoterapia", "Spas/Centros de bienestar", "Salones de belleza", "Productos de linea corporal", "Prestador de servicios de seg7"},
-            {"Seminarios", "Mesas de trabajo", "Diplomados", "Foros", "Simposios", "Congresos", "Encuentros", "Ferias de negocio", "Exposiciones", "Actividades de Networking", "Ruedas de negocio", "Recintos feriales", "Asesorias y consultorias", "Eventos sociales", "Centros de negocios"},
-            {"Desierto"},
-            {"Piscinas", "Ríos", "Balnearios", "Playas de arena oscura", "Playas de arena blanca", "Acuario natural"},
-            {"Bares", "Discotecas", "Karaokes", "Cervecerías"},
-            {"Comercio productos", "Centros comerciales", "Sitios de souvenirs/recuerdos", "Hipermercados", "Supermercados", "Miscelania", "Internet y papeleria", "Mercados campesinos", "Plazas de mercado", "Floristería", "Boutiques", "Zapaterías", "Desarrollo de software", "Diseño web", "Tecnología", "Publicidad", "Alquiler de equipos/sonido videobeam", "Operador turístico", "Guía Turístico", "Agencias de viajes", "administrador de empresas turistica y hotelera, asesorías"},
-            {"Hoteles", "Hostales", "Posadas", "Servicio de alojamiento familiar", "Fincas"},
-            {"Salas de cine", "Teatros", "Parques recreativos", "Parque de atracciones", "Parques temáticos", "Parques temáticos", "Escenarios deportivos", "Parador Turistico", "Estadero"},
-            {"Parqueaderos", "Empresas transportadoras"},
-            {"Acevedo", "Aipe", "Algeciras", "Altamira", "Baraya", "Campoalegre", "Colombia", "Elias", "El Agrado", "Garzón", "Gigante", "Guadalupe", "Hobo", "Íquira", "Isnos", "La Argentina", "La Plata", "Nátaga", "Neiva", "Oporapa", "Paicol", "Palermo", "Palestina", "Pital", "Pitalito", "Rivera", "Salado Blanco", "Santa María", "San Agustín", "Suaza", "Tarqui", "Tello", "Teruel", "Tesalia", "Timaná", "Villavieja", "Yaguará "}};
+
+            ////Naturaleza
+            //Ecoturismo
+            {"Avistamiento de aves", "Flora y fauna", "Parques Naturales", "Senderos", "Servicios Ambientales", "Otra Ecoturismo"},
+            //Turismo de aventura
+            {"Cabalgata", "Caminata", "Canotaje - Rafting", "Carrera", "Ciclismo", "Ciclomontañismo", "Cicloturismo", "Downhill", "Escalada", "Espeleologia", "Kayak", "Lancha", "Moto de Agua", "Natación", "Parapente", "Pesca deportiva", "Rapel", "Senderismo-Trekking", "Torrentismo", "Otra Aventura"},
+            //Turismo rural
+            {"Agroecoturismo", "Agroindustria del café", "Agroindustria del chocolate", "Agroindustria de la panela", "Haciendas", "Viveros", "Otra Rural"},
+
+            ////Cultural
+            //Atractivos turísticos
+            {"Arquitectura y monumentos", "Iglesias", "Parques y plazas", "Otra Turística"},
+            //Gastronomía
+            {"Cafés", "Comida internacional", "Comida rápida", "Comida típica", "Heladería", "Panadería, bizcochería, repostería", "Restaurantes", "Otra Gastronomía"},
+            //Cultura
+            {"Arqueología", "Artesanías", "Blibliotecas", "Danza", "Educación Turismo", "Exposiciones itinerantes", "Fiestas y celebraciones", "Fundación", "Gestor cultural", "Museos", "Música", "Religioso", "Teatro", "Otra Cultura"},
+
+            ////Salud y Bienestar
+            //Salud y bienestar
+            {"Clínicas de cirugía estética", "Gimnasio", "Prestador de Servicios de Salud", "Salones de belleza", "Spas/Centros de bienestar", "Termalismo/Talasoterapia", "Otra Salud"},
+
+            ////Negocios
+            //Turismo corporativo
+            {"Actividades de Networking", "Asesorias y consultorías", "Centros de negocios", "Congresos", "Diplomados", "Encuentros", "Eventos sociales", "Exposiciones", "Ferias de negocio", "Foros", "Mesas de trabajo", "Recintos feriales", "Ruedas de negocio", "Seminarios", "Simposios", "Otra Negocios"},
+
+            ////Sol y Veraneo
+            //Sol y Veraneo
+            {"Balnearios", "Piscinas", "Ríos", "Otra Sol"},
+
+            ////Nocturno
+            //Astronomía
+            {"Desierto", "Otra Astronomía"},
+            //Bares y Pubs
+            {"Bares", "Cervecerías", "Discotecas", "Karaokes", "Otra Nocturno"},
+
+            ////Entretenimiento
+            //Comercio
+            {"Agencias de viajes", "Boutiques", "Centros comerciales", "Empresas de Publicidad", "Empresas de Tecnología", "Floristerías", "Hipermercados", "Internet y papelerías", "Mercados campesinos", "Misceláneas", "Operador turístico", "Plazas de mercado", "Sitios de souvenirs/recuerdos", "Supermercados", "Venta de artesanías", "Zapaterías", "Otra Comercio"},
+            //Hospedaje
+            {"Fincas", "Hostales", "Hoteles", "Posadas", "Servicio de alojamiento familiar", "Otra Hospedaje"},
+            //Recreación
+            {"Casinos", "Escenarios deportivos", "Parque de atracciones", "Parques recreativos", "Parques temáticos", "Salas de cine", "Teatros", "Otra Recreación"},
+            //Transporte
+            {"Empresas Transportadoras", "Parqueaderos", "Otra Transporte"}}; //,
+
+            //{"Acevedo", "Aipe", "Algeciras", "Altamira", "Baraya", "Campoalegre", "Colombia", "Elias", "El Agrado", "Garzón", "Gigante", "Guadalupe", "Hobo", "Íquira", "Isnos", "La Argentina", "La Plata", "Nátaga", "Neiva", "Oporapa", "Paicol", "Palermo", "Palestina", "Pital", "Pitalito", "Rivera", "Salado Blanco", "Santa María", "San Agustín", "Suaza", "Tarqui", "Tello", "Teruel", "Tesalia", "Timaná", "Villavieja", "Yaguará "}};
 
     private ExpandableListView expandableListView;
 

@@ -15,7 +15,7 @@ android {
         applicationId "com.proyecto.huila.todosalhuila"
         minSdkVersion 14
         targetSdkVersion 23
-        versionName '1.2'
+        versionName '1.3'
         signingConfig signingConfigs.config
     }
     buildTypes {
@@ -40,8 +40,8 @@ android {
             applicationId 'com.proyecto.huila.todosalhuila'
             signingConfig signingConfigs.config
             targetSdkVersion 23
-            versionCode 3
-            versionName '1.2'
+            versionCode 5
+            versionName '1.4'
         }
     }
 }

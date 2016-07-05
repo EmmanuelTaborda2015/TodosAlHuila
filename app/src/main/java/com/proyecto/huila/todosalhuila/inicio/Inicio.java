@@ -4,12 +4,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 
 import com.proyecto.huila.indicador.AutoPlayManager;
@@ -20,6 +23,7 @@ import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
+import com.proyecto.huila.todosalhuila.portal.Portal;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 
@@ -151,6 +155,26 @@ public class Inicio extends AppCompatActivity  implements NetworkStateReceiver.N
                             i.putExtra("login", false);
                             startActivity(i);
                             finish();
+
+                        }else if (id == R.id.action_portal) {
+
+                            //Intent i = new Intent(Inicio.this, Portal.class);
+                            //i.putExtra("login", false);
+                            //startActivity(i);
+                            //finish();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Inicio.this);
+                            builder.setMessage("Se abrirá el Portal Web en el explorador de tu dispositivo móvil.").setNeutralButton("Aceptar",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                                            intent.setData(Uri.parse("http://52.20.189.85/joomlaH"));
+                                            startActivity(intent);
+                                        }
+                                    });
+                            // Create the AlertDialog object and return it
+                            builder.create().show();
+
                         }
 
                         seleccion=0;

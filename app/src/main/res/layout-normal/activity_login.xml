@@ -32,8 +32,9 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:src="@drawable/diseologo6"
+                android:layout_height="100dp"
+                android:background="@color/black"
+                android:src="@drawable/logofinal"
                 android:layout_marginBottom="15dp"/>
 
             <EditText

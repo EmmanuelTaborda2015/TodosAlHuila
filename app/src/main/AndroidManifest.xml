@@ -128,6 +128,10 @@
             android:name=".directorio.Sitios"
             android:label="@string/title_activity_diccionario"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".portal.Portal"
+            android:label="@string/title_activity_portal"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

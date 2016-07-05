@@ -4,10 +4,17 @@
 
 
     <item
+        android:id="@+id/action_portal"
+        android:icon="@drawable/internet"
+        android:orderInCategory="100"
+        android:title="Geolocalización"
+        app:showAsAction="always"></item>
+
+    <item
         android:id="@+id/action_geolocalizacion"
         android:icon="@drawable/mundo"
         android:orderInCategory="100"
-        android:title="Inicio"
+        android:title="Geolocalización"
         app:showAsAction="always"></item>
 
     <item

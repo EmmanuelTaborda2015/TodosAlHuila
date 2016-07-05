@@ -244,7 +244,17 @@ public class PageIndicatorViewUrlSitios extends RelativeLayout {
                     final ImageView imagen = new ImageView(getContext());
                     imagen.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, 250));
                     imagen.setImageResource(R.drawable.imagen_no_disponible);
-                    imagen.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                    if(android.os.Build.VERSION.SDK_INT > 15)
+                    {
+                        // for API above 15
+                        imagen.setBackground(getResources().getDrawable(R.drawable.imageviewind));
+                    }
+                    else
+                    {
+                        // for API below 15
+                        imagen.setBackgroundDrawable(getResources().getDrawable(R.drawable.imageviewind));
+                    }
 
                     LoadImageFromURL asyncTask =new LoadImageFromURL(new LoadImageFromURL.AsyncResponse() {
 

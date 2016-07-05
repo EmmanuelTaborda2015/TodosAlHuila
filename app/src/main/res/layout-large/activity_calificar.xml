@@ -87,7 +87,6 @@
     <ImageView
         android:layout_height="350dp"
         android:layout_width="fill_parent"
-        android:scaleType="fitXY"
         android:id="@+id/calificar_imagen1"
         android:background="@drawable/imageview"
         android:layout_gravity="center"

@@ -307,7 +307,7 @@
                     android:textOn="Si"
                     android:textSize="20dp" />
 
-                <ToggleButton
+                <!--ToggleButton
                     android:id="@+id/gl_tooglebutton_segmento16"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
@@ -320,7 +320,7 @@
                     android:textAlignment="textStart"
                     android:textOff="No"
                     android:textOn="Si"
-                    android:textSize="20dp" />
+                    android:textSize="20dp" /-->
 
 
             </LinearLayout>

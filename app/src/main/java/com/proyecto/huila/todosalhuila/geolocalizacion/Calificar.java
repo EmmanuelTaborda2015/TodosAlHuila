@@ -103,7 +103,7 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
         this.mipyme = intent.getStringExtra("mipyme");
 
         //Se genera el llamado al web service que enviara el promedio de calificaciones para un sitio turistico presentes en la base de datos.
-        circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
+        circuloProgreso = ProgressDialog.show(this, "", Calificar.this.getResources().getString(R.string.esperar), true);
 
         final WS_ConsultarCalificacion asyncTask = new WS_ConsultarCalificacion(new WS_ConsultarCalificacion.AsyncResponse() {
 
@@ -125,7 +125,7 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
                         BigDecimal a = new BigDecimal(stars);
                         BigDecimal roundOff = a.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 
-                        calificacion.setText(roundOff.toString() + ", Número de Votos: " + cal.get("numcal").toString());
+                        calificacion.setText(roundOff.toString() + ", " + Calificar.this.getResources().getString(R.string.etiquetaNumeroVotos) +": " + cal.get("numcal").toString());
 
                         ratingBar2.setRating(stars);
 
@@ -172,7 +172,7 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
                                          public void onClick(View v) {
 
                                              //Se genera el llamado al web service que enviara el promedio de calificaciones para un sitio turistico presentes en la base de datos.
-                                             circuloProgreso = ProgressDialog.show(Calificar.this, "", "Espere por favor ...", true);
+                                             circuloProgreso = ProgressDialog.show(Calificar.this, "", Calificar.this.getResources().getString(R.string.esperar), true);
 
                                              final WS_RegistrarCalificacion asyncTask = new WS_RegistrarCalificacion(new WS_RegistrarCalificacion.AsyncResponse() {
 
@@ -182,10 +182,10 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
                                                      try {
                                                          JSONObject json = new JSONObject(output);
                                                          if ("true".equals(json.getString("resultado").toString())) {
-                                                             Toast.makeText(Calificar.this, "Su calificación ha sido registrada.", Toast.LENGTH_LONG).show();
+                                                             Toast.makeText(Calificar.this, Calificar.this.getResources().getString(R.string.calificacionRegistrada), Toast.LENGTH_LONG).show();
                                                              finish();
                                                          } else {
-                                                             Toast.makeText(Calificar.this, "No se ha podido registrar su calificación, por favor intente nuevamente.", Toast.LENGTH_LONG).show();
+                                                             Toast.makeText(Calificar.this, Calificar.this.getResources().getString(R.string.calificacionNoRegistrada), Toast.LENGTH_LONG).show();
                                                          }
                                                      } catch (JSONException e) {
                                                          e.printStackTrace();
@@ -293,9 +293,9 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -307,9 +307,9 @@ public class Calificar extends AppCompatActivity implements NetworkStateReceiver
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;

@@ -215,7 +215,7 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
             }
         });
 
-        circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
+        circuloProgreso = ProgressDialog.show(this, "", Subcategorias.this.getResources().getString(R.string.esperar), true);
 
         final WS_MiPyme asyncTask = new WS_MiPyme(new WS_MiPyme.AsyncResponse() {
 
@@ -304,9 +304,9 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
 
     public void sinElementos() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("No se ha encontrado ningún elemento para los criterios seleccionados.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.sinElementos)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(Subcategorias.this, Categorias.class);
@@ -319,9 +319,9 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
 
     public void sinSeleccion() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("No se ha seleccionado ninguna palabra de busqueda.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.sinCriterio)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -393,9 +393,9 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -407,9 +407,9 @@ public class Subcategorias extends AppCompatActivity implements NetworkStateRece
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;

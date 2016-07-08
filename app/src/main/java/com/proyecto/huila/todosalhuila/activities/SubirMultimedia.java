@@ -156,7 +156,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
                 //});
                 //dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
 
-                Toast.makeText(SubirMultimedia.this, "Se ha cargado correctamente el archivo multimedia.", Toast.LENGTH_LONG).show();
+                Toast.makeText(SubirMultimedia.this, R.string.exitoCargaMultimedia, Toast.LENGTH_LONG).show();
                 Intent i = new Intent(SubirMultimedia.this, Multimedia.class);
                 startActivity(i);
                 finish();
@@ -212,7 +212,7 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
                                     conexionNoValida();
                                 }
                             } else {
-                                circuloProgreso = ProgressDialog.show(SubirMultimedia.this, "", "Subiendo Archivo ...", true);
+                                circuloProgreso = ProgressDialog.show(SubirMultimedia.this, "", SubirMultimedia.this.getResources().getString(R.string.subiendoArchivo), true);
 
                                 String ImageBase64 = convertFileToString(path);
 
@@ -478,9 +478,9 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -492,9 +492,9 @@ public class SubirMultimedia extends Activity implements GoogleApiClient.Connect
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;

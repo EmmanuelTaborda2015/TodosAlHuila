@@ -1,35 +1,107 @@
 <resources>
-    <string name="app_name">Todos Al Huila</string>
+    <string name="app_name">Huila Travel</string>
     <string name="action_settings">Settings</string>
     <string name="botonBienvenida">Ingresar</string>
     <string name="title_activity_inicio">Inicio</string>
 
 
-    <string name="menu1">Inicio</string>
-    <string name="menu2">Categorías</string>
-    <string name="menu3">Localización</string>
-    <string name="menu4">Agenda</string>
-    <string name="menu5">Multimedia</string>
-    <string name="menu6">Salir</string>
+    <!--Texto de Menú-->
+    
+    <string name="menuIniciarSesion">Iniciar Sesión</string>
+    <string name="menuInicio">Inicio</string>
+    <string name="menuNoticias">Noticias</string>
+    <string name="menuMultimedia">Multimedia</string>
+    <string name="menuCategorias">Categorías</string>
+    <string name="menuPortal">Ir al Portal Web</string>
+    <string name="menuGeolocalizacion">Geolocalización</string>
+    <string name="menuDirectorio">Directorio de Sitios</string>
+    <string name="menuMas">Mas</string>
+    <string name="menuSalir">Cerrar</string>
+    <string name="menuAtras">Regresar</string>
+    <string name="menuConduciendo">Llegar Conduciendo</string>
+    <string name="menuCaminando">Llegar Caminando</string>
+    <string name="menuMiUbicacion">Mi Ubicación</string>
+    <string name="menuUbicacionPrincipal">Ubicación Inicial</string>
+    <string name="menuSubirArchivo">Subir Archivo</string>
+    <string name="menuBuscar">Buscar</string>
+    <string name="menuProductos">Productos</string>
 
-    <string name="categoria1">Hoteles</string>
-    <string name="categoria2">Restaurantes</string>
-    <string name="categoria3">Atractivos Turísticos</string>
-    <string name="categoria4">Centros Comerciales</string>
-    <string name="categoria5">Discotecas</string>
-    <string name="categoria6">Iglesias</string>
 
-    <string name="registroCalificacionTrue">Gracias por su calificación!!! </string>
-    <string name="registroCalificacionFalse">No se ha podido enviar su calificación</string>
+    <!--Texto de Alertas y Mensajes-->
 
-    <string name="text_inicio">Descubre todas las maravillas que te puede ofrecer el paraíso huilense. Desde altas montañas, nevados y ríos hasta parques nacionales y exhuberantes comidas.</string>
-
+    <string name="mensajeIrPortal">Se abrirá el portal web en el explorador de su dispositivo móvil</string>
+    <string name="tituloMensaje">Mensaje</string>
+    <string name="mensaConexion">La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.</string>
+    <string name="tituloConexion">Conexión no válida!!!</string>
+    <string name="mensaSinConexion">Por favor conéctese a una red WIFI o Móvil.</string>
+    <string name="tituloSinConexion">Sin conexión a internet!!!</string>
+    <string name="sinConexion">Sin conexión a internet</string>
     <string name="salir_aplicacion">¿Desea salir de la aplicación?</string>
+    <string name="cerrar_aplicacion">Salir de la Aplicación</string>
+    <string name="sinCamara">Lo sentimos, tu dispositivo no cuenta con una cámara!</string>
+    <string name="sinCamaraFrontal">Lo sentimos, tu dispositivo no cuenta con una cámara Frontal!</string>
+    <string name="detenerGrabacion">La grabación se ha detenido</string>
+    <string name="tituloCaptura">Captura</string>
+    <string name="exitoCargaMultimedia">Se ha cargado correctamente el archivo multimedia.</string>
+    <string name="subiendoArchivo">Subiendo archivo ...</string>
+    <string name="comentarioRegistrado">Su comentario ha sido registrado.</string>
+    <string name="sinComentarios">No hay comentarios para enviar.</string>
+    <string name="esperar">Espere por favor ...</string>
+    <string name="comentarioNoRegistrado">No se ha podido registrar su comentario, por favor intente nuevamente.</string>
+    <string name="sinElementos">No se encontrado ningún elemento.</string>
+    <string name="sinPalabra">Debe ingresar una palabra para iniciar la búsqueda.</string>
+    <string name="errorBusquedaSitios">Se presento un error realizando la consulta, por favor intente nuevamente.</string>
+    <string name="calificacionRegistrada">Su calificación ha sido registrada.</string>
+    <string name="calificacionNoRegistrada">Se presento un error realizando la consulta, por favor intente nuevamente.</string>
+    <string name="ingreseUsuarioContrasena">Ingrese el usuario y contraseña.</string>
+    <string name="ingreseUsuario">Ingrese el usuario.</string>
+    <string name="ingreseContrasena">Ingrese la contraseña.</string>
+    <string name="errorInicioSesion">No se ha podido iniciar sesión, verifique su usuario y/o contraseña.</string>
+    <string name="tituloLlegarCaminando">"¿Cómo Llegar Caminando?"</string>
+    <string name="mensajeLlegarCaminando">Para encontrar las rutas que puede tomar caminando, primero debe seleccionar el destino.</string>
+    <string name="tituloLlegarConduciendo">"¿Cómo Llegar Conduciendo?"</string>
+    <string name="mensajeLlegarConduciendo">Para encontrar las rutas que puede tomar conduciendo, primero debe seleccionar el destino.</string>
+    <string name="tituloFuncionDeshabilitada">Función Deshabilitada</string>
+    <string name="sinGoogle">Su dispositivo móvil no tiene instalada la aplicación Google Maps.
+        ¿Desea instalarla?</string>
+    <string name="sinWaze">Su dispositivo móvil no tiene instalada la aplicación waze.
+        ¿Desea instalarla?</string>
+    <string name="appNavegacion">App de Navegación</string>
+    <string name="sinInformacion">Sin información disponible</string>
+    <string name="mensajeVision">En el año 2020 el Huila será el corazón verde de Colombia, pacífico, solidario y emprendedor; líder de una región dinámica donde florecen los sueños de todos.</string>
+    <string name="tituloVision">Nuestra Visión</string>
+    <string name="datosSecretariaCultura">Información de contacto de la Secretaria de Cultura y Turismo</string>
+    <string name="sinCriterio">Debe ingresar un criterio de búsqueda.</string>
 
+
+    <!--Texto de Botones-->
+
+    <string name="botonIniciarSesion">Iniciar Sesión</string>
+    <string name="botonAceptar">Aceptar</string>
     <string name="opcionSi">Si</string>
     <string name="opcionNo">No</string>
+    <string name="botonCalificar">Calificar</string>
+    <string name="botonComenzarBusqueda">comenzar búsqueda</string>
+    <string name="botonCargarMultimedia">Cargar</string>
+    <string name="botonCancelar">Cancelar</string>
+    <string name="botonInstalar">Instalar</string>
+    <string name="botonCerrar">Cerrar</string>
 
-    <string name="cerrar_aplicacion">Salir de la Aplicación</string>
+    <!--Texto de campos-->
+
+    <string name="campoUsuario">Usuario</string>
+    <string name="campoContrasena">Contraseña</string>
+    <string name="campoIntroducirPalabra">Introducir palabras</string>
+
+    <!--Texto de etiquetas-->
+
+    <string name="etiquetaBuscarPalabras">Búsqueda de palabras</string>
+    <string name="etiquetaCategoria">Categoría</string>
+    <string name="etiquetaEntradaBusqueda">Buscar entradas que tengan</string>
+    <string name="etiquetaTituloMultimedia">Título</string>
+    <string name="etiquetaDescripcionMultimedia">Descripción</string>
+    <string name="etiquetaLugarMultimedia">Lugar</string>
+    <string name="etiquetaNumeroVotos">Número de Votos</string>
 
     <string name="text_tab1">Descripción</string>
     <string name="text_tab2">Contacto</string>
@@ -39,7 +111,48 @@
     <string name="tipodato2">Teléfono:</string>
     <string name="tipodato3">E-mail:</string>
     <string name="tipodato4">Página Web:</string>
-    <string name="tipodato5">Página Web:</string>
+
+    <!--Texto de items-->
+
+    <string name="itemSeleccioneCategoria">Seleccione la categoría</string>
+    <string name="itemTransporte">Transporte</string>
+    <string name="itemGastronomia">Gastronomía</string>
+    <string name="itemHospedaje">Hospedaje</string>
+    <string name="itemAtractivos">Atractivos Turísticos</string>
+    <string name="itemBares">Bares</string>
+    <string name="itemComercio">Comercio</string>
+    <string name="itemTodasPalabras">Todas las palabras</string>
+    <string name="itemalgunasPalabras">Algunas palabras</string>
+    <string name="itemPalabrasExactas">Palabras exactas</string>
+
+
+
+
+
+
+    <string name="title_activity_comentar">Comentarios</string>
+    <string name="title_activity_calificar">Calificar</string>
+    <string name="title_activity_directorio">Directorio de Sitios</string>
+    <string name="title_activity_sitios">Sitios</string>
+    <string name="title_activity_noticias">Noticias</string>
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="categoria1">Hoteles</string>
+    <string name="categoria2">Restaurantes</string>
+    <string name="categoria3">Atractivos Turísticos</string>
+    <string name="categoria4">Centros Comerciales</string>
+    <string name="categoria5">Discotecas</string>
+    <string name="categoria6">Iglesias</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -50,8 +163,6 @@
     <string name="title_activity_agenda">Agenda</string>
     <string name="title_activity_lugares">Lugares</string>
     <string name="title_activity_informacion">Información</string>
-    <string name="title_activity_calificar">Calificar</string>
-    <string name="title_activity_comentar">Comentarios</string>
     <string name="title_activity_geolocalizacion_punto">GeolocalizacionPunto</string>
     <string name="title_activity_verificacion_internet">VerificacionInternet</string>
     <string name="title_activity_comentarios">Comentarios</string>

@@ -71,7 +71,7 @@ public class PlaybackActivity extends AppCompatActivity implements NetworkStateR
         setContentView(R.layout.activity_playback);
         ButterKnife.bind(this);
 
-        setTitle("Captura");
+        setTitle(R.string.tituloCaptura);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -230,9 +230,9 @@ public class PlaybackActivity extends AppCompatActivity implements NetworkStateR
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -244,23 +244,9 @@ public class PlaybackActivity extends AppCompatActivity implements NetworkStateR
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        seleccion=0;
-                    }
-                })
-                .setCancelable(false)
-                .show();
-    }
-
-    public void noImplementado() {
-        new AlertDialog.Builder(this)
-                .setTitle("Acción no Válida!!!")
-                .setMessage("No se permiten cargar videos a la red social. \n Las fotos y videos los puedes encontrar en tu dispositivo en la carpeta  \n Dispositivo/Pictures/TodosAlHuila")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion=0;

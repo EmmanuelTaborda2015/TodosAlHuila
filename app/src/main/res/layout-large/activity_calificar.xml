@@ -42,7 +42,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="Sin conexión a internet"
+            android:text="@string/sinConexion"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -96,7 +96,7 @@
 
     <Button
         android:id="@+id/calificar_boton1"
-        android:text="Calificar"
+        android:text="@string/botonCalificar"
         android:textColor="#FFFFFFFF"
         android:textSize="15sp"
         android:textStyle="bold"

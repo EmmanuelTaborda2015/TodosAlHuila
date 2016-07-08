@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/sf_textview_titulo"
-                android:text="Título"/>
+                android:text="@string/etiquetaTituloMultimedia"/>
 
 
             <EditText
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/sf_textview_descripcion"
-                android:text="Descripción"/>
+                android:text="@string/etiquetaDescripcionMultimedia"/>
 
 
             <EditText
@@ -66,7 +66,7 @@
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Subir"
+                    android:text="@string/botonCargarMultimedia"
                     android:id="@+id/sf_button_cargar"
                     android:layout_alignParentBottom="true"
                     android:layout_toLeftOf="@+id/sf_button_cancelar"
@@ -75,7 +75,7 @@
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Cancelar"
+                    android:text="@string/botonCancelar"
                     android:id="@+id/sf_button_cancelar"
                     android:layout_gravity="center_horizontal"
                     android:layout_alignParentBottom="true"

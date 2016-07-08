@@ -2,46 +2,71 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
-        android:id="@+id/action_noticias"
-        android:icon="@drawable/noticia"
+        android:id="@+id/action_mas"
+        android:icon="@drawable/mas"
         android:orderInCategory="100"
-        android:title="Noticias"
-        app:showAsAction="always"></item>
+        android:title="@string/menuMas"
+        app:showAsAction="always">
+
+    <menu>
+
+        <item
+            android:id="@+id/action_productos"
+            android:icon="@drawable/shoppingcart"
+            android:orderInCategory="0"
+            android:title="@string/menuProductos"
+            app:showAsAction="always"></item>
+
+        <item
+            android:id="@+id/action_noticias"
+            android:icon="@drawable/noticia"
+            android:orderInCategory="100"
+            android:title="@string/menuNoticias"
+            app:showAsAction="always"></item>
+        <item
+            android:id="@+id/action_multimedia"
+            android:icon="@drawable/camara"
+            android:orderInCategory="200"
+            android:title="@string/menuMultimedia"
+            app:showAsAction="always"></item>
+        <item
+            android:id="@+id/action_categoria"
+            android:icon="@drawable/categorias"
+            android:orderInCategory="300"
+            android:title="@string/menuCategorias"
+            app:showAsAction="always"></item>
+    </menu>
+</item>
+
 
     <item
-        android:id="@+id/action_multimedia"
-        android:icon="@drawable/camara"
+        android:id="@+id/action_portal"
+        android:icon="@drawable/internet"
         android:orderInCategory="200"
-        android:title="Multimedia"
+        android:title="@string/menuPortal"
         app:showAsAction="always"></item>
-    <item
-        android:id="@+id/action_categoria"
-        android:icon="@drawable/categorias"
-        android:orderInCategory="300"
-        android:title="Categorías"
-        app:showAsAction="always" />
+
 
     <item
         android:id="@+id/action_geolocalizacion"
         android:icon="@drawable/mundo"
         android:orderInCategory="400"
-        android:title="Geolocalización"
+        android:title="@string/menuGeolocalizacion"
         app:showAsAction="always"></item>
 
     <item
         android:id="@+id/action_salir"
         android:icon="@drawable/salir"
         android:orderInCategory="500"
-        android:title="Salir"
+        android:title="@string/menuSalir"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_directorio"
         android:icon="@drawable/list"
         android:orderInCategory="400"
-        android:title="Directorio Sitios"
+        android:title="@string/menuDirectorio"
         app:showAsAction="always" />
 
 

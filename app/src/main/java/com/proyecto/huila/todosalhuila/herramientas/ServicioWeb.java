@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
+import com.proyecto.huila.todosalhuila.R;
+
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
@@ -62,9 +64,9 @@ public abstract class ServicioWeb{
             if("false".equals(webResponse_conexion)){
                 // wifi connection was lost
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Sin Conexión a Internet");
-                builder.setMessage("Por favor verifique la configuración de su red Wi-Fi o Móvil.");
-                builder.setPositiveButton("Entendido",
+                builder.setTitle(R.string.tituloSinConexion);
+                builder.setMessage(R.string.mensaSinConexion);
+                builder.setPositiveButton(R.string.botonAceptar,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();

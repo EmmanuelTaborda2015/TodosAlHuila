@@ -109,10 +109,10 @@ public class Comentarios extends AppCompatActivity implements NetworkStateReceiv
 
                 String comentar = comentario.getText().toString();
                 if ("".equals(comentar)) {
-                    Toast.makeText(Comentarios.this, "No hay comentarios para enviar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Comentarios.this, Comentarios.this.getResources().getString(R.string.sinComentarios), Toast.LENGTH_LONG).show();
                 } else {
 
-                    circuloProgreso = ProgressDialog.show(Comentarios.this, "", "Espere por favor ...", true);
+                    circuloProgreso = ProgressDialog.show(Comentarios.this, "", Comentarios.this.getResources().getString(R.string.esperar), true);
 
                     final WS_RegistrarComentario asyncTask = new WS_RegistrarComentario(new WS_RegistrarComentario.AsyncResponse() {
                         @Override
@@ -121,10 +121,10 @@ public class Comentarios extends AppCompatActivity implements NetworkStateReceiv
                             try {
                                 JSONObject json = new JSONObject(output);
                                 if("true".equals(json.getString("resultado").toString())){
-                                    Toast.makeText(Comentarios.this, "Su comentarios ha sido registrado.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Comentarios.this, Comentarios.this.getResources().getString(R.string.comentarioRegistrado), Toast.LENGTH_LONG).show();
                                     finish();
                                 }else{
-                                    Toast.makeText(Comentarios.this, "No se ha podido registrar su comentario, por favor intente nuevamente.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Comentarios.this, Comentarios.this.getResources().getString(R.string.comentarioNoRegistrado), Toast.LENGTH_LONG).show();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -147,7 +147,7 @@ public class Comentarios extends AppCompatActivity implements NetworkStateReceiv
         Items = new ArrayList<TitularItemsComentarios>();
 
 
-        circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
+        circuloProgreso = ProgressDialog.show(this, "", Comentarios.this.getResources().getString(R.string.esperar), true);
 
         final WS_ConsultarComentario asyncTask = new WS_ConsultarComentario(new WS_ConsultarComentario.AsyncResponse() {
 
@@ -194,24 +194,12 @@ public class Comentarios extends AppCompatActivity implements NetworkStateReceiv
 
     public void sinElementos() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("No se ha encontrado ningún elemento para los criterios seleccionados.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.sinElementos)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
-                    }
-                })
-                .show();
-    }
-
-    public void sinSeleccion() {
-        new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("No se ha seleccionado ninguna palabra de busqueda.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
                     }
                 })
                 .show();
@@ -240,9 +228,9 @@ public class Comentarios extends AppCompatActivity implements NetworkStateReceiv
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -254,9 +242,9 @@ public class Comentarios extends AppCompatActivity implements NetworkStateReceiv
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;

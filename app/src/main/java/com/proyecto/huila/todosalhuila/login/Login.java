@@ -134,7 +134,7 @@ public class Login extends Activity {
                                     String[] myTaskParams = {usuarioD, contrasenaD, id_dispositivo};
                                     asyncTask.execute(myTaskParams);
                                     Log.v("usuario",usuarioD);
-                                    circuloProgreso = ProgressDialog.show(Login.this, "", "Espere por favor ...", true);
+                                    circuloProgreso = ProgressDialog.show(Login.this, "", Login.this.getResources().getString(R.string.esperar), true);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -153,9 +153,9 @@ public class Login extends Activity {
 
     public void ingreseUsuarioContraseña() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("Ingrese el usuario y contraseña.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.ingreseUsuarioContrasena)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -166,9 +166,9 @@ public class Login extends Activity {
 
     public void ingreseUsuario() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("Ingrese el usuario.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.ingreseUsuario)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -179,9 +179,9 @@ public class Login extends Activity {
 
     public void ingreseContraseña() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("Ingrese la contraseña.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.ingreseContrasena)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -192,9 +192,9 @@ public class Login extends Activity {
 
     public void datosInvalidos() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("No se ha podido iniciar sesión, verifique su usuario y/o contraseña.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.errorInicioSesion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -205,9 +205,9 @@ public class Login extends Activity {
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -218,9 +218,9 @@ public class Login extends Activity {
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }

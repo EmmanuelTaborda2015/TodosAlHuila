@@ -38,7 +38,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="Sin conexión a internet"
+                android:text="@string/sinConexion"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -93,8 +93,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -108,8 +108,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -123,8 +123,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -138,8 +138,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -153,8 +153,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -168,8 +168,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -183,8 +183,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -198,8 +198,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -213,8 +213,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -228,8 +228,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -243,8 +243,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -258,8 +258,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -273,8 +273,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -288,8 +288,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <ToggleButton
@@ -303,8 +303,8 @@
                     android:paddingLeft="1dp"
                     android:paddingTop="15dp"
                     android:textAlignment="textStart"
-                    android:textOff="No"
-                    android:textOn="Si"
+                    android:textOff="@string/opcionNo"
+                    android:textOn="@string/opcionSi"
                     android:textSize="20dp" />
 
                 <!--ToggleButton

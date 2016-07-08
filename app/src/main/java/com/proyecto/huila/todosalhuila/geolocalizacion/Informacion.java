@@ -109,7 +109,7 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
             toolbar2.setVisibility(View.GONE);
         }
 
-        circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
+        circuloProgreso = ProgressDialog.show(this, "", Informacion.this.getResources().getString(R.string.esperar), true);
 
 
         final JSONObject datos;
@@ -285,13 +285,11 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
             }
 
             if("".equals(datosContacto.getText())){
-                datosContacto.setText("Sin Información Disponible \n\nDatos de Contacto de la Gobernación \n\nDirección: Neiva-Huila-Colombia - Carrera 4 Calle 8 esquina\n PBX (57 + 8) 8671300  -  Línea gratuita 01 8000 968 716 \n Horario de Atención: Lunes a Jueves de 7:00 a.m. a 11:30 a.m. y de 2:00 p.m. a 5:30 p.m.\n" +
-                        "Viernes de 7:00 a.m. a 11:30 a.m. y de 2:00 p.m. a 4:30 p.m.");
+                datosContacto.setText(Informacion.this.getResources().getString(R.string.sinInformacion)+"\n\n" +Informacion.this.getResources().getString(R.string.datosSecretariaCultura)+"\n\n"+Informacion.this.getResources().getString(R.string.tipodato1)+" Neiva - Huila - Colombia - Carrera 4 Calle 8 esquina\n" + Informacion.this.getResources().getString(R.string.tipodato2)+" 8671300  -  01 8000 968 716 \n" + Informacion.this.getResources().getString(R.string.tipodato4) + " http://www.huila.gov.co/dependencias/secretarias/cultura-y-turismo.html");
             }
 
             if("".equals(descripcion.getText())){
-                descripcion.setText("Sin Información Disponible \n\nNuestra Visión \n\nEn el año 2020 el Huila será el corazón verde de Colombia, pacífico, solidario y emprendedor; líder de una región dinámica donde florecen los sueños de todos");
-
+                descripcion.setText(Informacion.this.getResources().getString(R.string.sinInformacion)+"\n\n" + Informacion.this.getResources().getString(R.string.tituloVision)+"\n\n"+Informacion.this.getResources().getString(R.string.mensajeVision));
             }
 
         } catch (JSONException e) {
@@ -334,9 +332,9 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -348,9 +346,9 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;

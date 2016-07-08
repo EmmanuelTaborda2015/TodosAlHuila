@@ -222,7 +222,7 @@ public class Multimedia extends Activity {
     public void onResume() {
         super.onResume();
         if (!hasCamera(myContext)) {
-            Toast toast = Toast.makeText(myContext, "Lo sentimos, tu dispositivo no cuenta con una cámara!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(myContext, R.string.sinCamara, Toast.LENGTH_LONG);
             toast.show();
             finish();
         }
@@ -240,7 +240,7 @@ public class Multimedia extends Activity {
                 switchCameraListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(Multimedia.this, "Lo sentimos, tu dispositivo no cuenta con una cámara frontal!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Multimedia.this, R.string.sinCamaraFrontal, Toast.LENGTH_LONG).show();
                     }
                 };
 
@@ -428,7 +428,7 @@ public class Multimedia extends Activity {
                     releaseCamera();
                     chooseCamera();
                 } else {
-                    Toast toast = Toast.makeText(myContext, "Lo sentimos, tu dispositivo no cuenta con una cámara frontal!", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(myContext, R.string.sinCamaraFrontal, Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
@@ -778,7 +778,7 @@ public class Multimedia extends Activity {
                 chrono.stop();
 
             releaseMediaRecorder(); // release the MediaRecorder object
-            Toast.makeText(Multimedia.this, "La grabación se ha detenido", Toast.LENGTH_LONG).show();
+            Toast.makeText(Multimedia.this, R.string.detenerGrabacion, Toast.LENGTH_LONG).show();
             recording = false;
 
             File mp4 = new File(url_file);
@@ -850,7 +850,7 @@ public class Multimedia extends Activity {
         // using Environment.getExternalStorageState() before doing this.
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "TodosAlHuila");
+                Environment.DIRECTORY_PICTURES), "HuilaTravel");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 

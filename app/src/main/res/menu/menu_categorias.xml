@@ -7,7 +7,7 @@
         android:id="@+id/action_home"
         android:icon="@drawable/home"
         android:orderInCategory="100"
-        android:title="Inicio"
+        android:title="@string/menuInicio"
         app:showAsAction="always"></item>
 
 
@@ -15,7 +15,7 @@
         android:id="@+id/action_salir"
         android:icon="@drawable/salir"
         android:orderInCategory="200"
-        android:title="Salir"
+        android:title="@string/menuSalir"
         app:showAsAction="always" />
 
 

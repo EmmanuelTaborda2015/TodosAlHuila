@@ -7,14 +7,14 @@
         android:id="@+id/action_atras"
         android:icon="@drawable/atras"
         android:orderInCategory="100"
-        android:title="Regresar"
+        android:title="@string/menuAtras"
         app:showAsAction="always"></item>
 
     <item
         android:id="@+id/action_buscar"
         android:icon="@drawable/buscar1"
         android:orderInCategory="200"
-        android:title="Regresar"
+        android:title="@string/menuBuscar"
         app:showAsAction="always"></item>
 
 </menu>

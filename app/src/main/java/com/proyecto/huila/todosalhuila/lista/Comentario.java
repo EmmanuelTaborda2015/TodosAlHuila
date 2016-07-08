@@ -47,7 +47,7 @@ public class Comentario extends AppCompatActivity {
         listaItems = (ListView)findViewById(R.id.listItems);
 
         //Se genera el llamado al web service que enviara los marcadores presentes en la base de datos.
-        circuloProgreso = ProgressDialog.show(this, "", "Espere por favor ...", true);
+        circuloProgreso = ProgressDialog.show(this, "", Comentario.this.getResources().getString(R.string.esperar), true);
 
         thread_listaCategoria = new Thread() {
             public void run() {

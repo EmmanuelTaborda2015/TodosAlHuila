@@ -42,7 +42,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="Sin conexión a internet"
+            android:text="@string/sinConexion"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -85,7 +85,7 @@
 
     <ImageView
         android:layout_height="150dp"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:id="@+id/calificar_imagen1"
         android:background="@drawable/imageview"
         android:layout_gravity="center"
@@ -95,7 +95,7 @@
 
     <Button
         android:id="@+id/calificar_boton1"
-        android:text="Calificar"
+        android:text="@string/botonCalificar"
         android:textColor="#FFFFFFFF"
         android:textSize="15sp"
         android:textStyle="bold"

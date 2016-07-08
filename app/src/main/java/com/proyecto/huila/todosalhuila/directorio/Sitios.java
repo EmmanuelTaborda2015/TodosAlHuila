@@ -50,7 +50,7 @@ public class Sitios extends AppCompatActivity implements NetworkStateReceiver.Ne
 
         setContentView(R.layout.activity_sitios);
 
-        setTitle("Sitios");
+        setTitle(R.string.title_activity_sitios);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,10 +79,7 @@ public class Sitios extends AppCompatActivity implements NetworkStateReceiver.Ne
         final Intent intent = getIntent();
         String sitios = intent.getStringExtra("sitios");
 
-        Log.v("sitios", sitios);
-
         try {
-
 
             final JSONObject datos;
             datos = new JSONObject(sitios);

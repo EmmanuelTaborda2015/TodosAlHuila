@@ -6,34 +6,34 @@
         android:id="@+id/action_home"
         android:icon="@drawable/home"
         android:orderInCategory="100"
-        android:title="Inicio"
+        android:title="@string/menuInicio"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_llegarconduciendo"
         android:icon="@drawable/carro"
         android:orderInCategory="200"
-        android:title="Llegar Conduciendo"
+        android:title="@string/menuConduciendo"
         app:showAsAction="always"></item>
 
     <item
         android:id="@+id/action_llegarcaminando"
         android:icon="@drawable/caminar"
         android:orderInCategory="300"
-        android:title="Llegar Caminando"
+        android:title="@string/menuCaminando"
         app:showAsAction="always"></item>
 
     <item
         android:id="@+id/action_miubicacion"
         android:icon="@drawable/gps"
         android:orderInCategory="400"
-        android:title="Mi Ubicación"
+        android:title="@string/menuMiUbicacion"
         app:showAsAction="always"></item>
 
     <item
         android:id="@+id/action_ubicacion"
         android:icon="@drawable/ubicar"
         android:orderInCategory="500"
-        android:title="Mi Ubicación"
+        android:title="@string/menuUbicacionPrincipal"
         app:showAsAction="always"></item>
 
 </menu>

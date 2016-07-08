@@ -1,0 +1,176 @@
+<resources>
+    <string name="app_name">Huila Travel</string>
+    <string name="action_settings">Settings</string>
+    <string name="botonBienvenida">Ingresar</string>
+    <string name="title_activity_inicio">Inicio</string>
+
+    <!--Texto de Menú-->
+
+    <string name="menuIniciarSesion">Login</string>
+    <string name="menuInicio">Home</string>
+    <string name="menuNoticias">News</string>
+    <string name="menuMultimedia">Multimedia</string>
+    <string name="menuCategorias">Categories</string>
+    <string name="menuPortal">Go to website</string>
+    <string name="menuGeolocalizacion">Geolocation</string>
+    <string name="menuDirectorio">Sites directory</string>
+    <string name="menuMas">More</string>
+    <string name="menuSalir">Close</string>
+    <string name="menuAtras">Go back</string>
+    <string name="menuConduciendo">Arrive driving</string>
+    <string name="menuCaminando">Arrive walking</string>
+    <string name="menuMiUbicacion">My location</string>
+    <string name="menuUbicacionPrincipal">Initial location</string>
+    <string name="menuSubirArchivo">Upload file</string>
+    <string name="menuBuscar">Search</string>
+    <string name="menuProductos">Products</string>
+
+
+    <!--Texto de Alertas y Mensajes-->
+
+    <string name="mensajeIrPortal">The web portal will open in the browser of your mobile device.</string>
+    <string name="tituloMensaje">Message</string>
+    <string name="mensaConexion">The internet connection through which are trying to access is invalid, please check it and try again.</string>
+    <string name="tituloConexion">Invalid connection!!!</string>
+    <string name="mensaSinConexion">Please connect to a WiFi or mobile network.</string>
+    <string name="tituloSinConexion">No internet connection!!!</string>
+    <string name="sinConexion">No internet connection</string>
+    <string name="salir_aplicacion">Do you want to exit the application?</string>
+    <string name="cerrar_aplicacion">Exit application</string>
+    <string name="sinCamara">Sorry, your device does not have a camera!</string>
+    <string name="sinCamaraFrontal">Sorry , your device does not have a front camera!</string>
+    <string name="detenerGrabacion">The recording has stopped</string>
+    <string name="tituloCaptura">Capture</string>
+    <string name="exitoCargaMultimedia">The file has successfully loaded.</string>
+    <string name="subiendoArchivo">File Uploading ...</string>
+    <string name="comentarioRegistrado">Your comment has been registered.</string>
+    <string name="sinComentarios">No comments to send.</string>
+    <string name="esperar">Please Wait ...</string>
+    <string name="comentarioNoRegistrado">Could not register your comment, please try again.</string>
+    <string name="sinElementos">It has not found any element.</string>
+    <string name="sinPalabra">You must enter a word to start the search.</string>
+    <string name="errorBusquedaSitios">An error occurred performing the search, please try again.</string>
+    <string name="ingreseUsuarioContrasena">Enter the username and password.</string>
+    <string name="ingreseUsuario">Enter the username.</string>
+    <string name="ingreseContrasena">Enter the password.</string>
+    <string name="errorInicioSesion">Unable to login, check your username and/or password.</string>
+    <string name="tituloLlegarCaminando">"how to arrive walking?"</string>
+    <string name="mensajeLlegarCaminando">To find walking routes you can take, you must first select the destination.</string>
+    <string name="tituloLlegarConduciendo">"How to arrive driving ?"</string>
+    <string name="mensajeLlegarConduciendo">To find the routes you can take by car, you must first select the destination.</string>
+    <string name="tituloFuncionDeshabilitada">Disabled function</string>
+    <string name="sinGoogle">Your mobile device does not have the application installed Google Maps. \nDo you want to install?</string>
+    <string name="sinWaze">Your mobile device does not have the application installed waze. \nDo you want to install?</string>
+    <string name="appNavegacion">Navigation App</string>
+    <string name="sinInformacion">No Information Available</string>
+    <string name="mensajeVision">In 2020, Huila is the green heart of Colombia, peaceful, united and enterprising; leader of a dynamic region where all dreams bloom.</string>
+    <string name="tituloVision">Our Vision</string>
+    <string name="datosSecretariaCultura">Contact Information Secretary of Culture and Tourism</string>
+    <string name="sinCriterio">You must enter a search criteria.</string>
+
+
+
+    <!--Texto de Botones-->
+
+    <string name="botonIniciarSesion">Login</string>
+    <string name="botonAceptar">Ok</string>
+    <string name="opcionSi">Yes</string>
+    <string name="opcionNo">No</string>
+    <string name="botonCalificar">Rate</string>
+    <string name="botonComenzarBusqueda">start search</string>
+    <string name="botonCargarMultimedia">Upload</string>
+    <string name="botonCancelar">Cancel</string>
+    <string name="botonInstalar">Install</string>
+    <string name="botonCerrar">Close</string>
+
+    <!--Texto de campos-->
+
+    <string name="campoUsuario">User</string>
+    <string name="campoContrasena">Password</string>
+    <string name="campoIntroducirPalabra">Enter words</string>
+
+    <!--Texto de etiquetas-->
+
+    <string name="etiquetaBuscarPalabras">Word Search</string>
+    <string name="etiquetaCategoria">Category</string>
+    <string name="etiquetaEntradaBusqueda">Search entries with</string>
+    <string name="etiquetaTituloMultimedia">Title</string>
+    <string name="etiquetaDescripcionMultimedia">Description</string>
+    <string name="etiquetaLugarMultimedia">Place</string>
+    <string name="etiquetaNumeroVotos">Number of Votes</string>
+    <string name="calificacionRegistrada">Your rating has been recorded.</string>
+    <string name="calificacionNoRegistrada">You can not register your rating, please try again.</string>
+
+    <string name="text_tab1">Description</string>
+    <string name="text_tab2">Contact information</string>
+    <string name="text_tab3">Share</string>
+
+    <string name="tipodato1">Address:</string>
+    <string name="tipodato2">Phone:</string>
+    <string name="tipodato3">E-mail:</string>
+    <string name="tipodato4">Web page:</string>
+
+    <!--Texto de items-->
+
+    <string name="itemSeleccioneCategoria">Select category</string>
+    <string name="itemTransporte">Transport</string>
+    <string name="itemGastronomia">Gastronomy</string>
+    <string name="itemHospedaje">Lodging</string>
+    <string name="itemAtractivos">Tourist attractions</string>
+    <string name="itemBares">pubs</string>
+    <string name="itemComercio">Commerce</string>
+    <string name="itemTodasPalabras">All words</string>
+    <string name="itemalgunasPalabras">Some words</string>
+    <string name="itemPalabrasExactas">Exact words</string>
+
+
+
+    <string name="title_activity_comentar">Comments</string>
+    <string name="title_activity_calificar">Rate</string>
+    <string name="title_activity_directorio">Sites directory</string>
+    <string name="title_activity_sitios">Sites</string>
+    <string name="title_activity_noticias">News</string>
+
+
+
+
+
+
+
+
+
+
+    <string name="categoria1">Hoteles</string>
+    <string name="categoria2">Restaurantes</string>
+    <string name="categoria3">Atractivos Turísticos</string>
+    <string name="categoria4">Centros Comerciales</string>
+    <string name="categoria5">Discotecas</string>
+    <string name="categoria6">Iglesias</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_categorias">Categorías</string>
+    <string name="title_activity_localizacion">Localización</string>
+    <string name="title_activity_mapa">Map</string>
+    <string name="title_activity_agenda">Agenda</string>
+    <string name="title_activity_lugares">Lugares</string>
+    <string name="title_activity_informacion">Información</string>
+    <string name="title_activity_geolocalizacion_punto">GeolocalizacionPunto</string>
+    <string name="title_activity_verificacion_internet">VerificacionInternet</string>
+    <string name="title_activity_comentarios">Comentarios</string>
+    <string name="title_activity_multimedia">Multimedia</string>
+    <string name="title_activity_portal">Ir al Portal</string>
+
+
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="done">Done</string>
+    <string name="video_path">Video path:</string>
+    <string name="video_too_short">Video is too short.</string>
+    <string name="processing">Processing...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_subir">Subir</string>
+    <string name="title_activity_diccionario">Diccionario</string>
+</resources>

@@ -70,7 +70,7 @@ public class Noticias extends AppCompatActivity implements NetworkStateReceiver.
 
         setContentView(R.layout.activity_noticias);
 
-        setTitle("Noticias");
+        setTitle(R.string.title_activity_noticias);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

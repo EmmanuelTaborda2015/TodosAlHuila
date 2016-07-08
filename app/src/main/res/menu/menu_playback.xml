@@ -7,14 +7,14 @@
         android:id="@+id/action_subir"
         android:icon="@drawable/cargar"
         android:orderInCategory="200"
-        android:title="Regresar"
+        android:title="@string/menuSubirArchivo"
         app:showAsAction="always"></item>
 
     <item
         android:id="@+id/action_atras"
         android:icon="@drawable/atras"
         android:orderInCategory="100"
-        android:title="Regresar"
+        android:title="@string/menuAtras"
         app:showAsAction="always"></item>
 
 </menu>

@@ -67,7 +67,7 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
         setSupportActionBar(toolbar);
 
 
-        this.setTitle("Directorio de Sitios");
+        this.setTitle(R.string.title_activity_directorio);
 
         connetion = (RelativeLayout) findViewById(R.id.conexion);
 
@@ -98,7 +98,7 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
             @Override
             public void onClick(View v) {
 
-                circuloProgreso = ProgressDialog.show(Directorio.this, "", "Espere por favor ...", true);
+                circuloProgreso = ProgressDialog.show(Directorio.this, "", Directorio.this.getResources().getString(R.string.esperar), true);
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(getApplication().INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(palabra.getWindowToken(), 0);
@@ -289,9 +289,9 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -303,9 +303,9 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -317,9 +317,9 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
 
     public void ingresePalabra() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("Debe ingresar una palabra para iniciar la búsqueda.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.sinPalabra)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -330,9 +330,9 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
 
     public void datosInvalidos() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("Se ha presentado un error realizando la consulta, por favor intente nuevamente.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.errorBusquedaSitios)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -343,9 +343,9 @@ public class Directorio extends AppCompatActivity implements NetworkStateReceive
 
     public void sinSitios() {
         new AlertDialog.Builder(this)
-                .setTitle("Mensaje")
-                .setMessage("No se encontro ningún sitio para los criterios ingresados.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloMensaje)
+                .setMessage(R.string.sinElementos)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }

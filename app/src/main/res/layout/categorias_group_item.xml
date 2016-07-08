@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:text="TextView"
+        android:text=""
         android:layout_marginLeft="10dp"
         android:textStyle="bold"
         android:textColor = "#FFFF"

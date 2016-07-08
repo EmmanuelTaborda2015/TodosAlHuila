@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,7 @@ import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.directorio.Directorio;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
 import com.proyecto.huila.todosalhuila.menu.Noticias;
+import com.proyecto.huila.todosalhuila.productos.Productos;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 
@@ -126,7 +128,8 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
 
         if (id == R.id.action_salir) {
             salir();
-        } else if (seleccion == 0) {
+        }else if  (id == R.id.action_mas) {
+        }else if (seleccion == 0) {
             seleccion++;
             final WS_ValidarConexionGoogle asyncTaskConection = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
                 @Override
@@ -160,8 +163,34 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
                             i.putExtra("login", false);
                             startActivity(i);
                             finish();
+                        }else if (id == R.id.action_portal) {
+
+                            //Intent i = new Intent(Inicio.this, Portal.class);
+                            //i.putExtra("login", false);
+                            //startActivity(i);
+                            //finish();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(InicioLogin.this);
+                            builder.setTitle(R.string.tituloMensaje);
+                            builder.setMessage(R.string.mensajeIrPortal).setNeutralButton(R.string.botonAceptar,
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                                            intent.setData(Uri.parse("http://52.20.189.85/joomlaH"));
+                                            startActivity(intent);
+                                        }
+                                    });
+                            // Create the AlertDialog object and return it
+                            builder.create().show();
+
+                        }else if (id == R.id.action_productos) {
+
+                            Intent i = new Intent(InicioLogin.this, Productos.class);
+                            startActivity(i);
+                            finish();
                         }
-                        seleccion = 0;
+
+                            seleccion = 0;
                     }
                 }
             });
@@ -182,9 +211,9 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -196,9 +225,9 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;

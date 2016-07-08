@@ -42,7 +42,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:id="@+id/sf_textview_titulo"
-                android:text="Título"/>
+                android:text="@string/etiquetaTituloMultimedia"/>
 
 
             <EditText
@@ -56,7 +56,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:id="@+id/sf_textview_descripcion"
-                android:text="Descripción"/>
+                android:text="@string/etiquetaDescripcionMultimedia"/>
 
 
             <EditText
@@ -70,7 +70,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:id="@+id/sf_textview_lugar"
-                android:text="Lugar"/>
+                android:text="@string/etiquetaLugarMultimedia"/>
 
 
             <EditText
@@ -90,7 +90,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cargar"
+                        android:text="@string/botonCargarMultimedia"
                         android:paddingBottom="10dp"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
@@ -108,7 +108,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cancelar"
+                        android:text="@string/botonCancelar"
                         android:id="@+id/sf_button_cancelar"
                         android:textStyle="bold"
                         android:paddingBottom="10dp"

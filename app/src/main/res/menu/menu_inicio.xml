@@ -7,21 +7,21 @@
         android:id="@+id/action_portal"
         android:icon="@drawable/internet"
         android:orderInCategory="100"
-        android:title="Geolocalización"
+        android:title="@string/menuPortal"
         app:showAsAction="always"></item>
 
     <item
         android:id="@+id/action_geolocalizacion"
         android:icon="@drawable/mundo"
         android:orderInCategory="100"
-        android:title="Geolocalización"
+        android:title="@string/menuGeolocalizacion"
         app:showAsAction="always"></item>
 
     <item
         android:id="@+id/action_user"
         android:icon="@drawable/usuario"
         android:orderInCategory="200"
-        android:title="Ingresar"
+        android:title="@string/menuIniciarSesion"
         app:showAsAction="always"></item>
 
 
@@ -29,7 +29,7 @@
         android:id="@+id/action_salir"
         android:icon="@drawable/salir"
         android:orderInCategory="300"
-        android:title="Salir"
+        android:title="@string/menuSalir"
         app:showAsAction="always" />
 
 

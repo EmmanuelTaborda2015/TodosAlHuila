@@ -9,7 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
-
+import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.categorias.Categorias;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexion;
 
@@ -51,9 +51,9 @@ public class AppStatus extends Categorias{
                 Toast.makeText(context, webResponse_conexion, Toast.LENGTH_LONG).show();
                 // wifi connection was lost
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Sin Conexión a Internet");
-                builder.setMessage("Por favor verifique la configuración de su red Wi-Fi o Móvil.");
-                builder.setPositiveButton("Entendido",
+                builder.setTitle(R.string.tituloSinConexion);
+                builder.setMessage(R.string.mensaSinConexion);
+                builder.setPositiveButton(R.string.botonAceptar,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();

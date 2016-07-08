@@ -2,6 +2,8 @@ package com.proyecto.huila.todosalhuila.geolocalizacion;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -19,7 +21,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -87,6 +93,8 @@ public class Geolocalizacion extends AppCompatActivity
 
 
     private static final String TAG = "Inicio";
+
+    private String AppMaps = "googlemaps";
 
     int seleccion = 0;
 
@@ -457,28 +465,23 @@ public class Geolocalizacion extends AppCompatActivity
                             contador = 0;
                             checkLocationSettings();
                         } else if (id == R.id.action_llegarcaminando) {
+
                             if (selectMarker) {
 
-                               if(isGoogleMapsInstalled() ){
-                                   String uri = "http://maps.google.com/maps?daddr="+ previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&dirflg=w";
-                                   Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
-                                   intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                                   startActivity(intent);
-                               }else{
-                                   sinGoogleMaps();
-                               }
-
-                                //Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=w");
-                                //Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                                //mapIntent.setPackage("com.google.android.apps.maps");
-                                //startActivity(mapIntent);
-
+                                if(isGoogleMapsInstalled() ){
+                                    String uri = "http://maps.google.com/maps?daddr="+ previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&dirflg=w";
+                                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                                    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                                    startActivity(intent);
+                                }else{
+                                    sinGoogleMaps();
+                                }
 
                             } else {
                                 new AlertDialog.Builder(Geolocalizacion.this)
-                                        .setTitle("¿Cómo Llegar Caminando?")
-                                        .setMessage("Para encontrar las rutas que puede tomar caminando, primero debe seleccionar el destino.")
-                                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                        .setTitle(R.string.tituloLlegarCaminando)
+                                        .setMessage(R.string.mensajeLlegarCaminando)
+                                        .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                             }
@@ -489,25 +492,13 @@ public class Geolocalizacion extends AppCompatActivity
                         } else if (id == R.id.action_llegarconduciendo) {
                             if (selectMarker) {
 
-                                if(isGoogleMapsInstalled() ){
-                                    String uri = "http://maps.google.com/maps?daddr="+ previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&dirflg=d";
-                                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
-                                    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                                    startActivity(intent);
-                                }else{
-                                    sinGoogleMaps();
-                                }
+                                dialogoAppMaps();
 
-
-                                //Uri gmmIntentUri = Uri.parse("google.navigation:q=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&mode=d");
-                                //Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                                //mapIntent.setPackage("com.google.android.apps.maps");
-                                //startActivity(mapIntent);
                             } else {
                                 new AlertDialog.Builder(Geolocalizacion.this)
-                                        .setTitle("¿Cómo Llegar Conduciendo?")
-                                        .setMessage("Para encontrar las rutas que puede tomar conduciendo, primero debe seleccionar el destino.")
-                                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                        .setTitle(R.string.tituloLlegarConduciendo)
+                                        .setMessage(R.string.mensajeLlegarConduciendo)
+                                        .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                             }
@@ -664,7 +655,7 @@ public class Geolocalizacion extends AppCompatActivity
         if (contador == 0) {
             mCurrentLocation = location;
             mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
-            Log.v("coordenadas", "aquí");
+
             updateLocationUI();
 
             LatLng mylocation = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
@@ -770,9 +761,9 @@ public class Geolocalizacion extends AppCompatActivity
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -784,9 +775,9 @@ public class Geolocalizacion extends AppCompatActivity
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -799,31 +790,25 @@ public class Geolocalizacion extends AppCompatActivity
 
     public void sinGoogleMaps() {
         new AlertDialog.Builder(this)
-                .setTitle("Función Deshabilitada")
-                .setMessage("Su dispositivo móvil no tiene instalada la aplicación Google Maps. \n ¿Desea instalarla?")
-                .setPositiveButton("Instalar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloFuncionDeshabilitada)
+                .setMessage(R.string.sinGoogle)
+                .setPositiveButton(R.string.botonInstalar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent a = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.apps.maps"));
                         startActivity(a);
                     }
                 })
-                .setNegativeButton("Cerrar",  new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.botonCerrar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (login) {
-                            Intent i = new Intent(Geolocalizacion.this, InicioLogin.class);
-                            startActivity(i);
-                            finish();
-                        } else {
-                            Intent i = new Intent(Geolocalizacion.this, Inicio.class);
-                            startActivity(i);
-                            finish();
-                        }
+                        dialog.cancel();
                     }
                 })
                 .show();
     }
+
+
 
     public boolean isGoogleMapsInstalled()
     {
@@ -852,6 +837,89 @@ public class Geolocalizacion extends AppCompatActivity
                 finish();
             }
         };
+    }
+
+
+    public void sinWaze() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tituloFuncionDeshabilitada)
+                .setMessage(R.string.sinWaze)
+                .setPositiveButton(R.string.botonInstalar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent =
+                                new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(R.string.botonCerrar,  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
+    }
+
+    public void dialogoAppMaps(){
+
+        final Dialog dialog = new Dialog(Geolocalizacion.this);
+        dialog.setContentView(R.layout.seleccionar_app_mapas);
+        dialog.setTitle(R.string.appNavegacion);
+        dialog.setCancelable(true);
+        // there are a lot of settings, for dialog, check them all out!
+        // set up radiobutton
+        RadioGroup group = (RadioGroup) dialog.findViewById(R.id.group_radiobutton);
+
+        dialog.show();
+
+        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.rd_googlemaps:
+                        AppMaps = "googlemaps";
+                        break;
+                    case R.id.rd_waze:
+                        AppMaps = "waze";
+                        break;
+                }
+
+            }
+        });
+
+        Button btnsubmit = (Button) dialog.findViewById(R.id.button_mapas);
+        btnsubmit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if("googlemaps".equals(AppMaps)){
+                    if(isGoogleMapsInstalled() ){
+                        String uri = "http://maps.google.com/maps?daddr="+ previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "&dirflg=d";
+                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                        startActivity(intent);
+                    }else{
+                        sinGoogleMaps();
+                    }
+                }else if ("waze".equals(AppMaps)){
+                    try
+                    {
+                        String url = "waze://?ll=" + previoMarker.getPosition().latitude + "," + previoMarker.getPosition().longitude + "navigate=yes";
+                        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
+                        startActivity( intent );
+
+                    }
+                    catch ( ActivityNotFoundException ex  )
+                    {
+                        sinWaze();
+                    }
+                }
+
+                dialog.dismiss();
+
+            }
+        });
     }
 
 }

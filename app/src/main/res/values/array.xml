@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spinnerItems">
-        <item>Seleccione la categoría</item>
-        <item>Transporte</item>
-        <item>Gastronomía</item>
-        <item>Hospedaje</item>
-        <item>Atractivos Turísticos</item>
-        <item>Bares</item>
-        <item>Comercio</item>
+        <item>@string/itemSeleccioneCategoria</item>@string/item
+        <item>@string/itemTransporte</item>
+        <item>@string/itemGastronomia</item>
+        <item>@string/itemHospedaje</item>
+        <item>@string/itemAtractivos</item>
+        <item>@string/itemBares</item>
+        <item>@string/itemComercio</item>
     </string-array>
 
     <string-array name="spinnerItems2">
-        <item>Todas las palabras</item>
-        <item>Algunas palabras</item>
-        <item>Palabras exactas</item>
+        <item>@string/itemTodasPalabras</item>
+        <item>@string/itemalgunasPalabras</item>
+        <item>@string/itemPalabrasExactas</item>
     </string-array>
 </resources>

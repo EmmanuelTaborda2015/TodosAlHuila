@@ -11,19 +11,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 
 import com.proyecto.huila.indicador.AutoPlayManager;
 import com.proyecto.huila.indicador.ImageIndicatorView;
-import com.proyecto.huila.todosalhuila.directorio.Directorio;
 import com.proyecto.huila.todosalhuila.login.Login;
 import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.conexion.NetworkUtil;
 import com.proyecto.huila.todosalhuila.geolocalizacion.Geolocalizacion;
-import com.proyecto.huila.todosalhuila.portal.Portal;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 
@@ -158,13 +154,9 @@ public class Inicio extends AppCompatActivity  implements NetworkStateReceiver.N
 
                         }else if (id == R.id.action_portal) {
 
-                            //Intent i = new Intent(Inicio.this, Portal.class);
-                            //i.putExtra("login", false);
-                            //startActivity(i);
-                            //finish();
-
                             AlertDialog.Builder builder = new AlertDialog.Builder(Inicio.this);
-                            builder.setMessage("Se abrirá el Portal Web en el explorador de tu dispositivo móvil.").setNeutralButton("Aceptar",
+                            builder.setTitle(R.string.tituloMensaje);
+                            builder.setMessage(R.string.mensajeIrPortal).setNeutralButton(R.string.botonAceptar,
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -198,9 +190,9 @@ public class Inicio extends AppCompatActivity  implements NetworkStateReceiver.N
 
     public void conexionNoValida() {
         new AlertDialog.Builder(this)
-                .setTitle("Conexión no válida!!!")
-                .setMessage("La conexión a internet mediante la cual esta tratando de acceder no es válida, por favor verifiquela e intente de nuevo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloConexion)
+                .setMessage(R.string.mensaConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion = 0;
@@ -212,9 +204,9 @@ public class Inicio extends AppCompatActivity  implements NetworkStateReceiver.N
 
     public void sinConexion() {
         new AlertDialog.Builder(this)
-                .setTitle("Sin conexión a internet!!!")
-                .setMessage("Por favor conéctese a una red WIFI o Móvil.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tituloSinConexion)
+                .setMessage(R.string.mensaSinConexion)
+                .setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         seleccion=0;

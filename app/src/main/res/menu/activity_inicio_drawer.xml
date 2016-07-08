@@ -5,27 +5,27 @@
         <item
             android:id="@+id/menu1"
             android:icon="@drawable/inicio"
-            android:title="@string/menu1" />
+            android:title="@string/menuCategorias" />
         <item
             android:id="@+id/menu2"
             android:icon="@drawable/categorias"
-            android:title="@string/menu2" />
+            android:title="@string/menuCategorias" />
         <item
             android:id="@+id/menu3"
             android:icon="@drawable/localizacion"
-            android:title="@string/menu3" />
+            android:title="@string/menuCategorias" />
         <item
             android:id="@+id/menu4"
             android:icon="@drawable/agenda"
-            android:title="@string/menu4" />
+            android:title="@string/menuCategorias" />
         <item
             android:id="@+id/menu5"
             android:icon="@drawable/multimedia"
-            android:title="@string/menu5" />
+            android:title="@string/menuCategorias" />
         <item
             android:id="@+id/menu6"
             android:icon="@drawable/salir"
-            android:title="@string/menu6" />
+            android:title="@string/menuCategorias" />
     </group>
 
 </menu>

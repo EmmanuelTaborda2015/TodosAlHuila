@@ -86,6 +86,10 @@
     <string name="botonCancelar">Cancelar</string>
     <string name="botonInstalar">Instalar</string>
     <string name="botonCerrar">Cerrar</string>
+    <string name="botonAnterior">atras</string>
+    <string name="botonSiguiente">adelante</string>
+
+
 
     <!--Texto de campos-->
 
@@ -135,6 +139,7 @@
     <string name="title_activity_directorio">Directorio de Sitios</string>
     <string name="title_activity_sitios">Sitios</string>
     <string name="title_activity_noticias">Noticias</string>
+    <string name="title_activity_productos">Productos</string>
 
 
 

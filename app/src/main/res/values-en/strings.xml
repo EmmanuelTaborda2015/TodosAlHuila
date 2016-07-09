@@ -82,10 +82,12 @@
     <string name="botonCancelar">Cancel</string>
     <string name="botonInstalar">Install</string>
     <string name="botonCerrar">Close</string>
+    <string name="botonAnterior">back</string>
+    <string name="botonSiguiente">Forward</string>
 
     <!--Texto de campos-->
 
-    <string name="campoUsuario">User</string>
+    <string name="campoUsuario">Username</string>
     <string name="campoContrasena">Password</string>
     <string name="campoIntroducirPalabra">Enter words</string>
 
@@ -130,6 +132,8 @@
     <string name="title_activity_directorio">Sites directory</string>
     <string name="title_activity_sitios">Sites</string>
     <string name="title_activity_noticias">News</string>
+    <string name="title_activity_productos">Products</string>
+
 
 
 

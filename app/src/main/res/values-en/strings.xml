@@ -84,6 +84,7 @@
     <string name="botonCerrar">Close</string>
     <string name="botonAnterior">back</string>
     <string name="botonSiguiente">Forward</string>
+    <string name="botonDetener">stop</string>
 
     <!--Texto de campos-->
 

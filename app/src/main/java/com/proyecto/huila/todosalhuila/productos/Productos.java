@@ -1,8 +1,10 @@
 package com.proyecto.huila.todosalhuila.productos;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -15,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -29,6 +33,7 @@ import com.proyecto.huila.todosalhuila.R;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.crypto.MCrypt;
 import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
+import com.proyecto.huila.todosalhuila.login.Login;
 import com.proyecto.huila.todosalhuila.webservice.WS_ValidarConexionGoogle;
 
 import org.apache.http.HttpResponse;
@@ -40,7 +45,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EncodingUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -66,13 +73,16 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
 
     private ProgressBar progressBar;
 
+    private boolean menuActivo = true;
+
 
 
     int seleccion = 0;
     WebView myWebView;
-    String urlLogin = "http://52.20.189.85/joomlaH/app.php?function=login";
-    String urlProducts = "http://52.20.189.85/joomlaH/index.php/tiendavirtual/productos";
+    String urlLogin = "http://52.20.189.85/joomlaH/app.php";
+    String urlProducts = "http://52.20.189.85/joomlaH/index.php?option=com_virtuemart&view=virtuemart&productsublayout=0";
     private int start = 0;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +90,8 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
 
         this.setContentView(R.layout.productos);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         this.setTitle(R.string.title_activity_productos);
 
@@ -106,25 +115,24 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
 
         connetion.setVisibility(View.GONE);
 
-
         myWebView = (WebView) this.findViewById(R.id.webView);
 
+        //deleteCache(getApplicationContext());
+        //clearApplicationData();
+
+        CookieSyncManager.createInstance(this);
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.removeAllCookie();
+
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.clearHistory();
-        myWebView.clearFormData();
-        myWebView.clearCache(true);
-        myWebView.setWebViewClient(new WebViewClient());
-
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-
         myWebView.getSettings().setAppCacheEnabled(false);
-        myWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        myWebView.getSettings().setAllowContentAccess(true);
+        myWebView.clearCache(true);
+        myWebView.getSettings().setAppCacheMaxSize(0);
+
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
-        myWebView.setWebChromeClient(new WebChromeClient(){
+        myWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
 
@@ -149,13 +157,22 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
             }
 
             @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon)
+            {
+                if (start > 0) {
+                    ((Button) Productos.this.findViewById(R.id.botonDetener)).setEnabled(true);
+                }
+            }
+
+            @Override
             public void onPageFinished(WebView view, String url) {
                 if (urlLogin.equals(url)) {
                     myWebView.loadUrl(urlProducts);
                 } else {
-                    if(start==0){
+                    if (start == 0) {
                         view.clearHistory();
                         start++;
+                        circuloProgreso.dismiss();
                     }
 
                     view.loadUrl("javascript:document.getElementById(\"g-header\").setAttribute(\"style\",\"display:none;\");");
@@ -165,29 +182,32 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
 
                 Button botonAnterior = (Button) Productos.this.findViewById(R.id.botonAnterior);
 
-                if (view.canGoBack())
-                {
+                if (view.canGoBack()) {
                     botonAnterior.setEnabled(true);
-                }
-                else
-                {
+                } else {
                     botonAnterior.setEnabled(false);
                 }
 
                 Button botonSiguiente = (Button) Productos.this.findViewById(R.id.botonSiguiente);
 
-                if (view.canGoForward())
-                {
+                if (view.canGoForward()) {
                     botonSiguiente.setEnabled(true);
                 }
+
+                ((Button) Productos.this.findViewById(R.id.botonDetener)).setEnabled(false);
 
             }
 
 
         });
 
-        myWebView.clearCache(true);
-        myWebView.loadUrl(urlLogin);
+        String postData = "function=login&username="+new Login().usuarioD+"&password="+ new Login().contrasenaD;
+        myWebView.postUrl(urlLogin, EncodingUtils.getBytes(postData, "BASE64"));
+
+        if(start==0){
+            circuloProgreso = ProgressDialog.show(Productos.this, "", Productos.this.getResources().getString(R.string.esperar), true);
+        }
+
     }
 
     public void salir() {
@@ -219,9 +239,14 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
         myWebView.goForward();
     }
 
+    public void detener(View view)
+    {
+        myWebView.stopLoading();
+    }
+
     @Override
     public void onBackPressed() {
-      salir();
+        salir();
     }
 
     @Override
@@ -230,6 +255,7 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         final int id = item.getItemId();
+
 
         if (id == R.id.action_salir) {
             salir();
@@ -282,5 +308,5 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
                 .setCancelable(false)
                 .show();
     }
-
 }
+

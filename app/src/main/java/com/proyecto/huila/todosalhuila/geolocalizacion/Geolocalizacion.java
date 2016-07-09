@@ -342,7 +342,7 @@ public class Geolocalizacion extends AppCompatActivity
                     case "Hospedaje":
                         if (segmento13.isChecked() == true) {
                             dibujar = true;
-                            icon = R.drawable.seg8;
+                            icon = R.drawable.seg13;
                         }
                         break;
                     case "Recreación":

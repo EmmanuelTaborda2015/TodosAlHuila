@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/RelativeLayout01"
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="330dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
@@ -26,7 +26,7 @@
             android:id="@+id/LinearLayout01"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black"
+            android:background="@drawable/fondologin"
             android:orientation="vertical"
             android:padding="20dp"
             android:paddingBottom="20dp"
@@ -35,7 +35,6 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:background="@color/black"
                 android:src="@drawable/logofinal"
                 android:layout_marginBottom="15dp"/>
 

@@ -7,24 +7,15 @@
     <RelativeLayout
         android:id="@+id/RelativeLayout01"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/fondologin">
 
-        <LinearLayout
-            android:id="@+id/LinearLayout02"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/azul1"
-            android:orientation="vertical"
-            android:padding="20dp"
-            android:paddingBottom="20dp">
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LinearLayout01"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@color/azul4"
             android:orientation="vertical"
             android:padding="20dp"
             android:paddingBottom="20dp"

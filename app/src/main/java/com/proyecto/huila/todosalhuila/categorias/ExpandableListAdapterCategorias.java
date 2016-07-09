@@ -75,63 +75,63 @@ public class ExpandableListAdapterCategorias extends BaseExpandableListAdapter i
 
         if(group_id == 0){
         	group = "Ecoturismo";
-        	id_res = R.drawable.segmento1;
+        	id_res = R.drawable.segment1;
         }
         else if(group_id == 1){
         	group = "Turismo de aventura";
-        	id_res = R.drawable.segmento2;
+        	id_res = R.drawable.segment2;
         }
         else if(group_id == 2){
         	group = "Turismo rural";
-        	id_res = R.drawable.segmento3;
+        	id_res = R.drawable.segment3;
         }
         else if(group_id == 3){
             group = "Atractivos turísticos";
-            id_res = R.drawable.segmento4;
+            id_res = R.drawable.segment4;
         }
         else if(group_id == 4){
             group = " Gastronomía";
-            id_res = R.drawable.segmento5;
+            id_res = R.drawable.segment5;
         }
         else if(group_id == 5){
             group = "Cultura";
-            id_res = R.drawable.segmento6;
+            id_res = R.drawable.segment6;
         }
         else if(group_id == 6){
             group = "Salud y bienestar";
-            id_res = R.drawable.segmento7;
+            id_res = R.drawable.segment7;
         }
         else if(group_id == 7){
             group = "Turismo corporativo";
-            id_res = R.drawable.segmento8;
+            id_res = R.drawable.segment8;
         }
         else if(group_id == 8){
             group = "Sol y Veraneo";
-            id_res = R.drawable.segmento9;
+            id_res = R.drawable.segment9;
         }
         else if(group_id == 9){
             group = "Astronomía";
-            id_res = R.drawable.segmento10;
+            id_res = R.drawable.segment10;
         }
         else if(group_id == 10){
             group = "Bares y Pubs";
-            id_res = R.drawable.segmento11;
+            id_res = R.drawable.segment11;
         }
         else if(group_id == 11){
             group = "Comercio";
-            id_res = R.drawable.segmento12;
+            id_res = R.drawable.segment12;
         }
         else if(group_id == 12){
             group = "Hospedaje";
-            id_res = R.drawable.segmento13;
+            id_res = R.drawable.segment13;
         }
         else if(group_id == 13){
             group = "Recreación";
-            id_res = R.drawable.segmento14;
+            id_res = R.drawable.segment14;
         }
         else if(group_id == 14){
             group = "Transporte";
-            id_res = R.drawable.segmento15;
+            id_res = R.drawable.segment15;
         }
         else if(group_id == 15){
             group = "Municipios";

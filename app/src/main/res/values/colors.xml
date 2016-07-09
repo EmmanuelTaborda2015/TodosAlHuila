@@ -23,8 +23,9 @@
     <item name="azul2_2" type="color">#0083FF</item>
     <item name="azul3_3" type="color">#0033FF</item>
     <item name="azul1" type="color">#F0F0F0</item>
-    <item name="azul2" type="color">#000000</item>
-    <item name="azul3" type="color">#356c60</item>
+    <item name="azul2" type="color">#ea000000</item>
+    <item name="azul3" type="color">#9a9e9d</item>
+    <item name="azul4" type="color">#a0000000</item>
     <item name="white" type="color">#FFFFFF</item>
     <item name="gray" type="color">#FFD3D3D3</item>
 

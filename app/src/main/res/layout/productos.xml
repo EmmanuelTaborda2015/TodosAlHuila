@@ -80,6 +80,15 @@ android:fitsSystemWindows="true">
         android:onClick="siguiente"
         android:text="@string/botonSiguiente" />
 
+        <Button
+            android:id="@+id/botonDetener"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/botonSiguiente"
+            android:enabled="false"
+            android:onClick="detener"
+            android:text="@string/botonDetener" />
+
     </RelativeLayout>
 
     <RelativeLayout

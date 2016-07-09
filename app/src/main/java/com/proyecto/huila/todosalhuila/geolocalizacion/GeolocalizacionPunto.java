@@ -253,105 +253,105 @@ public class GeolocalizacionPunto extends AppCompatActivity
                     if (segmento1.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg1;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento1));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment1));
                     }
                     break;
                 case "Turismo de aventura":
                     if (segmento2.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg2;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento2));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment2));
                     }
                     break;
                 case "Turismo rural":
                     if (segmento3.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg3;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento3));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment3));
                     }
                     break;
                 case "Atractivos turísticos":
                     if (segmento4.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg4;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento4));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment4));
                     }
                     break;
                 case "Gastronomía":
                     if (segmento5.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg5;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento5));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment5));
                     }
                     break;
                 case "Cultura":
                     if (segmento6.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg6;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento6));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment6));
                     }
                     break;
                 case "Salud y bienestar":
                     if (segmento7.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg7;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento7));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment7));
                     }
                     break;
                 case "Turismo corporativo":
                     if (segmento8.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg8;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento8));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment8));
                     }
                     break;
                 case "Sol y playa":
                     if (segmento9.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg9;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento9));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment9));
                     }
                     break;
                 case "Astronomía":
                     if (segmento10.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg10;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento10));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment10));
                     }
                     break;
                 case "Bares y Pubs":
                     if (segmento11.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg11;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento11));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment11));
                     }
                     break;
                 case "Comercio":
                     if (segmento12.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg12;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento12));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment12));
                     }
                     break;
                 case "Hospedaje":
                     if (segmento13.isChecked() == true) {
                         dibujar = true;
-                        icon = R.drawable.seg12;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento12));
+                        icon = R.drawable.seg13;
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment13));
                     }
                     break;
                 case "Recreación":
                     if (segmento14.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg14;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento14));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment14));
                     }
                     break;
                 case "Transporte":
                     if (segmento15.isChecked() == true) {
                         dibujar = true;
                         icon = R.drawable.seg15;
-                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segmento15));
+                        imageviewpunto.setImageDrawable(getResources().getDrawable(R.drawable.segment15));
                     }
                     break;
                // case "Municipios":

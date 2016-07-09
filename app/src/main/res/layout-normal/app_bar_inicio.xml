@@ -14,14 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/name_app"
-        android:padding="10dp"
-        android:background="@color/azul2">
+        android:background="@drawable/fondologo">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:src="@drawable/logofinalmini"
+            android:background="@color/azul4"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 

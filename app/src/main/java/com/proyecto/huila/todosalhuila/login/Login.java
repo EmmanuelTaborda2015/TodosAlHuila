@@ -133,7 +133,6 @@ public class Login extends Activity {
                                     contrasenaD = MCrypt.bytesToHex( mcrypt.encrypt(et_contrasena.getText().toString()));
                                     String[] myTaskParams = {usuarioD, contrasenaD, id_dispositivo};
                                     asyncTask.execute(myTaskParams);
-                                    Log.v("usuario",usuarioD);
                                     circuloProgreso = ProgressDialog.show(Login.this, "", Login.this.getResources().getString(R.string.esperar), true);
                                 } catch (Exception e) {
                                     e.printStackTrace();

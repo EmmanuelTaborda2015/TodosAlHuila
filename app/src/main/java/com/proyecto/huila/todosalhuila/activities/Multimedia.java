@@ -878,6 +878,13 @@ public class Multimedia extends Activity {
         return mediaFile;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Multimedia.this, InicioLogin.class);
+        startActivity(i);
+        finish();
+    }
+
 
 }
 

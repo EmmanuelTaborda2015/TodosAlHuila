@@ -40,8 +40,8 @@ android {
             applicationId 'com.proyecto.huila.todosalhuila'
             signingConfig signingConfigs.config
             targetSdkVersion 23
-            versionCode 5
-            versionName '1.4'
+            versionCode 6
+            versionName '1.5'
         }
     }
 }

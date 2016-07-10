@@ -150,8 +150,6 @@ public class Inicio extends AppCompatActivity  implements NetworkStateReceiver.N
                             Intent i = new Intent(Inicio.this, Geolocalizacion.class);
                             i.putExtra("login", false);
                             startActivity(i);
-                            finish();
-
                         }else if (id == R.id.action_portal) {
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(Inicio.this);

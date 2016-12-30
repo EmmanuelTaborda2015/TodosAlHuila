@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -30,6 +32,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.proyecto.huila.todosalhuila.R;
+import com.proyecto.huila.todosalhuila.conexion.CustomSSLSocketFactory;
 import com.proyecto.huila.todosalhuila.conexion.NetworkStateReceiver;
 import com.proyecto.huila.todosalhuila.crypto.MCrypt;
 import com.proyecto.huila.todosalhuila.inicio.InicioLogin;
@@ -49,9 +52,15 @@ import org.apache.http.util.EncodingUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.net.URLEncoder;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class Productos extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
 
@@ -79,8 +88,8 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
 
     int seleccion = 0;
     WebView myWebView;
-    String urlLogin = "http://52.20.189.85/joomlaH/app.php";
-    String urlProducts = "http://52.20.189.85/joomlaH/index.php?option=com_virtuemart&view=virtuemart&productsublayout=0";
+    String urlLogin = "https://huila.travel/app.php";
+    String urlProducts = "https://huila.travel/index.php?option=com_virtuemart&view=virtuemart&productsublayout=0&lang=es";
     private int start = 0;
     private Toolbar toolbar;
 
@@ -101,6 +110,32 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
         networkStateReceiver.addListener(this);
         this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
 
+
+
+        URL url = null;
+        try {
+            url = new URL("https://huila.travel/app.php");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpsURLConnection connection = null;
+        try {
+            connection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+
+        }
+        try {
+            connection.setRequestMethod("GET");
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
+        try {
+            connection.setSSLSocketFactory(CustomSSLSocketFactory.getSSLSocketFactory(this));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
 
         final WS_ValidarConexionGoogle asyncTask = new WS_ValidarConexionGoogle(new WS_ValidarConexionGoogle.AsyncResponse() {
             @Override
@@ -128,6 +163,7 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
         myWebView.getSettings().setAppCacheEnabled(false);
         myWebView.clearCache(true);
         myWebView.getSettings().setAppCacheMaxSize(0);
+        myWebView.getSettings().setDomStorageEnabled(true);
 
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -150,6 +186,33 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
         });
 
         myWebView.setWebViewClient(new WebViewClient() {
+
+           // @Override
+           // public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+             //   handler.proceed();
+                // Ignore SSL certificate errors
+            //}
+
+            @Override
+            public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(Productos.this);
+                builder.setMessage("No se ha podido validar de manera adecuada el certificado de seguridad.\n ¿Desea continuar?");
+                builder.setPositiveButton("continuar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        handler.proceed();
+                    }
+                });
+                builder.setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        handler.cancel();
+                    }
+                });
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -178,6 +241,8 @@ public class Productos extends AppCompatActivity implements NetworkStateReceiver
                     view.loadUrl("javascript:document.getElementById(\"g-header\").setAttribute(\"style\",\"display:none;\");");
                     //view.loadUrl("javascript:document.getElementById(\"g-container\").setAttribute(\"style\",\"display:none;\");");
                     view.loadUrl("javascript:document.getElementById(\"g-footer\").setAttribute(\"style\",\"display:none;\");");
+                    view.loadUrl("javascript:document.getElementById(\"social-toolbar\").setAttribute(\"style\",\"display:none;\");");
+
                 }
 
                 Button botonAnterior = (Button) Productos.this.findViewById(R.id.botonAnterior);

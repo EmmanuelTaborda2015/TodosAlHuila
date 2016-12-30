@@ -188,8 +188,12 @@ public class Informacion extends AppCompatActivity implements NetworkStateReceiv
                                             seleccion = 0;
                                             Intent i = new Intent(Informacion.this, Calificar.class);
                                             if (output.length > 0) {
+                                                //ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                                                //output[0].compress(Bitmap.CompressFormat.WEBP, 50, bs);
+                                                //i.putExtra("byteArray", bs.toByteArray());
+                                                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);
                                                 ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                                                output[0].compress(Bitmap.CompressFormat.WEBP, 50, bs);
+                                                icon.compress(Bitmap.CompressFormat.PNG, 50, bs);
                                                 i.putExtra("byteArray", bs.toByteArray());
                                             } else {
                                                 Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.imagen_no_disponible);

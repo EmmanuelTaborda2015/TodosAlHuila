@@ -176,7 +176,7 @@ public class InicioLogin extends AppCompatActivity implements NetworkStateReceiv
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             Intent intent = new Intent(Intent.ACTION_VIEW);
-                                            intent.setData(Uri.parse("http://52.20.189.85/joomlaH"));
+                                            intent.setData(Uri.parse("https://huila.travel/"));
                                             startActivity(intent);
                                         }
                                     });

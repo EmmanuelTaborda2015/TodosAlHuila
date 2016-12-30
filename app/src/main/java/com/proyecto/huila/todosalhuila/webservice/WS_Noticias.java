@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 
 public class WS_Noticias extends AsyncTask<String, Void, String> {
 
-    String url = "http://52.71.142.183:8080/api/empresa/getNoticias";
+    String url = "http://200.26.150.147:8080/api/empresa/getNoticias";
 
     public AsyncResponse delegate = null;
 

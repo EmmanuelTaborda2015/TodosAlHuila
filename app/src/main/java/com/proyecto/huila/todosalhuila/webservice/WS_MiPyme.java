@@ -33,7 +33,7 @@ import java.util.Vector;
 
 public class WS_MiPyme extends AsyncTask<String, Void, String> {
 
-    String url = "http://52.71.142.183:8080/api/empresa/getinformacion";
+    String url = "http://200.26.150.147:8080/api/empresa/getinformacion";
 
     public AsyncResponse delegate = null;
 

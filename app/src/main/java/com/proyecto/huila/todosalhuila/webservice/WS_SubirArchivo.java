@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class WS_SubirArchivo extends AsyncTask<String, Void, String> {
 
-    String url = "http://52.20.189.85/joomlaH/app.php";
+    String url = "http://200.26.150.148/app.php";
 
     public AsyncResponse delegate = null;
 

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class WS_Directorio extends AsyncTask<String, Void, String> {
 
-    String url = "http://52.20.189.85/ws_todosalhuila/turista/aplicativo/directorio/";
+    String url = "http://200.26.150.148/ws_todosalhuila/turista/aplicativo/directorio/";
 
     public AsyncResponse delegate = null;
 
@@ -59,8 +59,9 @@ public class WS_Directorio extends AsyncTask<String, Void, String> {
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             InputStream is = entity.getContent();
+
             result = convertStreamToString(is);
-            Log.v("directorio", "Aquí6" + result.toString());
+
         } catch (Exception e) {
             Log.e("log_tag", "Error in http connection " + e.toString());
         }

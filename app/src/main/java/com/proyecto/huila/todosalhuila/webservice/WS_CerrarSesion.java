@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class WS_CerrarSesion extends AsyncTask<String, Void, String> {
 
-    String url = "http://52.20.189.85/ws_todosalhuila/turista/aplicativo/cerrarsesion/";
+    String url = "http://200.26.150.148/ws_todosalhuila/turista/aplicativo/cerrarsesion/";
 
     public AsyncResponse delegate = null;
 
